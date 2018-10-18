@@ -29,7 +29,7 @@ $ ./install_nfv_sol_libs.sh [-d FOLDER_NAME]
 
 ## Versioning
 
-For the versions available, see the [tags on this repository]. 
+For the versions available, see the tags on this repository. 
 
 ## Authors
 
