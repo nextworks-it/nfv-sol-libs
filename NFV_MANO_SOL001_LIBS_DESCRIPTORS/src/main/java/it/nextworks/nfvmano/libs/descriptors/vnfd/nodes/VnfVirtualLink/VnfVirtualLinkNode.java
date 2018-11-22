@@ -15,16 +15,30 @@
  */
 package it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfVirtualLink;
 
-//@Entity
-public class VnfVirtualLinkNode /*extends Node implements DescriptorInformationElement*/ {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
+import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
+import it.nextworks.nfvmano.libs.descriptors.templates.Node;
+import it.nextworks.nfvmano.libs.descriptors.templates.TopologyTemplate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+
+@Entity
+public class VnfVirtualLinkNode extends Node implements DescriptorInformationElement {
 	
-	/*@JsonInclude(JsonInclude.Include.NON_NULL)
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "vnfVirtualLinkNode", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "vnfVirtualLinkNode", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private VnfVirtualLinkProperties properties;
 
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "vnfVirtualLinkNode", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "vnfVirtualLinkNode", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private VnfVirtualLinkCapabilities capabilities;
 
@@ -40,7 +54,7 @@ public class VnfVirtualLinkNode /*extends Node implements DescriptorInformationE
 	}
 
 	public VnfVirtualLinkNode(TopologyTemplate topologyTemplate, String type, VnfVirtualLinkProperties properties,
-			VnfVirtualLinkCapabilities capabilities) {
+                              VnfVirtualLinkCapabilities capabilities) {
 		super(topologyTemplate, type);
 		this.properties = properties;
 		this.capabilities = capabilities;
@@ -62,6 +76,6 @@ public class VnfVirtualLinkNode /*extends Node implements DescriptorInformationE
 			throw new MalformattedElementException("Properties are missing in VNF VL Node");
 		if (this.capabilities == null)
 			throw new MalformattedElementException("Capabilities are missing in VNF VL Node");
-	}*/
+	}
 
 }

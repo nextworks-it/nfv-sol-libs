@@ -115,7 +115,7 @@
   </association>  
   <association id="13">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="14" name="properties">        
+      <attribute id="14" name="nsVLProperties">
         <position height="0" width="0" x="-269" y="137"/>      
       </attribute>      
       <multiplicity id="15" minimum="0" maximum="1">        
@@ -163,7 +163,7 @@
   </association>  
   <association id="25">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="26" name="properties">        
+      <attribute id="26" name="nsVLProperties">
         <position height="0" width="0" x="-402" y="-60"/>      
       </attribute>      
       <multiplicity id="27" minimum="0" maximum="1">        
@@ -199,7 +199,7 @@
   </association>  
   <association id="34">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="35" name="properties">        
+      <attribute id="35" name="nsVLProperties">
         <position height="0" width="0" x="-258" y="9"/>      
       </attribute>      
       <multiplicity id="36" minimum="0" maximum="1">        

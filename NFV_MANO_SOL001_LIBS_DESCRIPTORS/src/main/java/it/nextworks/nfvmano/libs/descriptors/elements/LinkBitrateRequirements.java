@@ -39,6 +39,10 @@ public class LinkBitrateRequirements implements DescriptorInformationElement {
 
     @OneToOne
     @JsonIgnore
+    private NsVlProfile nsVlProfile;
+
+    @OneToOne
+    @JsonIgnore
     private VirtualLinkBitrateLevel vlBitrateLevel;
 
     private Integer root;
@@ -59,6 +63,12 @@ public class LinkBitrateRequirements implements DescriptorInformationElement {
         this.leaf = leaf;
     }
 
+    public LinkBitrateRequirements(NsVlProfile nsVlProfile, Integer root, Integer leaf) {
+        this.nsVlProfile = nsVlProfile;
+        this.root = root;
+        this.leaf = leaf;
+    }
+
     public LinkBitrateRequirements(VirtualLinkBitrateLevel vlBitrateLevel, Integer root, Integer leaf) {
         this.vlBitrateLevel = vlBitrateLevel;
         this.root = root;
@@ -71,6 +81,10 @@ public class LinkBitrateRequirements implements DescriptorInformationElement {
 
     public VlProfile getVlProfile() {
         return vlProfile;
+    }
+
+    public NsVlProfile getNsVlProfile() {
+        return nsVlProfile;
     }
 
     public VirtualLinkBitrateLevel getVlBitrateLevel() {

@@ -15,10 +15,22 @@
  */
 package it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfVirtualLink;
 
-//@Entity
-public class VnfVirtualLinkCapabilities /*implements DescriptorInformationElement*/ {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
+import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-	/*@Id
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+public class VnfVirtualLinkCapabilities implements DescriptorInformationElement {
+
+	@Id
 	@GeneratedValue
 	@JsonIgnore
 	private Long id;
@@ -27,10 +39,6 @@ public class VnfVirtualLinkCapabilities /*implements DescriptorInformationElemen
 	@JsonIgnore
 	private VnfVirtualLinkNode vnfVirtualLinkNode;
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SELECT)
-	@Cascade(org.hibernate.annotations.CascadeType.ALL)
-	private List<String> monitoringParameter = new ArrayList<>();
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SELECT)
@@ -41,20 +49,12 @@ public class VnfVirtualLinkCapabilities /*implements DescriptorInformationElemen
 
 	}
 
-	public VnfVirtualLinkCapabilities(List<String> monitoringParameter, List<String> virtualLinkable) {
-		this.monitoringParameter = monitoringParameter;
+	public VnfVirtualLinkCapabilities(List<String> virtualLinkable) {
 		this.virtualLinkable = virtualLinkable;
 	}
 
-	public VnfVirtualLinkCapabilities(VnfVirtualLinkNode vnfVlNode, List<String> monitoringParameter) {
+	public VnfVirtualLinkCapabilities(VnfVirtualLinkNode vnfVlNode, List<String> virtualLinkable) {
 		this.vnfVirtualLinkNode = vnfVlNode;
-		this.monitoringParameter = monitoringParameter;
-	}
-
-	public VnfVirtualLinkCapabilities(VnfVirtualLinkNode vnfVlNode, List<String> monitoringParameter,
-			List<String> virtualLinkable) {
-		this.vnfVirtualLinkNode = vnfVlNode;
-		this.monitoringParameter = monitoringParameter;
 		this.virtualLinkable = virtualLinkable;
 	}
 
@@ -66,11 +66,6 @@ public class VnfVirtualLinkCapabilities /*implements DescriptorInformationElemen
 		return vnfVirtualLinkNode;
 	}
 
-	@JsonProperty("monitoringParameter")
-	public List<String> getMonitoringParameter() {
-		return monitoringParameter;
-	}
-
 	@JsonProperty("virtualLinkable")
 	public List<String> getVirtualLinkable() {
 		return virtualLinkable;
@@ -79,6 +74,6 @@ public class VnfVirtualLinkCapabilities /*implements DescriptorInformationElemen
 	@Override
 	public void isValid() throws MalformattedElementException {
 
-	}*/
+	}
 
 }

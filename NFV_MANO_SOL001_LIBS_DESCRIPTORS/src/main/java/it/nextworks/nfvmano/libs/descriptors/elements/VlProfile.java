@@ -22,6 +22,7 @@ import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.elements.QoS;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.NsVirtualLink.NsVirtualLinkProperties;
+import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfVirtualLink.VnfVirtualLinkProperties;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.OnDelete;
@@ -43,9 +44,9 @@ public class VlProfile implements DescriptorInformationElement {
     @JsonIgnore
     private NsVirtualLinkProperties nsVLProperties;
 
-	/*@OneToOne
+	@OneToOne
 	@JsonIgnore
-	private VnfVirtualLinkProperties vnfVLProperties;*/
+	private VnfVirtualLinkProperties vnfVLProperties;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "vlProfile", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -88,7 +89,7 @@ public class VlProfile implements DescriptorInformationElement {
         this.virtualLinkProtocolData = virtualLinkProtocolData;
     }
 
-	/*public VlProfile(VnfVirtualLinkProperties vnfVLProperties, LinkBitrateRequirements maxBitrateRequirements,
+	public VlProfile(VnfVirtualLinkProperties vnfVLProperties, LinkBitrateRequirements maxBitrateRequirements,
 			LinkBitrateRequirements minBitrateRequirements, QoS qos,
 			List<VirtualLinkProtocolData> virtualLinkProtocolData) {
 		this.vnfVLProperties = vnfVLProperties;
@@ -96,7 +97,7 @@ public class VlProfile implements DescriptorInformationElement {
 		this.minBitrateRequirements = minBitrateRequirements;
 		this.qos = qos;
 		this.virtualLinkProtocolData = virtualLinkProtocolData;
-	}*/
+	}
 
     public Long getId() {
         return id;
@@ -106,9 +107,9 @@ public class VlProfile implements DescriptorInformationElement {
         return nsVLProperties;
     }
 
-	/*public VnfVirtualLinkProperties getVnfVLProperties() {
+	public VnfVirtualLinkProperties getVnfVLProperties() {
 		return vnfVLProperties;
-	}*/
+	}
 
     @JsonProperty("maxBitrateRequirements")
     public LinkBitrateRequirements getMaxBitrateRequirements() {

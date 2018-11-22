@@ -39,23 +39,35 @@ public class SapNode extends Node implements DescriptorInformationElement {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private SapProperties properties;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "sapNode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private SapRequirements requirements;
+
     public SapNode() {
 
     }
 
-    public SapNode(String type, SapProperties properties) {
+    public SapNode(String type, SapProperties properties, SapRequirements requirements) {
         super(type);
         this.properties = properties;
+        this.requirements = requirements;
     }
 
-    public SapNode(TopologyTemplate topologyTemplate, String type, SapProperties properties) {
+    public SapNode(TopologyTemplate topologyTemplate, String type, SapProperties properties, SapRequirements requirements) {
         super(topologyTemplate, type);
         this.properties = properties;
+        this.requirements = requirements;
     }
 
     @JsonProperty("properties")
     public SapProperties getProperties() {
         return properties;
+    }
+
+    @JsonProperty("requirements")
+    public SapRequirements getRequirements() {
+        return requirements;
     }
 
     @Override
@@ -64,5 +76,9 @@ public class SapNode extends Node implements DescriptorInformationElement {
             throw new MalformattedElementException("Sap Node without properties");
         else
             this.properties.isValid();
+        if (this.requirements == null)
+            throw new MalformattedElementException("Sap Node without requirements");
+        else
+            this.requirements.isValid();
     }
 }

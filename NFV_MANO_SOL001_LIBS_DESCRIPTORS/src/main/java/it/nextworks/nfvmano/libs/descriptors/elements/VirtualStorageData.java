@@ -50,7 +50,7 @@ public class VirtualStorageData /* implements DescriptorInformationElement */ {
      *
      * public Long getId() { return id; }
      *
-     * public VDUVirtualBlockStorageProperties getProperties() { return properties; }
+     * public VDUVirtualBlockStorageProperties getNsVLProperties() { return properties; }
      *
      * @JsonProperty("typeOfStorage") public String getTypeOfStorage() { return
      * typeOfStorage; }

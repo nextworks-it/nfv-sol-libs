@@ -37,32 +37,23 @@ public class SapProperties extends CpProperties {
     @JsonIgnore
     private SapNode sapNode;
 
-    private boolean sapAddressAssignment;
-
     public SapProperties() {
 
     }
 
     public SapProperties(List<LayerProtocol> layerProtocol, CpRole role, String description,
-                         ArrayList<CpProtocolData> protocolData, boolean trunkMode, boolean sapAddressAssignment) {
+                         ArrayList<CpProtocolData> protocolData, boolean trunkMode) {
         super(null, layerProtocol, role, description, protocolData, trunkMode);
-        this.sapAddressAssignment = sapAddressAssignment;
     }
 
     public SapProperties(SapNode sapNode, List<LayerProtocol> layerProtocol, CpRole role, String description,
-                         ArrayList<CpProtocolData> protocolData, boolean trunkMode, boolean sapAddressAssignment) {
+                         ArrayList<CpProtocolData> protocolData, boolean trunkMode) {
         super(null, layerProtocol, role, description, protocolData, trunkMode);
         this.sapNode = sapNode;
-        this.sapAddressAssignment = sapAddressAssignment;
     }
 
     public SapNode getSapNode() {
         return sapNode;
-    }
-
-    @JsonProperty("sapAddressAssignment")
-    public boolean getSapAddressAssignment() {
-        return sapAddressAssignment;
     }
 
     @Override

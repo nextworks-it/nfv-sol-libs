@@ -37,11 +37,6 @@ public class NSNode extends Node implements DescriptorInformationElement {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "nsNode", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private NSCapabilities capabilities;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "nsNode", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private NSRequirements requirements;
 
     // TODO Still to be specified in ETSI SOL001
@@ -74,20 +69,12 @@ public class NSNode extends Node implements DescriptorInformationElement {
         return requirements;
     }
 
-    @JsonProperty("capabilities")
-    public NSCapabilities getCapabilities() {
-        return capabilities;
-    }
-
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.properties == null)
             throw new MalformattedElementException("NS Node without properties");
         else
             this.properties.isValid();
-        if (this.capabilities != null) {
-            this.capabilities.isValid();
-        }
         if (this.requirements != null) {
             this.requirements.isValid();
         }

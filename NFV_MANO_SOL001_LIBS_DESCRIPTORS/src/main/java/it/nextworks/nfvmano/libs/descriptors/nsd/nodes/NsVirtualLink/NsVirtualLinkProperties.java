@@ -20,14 +20,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.elements.QoS;
+import it.nextworks.nfvmano.libs.common.enums.TestAccess;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.elements.ConnectivityType;
 import it.nextworks.nfvmano.libs.descriptors.elements.ServiceAvailability;
 import it.nextworks.nfvmano.libs.descriptors.elements.VlProfile;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class NsVirtualLinkProperties implements DescriptorInformationElement {
@@ -41,8 +45,12 @@ public class NsVirtualLinkProperties implements DescriptorInformationElement {
     @JsonIgnore
     private NsVirtualLinkNode nsVirtualLinkNode;
 
-    private String provider;
-    private String version;
+    private String description;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<TestAccess> testAccess = new ArrayList<>();
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "nsVLProperties", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -50,31 +58,21 @@ public class NsVirtualLinkProperties implements DescriptorInformationElement {
     private VlProfile vlProfile;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "properties", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "nsVLProperties", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ConnectivityType connectivityType;
-
-    // TODO: Already included in vlProfile, look at next SOL001 release
-    /*
-     * @Embedded private QoS qos;
-     */
-
-    @Embedded
-    private ServiceAvailability serviceAvailability;
 
     public NsVirtualLinkProperties() {
 
     }
 
-    public NsVirtualLinkProperties(NsVirtualLinkNode nsVirtualLinkNode, String provider, String version,
-                                   VlProfile vlProfile, ConnectivityType connectivityType, QoS qos, ServiceAvailability serviceAvailability) {
+    public NsVirtualLinkProperties(NsVirtualLinkNode nsVirtualLinkNode, String description,
+                                   VlProfile vlProfile, ConnectivityType connectivityType, List<TestAccess> testAccess) {
         this.nsVirtualLinkNode = nsVirtualLinkNode;
-        this.provider = provider;
-        this.version = version;
+        this.description = description;
         this.vlProfile = vlProfile;
         this.connectivityType = connectivityType;
-        // this.qos = qos;
-        this.serviceAvailability = serviceAvailability;
+        this.testAccess = testAccess;
     }
 
     public Long getId() {
@@ -85,14 +83,9 @@ public class NsVirtualLinkProperties implements DescriptorInformationElement {
         return nsVirtualLinkNode;
     }
 
-    @JsonProperty("provider")
-    public String getProvider() {
-        return provider;
-    }
-
-    @JsonProperty("version")
-    public String getVersion() {
-        return version;
+    @JsonProperty("description")
+    public String getDescription() {
+        return description;
     }
 
     @JsonProperty("vlProfile")
@@ -105,19 +98,13 @@ public class NsVirtualLinkProperties implements DescriptorInformationElement {
         return connectivityType;
     }
 
-    /*
-     * @JsonProperty("qos") public QoS getQos() { return qos; }
-     */
-
-    @JsonProperty("serviceAvailability")
-    public ServiceAvailability getServiceAvailability() {
-        return serviceAvailability;
+    @JsonProperty("testAccess")
+    public List<TestAccess> getTestAccess() {
+        return testAccess;
     }
 
     @Override
     public void isValid() throws MalformattedElementException {
-        if (this.version == null)
-            throw new MalformattedElementException("NsVirtualLink Node without version");
         if (this.vlProfile == null)
             throw new MalformattedElementException("NsVirtualLink Node without vlProfile");
         else
@@ -126,10 +113,5 @@ public class NsVirtualLinkProperties implements DescriptorInformationElement {
             throw new MalformattedElementException("NsVirtualLink Node without connectivityType");
         else
             this.connectivityType.isValid();
-        /*
-         * if (this.qos != null) this.qos.isValid();
-         */
-        if (this.serviceAvailability != null)
-            this.serviceAvailability.isValid();
     }
 }

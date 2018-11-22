@@ -22,6 +22,7 @@ import it.nextworks.nfvmano.libs.common.enums.FlowPattern;
 import it.nextworks.nfvmano.libs.common.enums.LayerProtocol;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.NsVirtualLink.NsVirtualLinkProperties;
+import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfVirtualLink.VnfVirtualLinkProperties;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -39,7 +40,11 @@ public class ConnectivityType implements DescriptorInformationElement {
 
     @OneToOne
     @JsonIgnore
-    private NsVirtualLinkProperties properties;
+    private NsVirtualLinkProperties nsVLProperties;
+
+    @OneToOne
+    @JsonIgnore
+    private VnfVirtualLinkProperties vnfVLProperties;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
@@ -56,10 +61,28 @@ public class ConnectivityType implements DescriptorInformationElement {
         this.flowPattern = flowPattern;
     }
 
-    public ConnectivityType(NsVirtualLinkProperties properties, List<LayerProtocol> layerProtocols, FlowPattern flowPattern) {
-        this.properties = properties;
+    public ConnectivityType(NsVirtualLinkProperties nsVLProperties, List<LayerProtocol> layerProtocols, FlowPattern flowPattern) {
+        this.nsVLProperties = nsVLProperties;
         this.layerProtocols = layerProtocols;
         this.flowPattern = flowPattern;
+    }
+
+    public ConnectivityType(VnfVirtualLinkProperties vnfVLProperties, List<LayerProtocol> layerProtocols, FlowPattern flowPattern) {
+        this.vnfVLProperties = vnfVLProperties;
+        this.layerProtocols = layerProtocols;
+        this.flowPattern = flowPattern;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public NsVirtualLinkProperties getNsVLProperties() {
+        return nsVLProperties;
+    }
+
+    public VnfVirtualLinkProperties getVnfVLProperties() {
+        return vnfVLProperties;
     }
 
     @JsonProperty("layerProtocols")

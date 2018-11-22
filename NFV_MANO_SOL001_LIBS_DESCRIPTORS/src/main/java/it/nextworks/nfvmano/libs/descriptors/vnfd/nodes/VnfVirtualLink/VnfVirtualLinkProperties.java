@@ -15,10 +15,27 @@
  */
 package it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfVirtualLink;
 
-//@Entity
-public class VnfVirtualLinkProperties /*implements DescriptorInformationElement*/ {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
+import it.nextworks.nfvmano.libs.common.enums.TestAccess;
+import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
+import it.nextworks.nfvmano.libs.descriptors.elements.ConnectivityType;
+import it.nextworks.nfvmano.libs.descriptors.elements.VirtualLinkMonitoringParameter;
+import it.nextworks.nfvmano.libs.descriptors.elements.VlProfile;
+import org.hibernate.annotations.*;
 
-	/*@Id
+import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+public class VnfVirtualLinkProperties implements DescriptorInformationElement {
+
+	@Id
 	@GeneratedValue
 	@JsonIgnore
 	private Long id;
@@ -27,7 +44,9 @@ public class VnfVirtualLinkProperties /*implements DescriptorInformationElement*
 	@JsonIgnore
 	private VnfVirtualLinkNode vnfVirtualLinkNode;
 
-	@Embedded
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "vnfVLProperties", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
 	private ConnectivityType connectivityType;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -42,16 +61,22 @@ public class VnfVirtualLinkProperties /*implements DescriptorInformationElement*
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private VlProfile vlProfile;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+	private List<VirtualLinkMonitoringParameter> monitoringParameters = new ArrayList<>();
+
 	public VnfVirtualLinkProperties() {
 	}
 
 	public VnfVirtualLinkProperties(VnfVirtualLinkNode vnfVirtualLinkNode, ConnectivityType connectivityType,
-			List<TestAccess> testAccess, String description, VlProfile vlProfile) {
+			List<TestAccess> testAccess, String description, VlProfile vlProfile, List<VirtualLinkMonitoringParameter> monitoringParameters) {
 		this.vnfVirtualLinkNode = vnfVirtualLinkNode;
 		this.connectivityType = connectivityType;
 		this.testAccess = testAccess;
 		this.description = description;
 		this.vlProfile = vlProfile;
+		this.monitoringParameters = monitoringParameters;
 	}
 
 	public Long getId() {
@@ -82,7 +107,12 @@ public class VnfVirtualLinkProperties /*implements DescriptorInformationElement*
 		return vlProfile;
 	}
 
-	@Override
+	@JsonProperty("monitoringParameters")
+    public List<VirtualLinkMonitoringParameter> getMonitoringParameters() {
+        return monitoringParameters;
+    }
+
+    @Override
 	public void isValid() throws MalformattedElementException {
 		if (this.testAccess != null) {
 			for (TestAccess testAccess : this.testAccess) {
@@ -101,6 +131,6 @@ public class VnfVirtualLinkProperties /*implements DescriptorInformationElement*
 			throw new MalformattedElementException("VlProfile is missing in VFN VL Properties");
 		else
 			this.vlProfile.isValid();
-	}*/
+	}
 
 }

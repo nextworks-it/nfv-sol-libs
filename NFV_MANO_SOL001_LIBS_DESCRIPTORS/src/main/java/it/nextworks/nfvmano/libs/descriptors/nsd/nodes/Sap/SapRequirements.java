@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package it.nextworks.nfvmano.libs.descriptors.nsd.nodes.NS;
+package it.nextworks.nfvmano.libs.descriptors.nsd.nodes.Sap;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class NSCapabilities implements DescriptorInformationElement {
+public class SapRequirements implements DescriptorInformationElement {
 
     @Id
     @GeneratedValue
@@ -37,41 +37,53 @@ public class NSCapabilities implements DescriptorInformationElement {
 
     @OneToOne
     @JsonIgnore
-    private NSNode nsNode;
+    private SapNode sapNode;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<String> monitoringParameter = new ArrayList<>();
+    private List<String> internalVirtualLink = new ArrayList<>();
 
-    public NSCapabilities() {
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<String> externalVirtualLink = new ArrayList<>();
 
+    public SapRequirements() {
     }
 
-    public NSCapabilities(List<String> monitoringParameter) {
-        this.monitoringParameter = monitoringParameter;
+    public SapRequirements(List<String> internalVirtualLink, List<String> externalVirtualLink) {
+        this.internalVirtualLink = internalVirtualLink;
+        this.externalVirtualLink = externalVirtualLink;
     }
 
-    public NSCapabilities(NSNode nsNode, List<String> monitoringParameter) {
-        this.nsNode = nsNode;
-        this.monitoringParameter = monitoringParameter;
+    public SapRequirements(SapNode sapNode, List<String> internalVirtualLink, List<String> externalVirtualLink) {
+        this.sapNode = sapNode;
+        this.internalVirtualLink = internalVirtualLink;
+        this.externalVirtualLink = externalVirtualLink;
     }
 
     public Long getId() {
         return id;
     }
 
-    public NSNode getNsNode() {
-        return nsNode;
+    public SapNode getSapNode() {
+        return sapNode;
     }
 
-    @JsonProperty("monitoringParameter")
-    public List<String> getMonitoringParameter() {
-        return monitoringParameter;
+    @JsonProperty("internalVirtualLink")
+    public List<String> getInternalVirtualLink() {
+        return internalVirtualLink;
+    }
+
+    @JsonProperty("externalVirtualLink")
+    public List<String> getExternalVirtualLink() {
+        return externalVirtualLink;
     }
 
     @Override
     public void isValid() throws MalformattedElementException {
-
+        if (this.internalVirtualLink == null || this.internalVirtualLink.isEmpty())
+            throw new MalformattedElementException("SAP Node requirements without internalVirtualLink");
     }
 }
