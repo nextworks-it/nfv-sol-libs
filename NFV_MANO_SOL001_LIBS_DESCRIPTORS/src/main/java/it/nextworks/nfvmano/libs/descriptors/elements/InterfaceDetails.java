@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
+import it.nextworks.nfvmano.libs.descriptors.policies.SupportedVnfInterfaceProperties;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -33,6 +34,10 @@ public class InterfaceDetails implements DescriptorInformationElement {
     @GeneratedValue
     @JsonIgnore
     private Long id;
+
+    /*@OneToOne
+    @JsonIgnore
+    private SupportedVnfInterfaceProperties supportedVnfInterfaceProperties;*/
 
     @Embedded
     private UriComponents uriComponents;
@@ -50,9 +55,19 @@ public class InterfaceDetails implements DescriptorInformationElement {
         this.interfaceSpecificData = interfaceSpecificData;
     }
 
+    public InterfaceDetails(SupportedVnfInterfaceProperties supportedVnfInterfaceProperties, UriComponents uriComponents, Map<String, String> interfaceSpecificData) {
+        //this.supportedVnfInterfaceProperties = supportedVnfInterfaceProperties;
+        this.uriComponents = uriComponents;
+        this.interfaceSpecificData = interfaceSpecificData;
+    }
+
     public Long getId() {
         return id;
     }
+
+    /*public SupportedVnfInterfaceProperties getSupportedVnfInterfaceProperties() {
+        return supportedVnfInterfaceProperties;
+    }*/
 
     @JsonProperty("uriComponents")
     public UriComponents getUriComponents() {

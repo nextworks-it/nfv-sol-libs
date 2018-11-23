@@ -64,11 +64,17 @@ public class TopologyTemplate implements DescriptorInformationElement {
     @LazyCollection(LazyCollectionOption.FALSE)
     private Map<String, Node> nodeTemplates = new HashMap<>();
 
-    // @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToMany(mappedBy = "topologyTemplate", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Map<String, Relationship> relationshipTemplates = new HashMap<>();
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @OneToMany(mappedBy = "topologyTemplate", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Map<String, Policy> policies = new HashMap<>();
 
     public TopologyTemplate() {
 
@@ -79,11 +85,12 @@ public class TopologyTemplate implements DescriptorInformationElement {
     }
 
     public TopologyTemplate(DescriptorTemplate descriptorTemplate, SubstitutionMapping substitutionMapping, Map<String, Node> nodeTemplates,
-                            Map<String, Relationship> relationshipTemplates) {
+                            Map<String, Relationship> relationshipTemplates, Map<String, Policy> policies) {
         this.descriptorTemplate = descriptorTemplate;
         this.substituitionMapping = substitutionMapping;
         this.nodeTemplates = nodeTemplates;
         this.relationshipTemplates = relationshipTemplates;
+        this.policies = policies;
     }
 
     public Long getId() {
@@ -109,6 +116,11 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return relationshipTemplates;
     }
 
+    @JsonProperty("policies")
+    public Map<String, Policy> getPolicies() {
+        return policies;
+    }
+
     @JsonIgnore
     public Map<String, CpNode> getCPNodes() throws MalformattedElementException {
 
@@ -129,38 +141,38 @@ public class TopologyTemplate implements DescriptorInformationElement {
 
     @JsonIgnore
     public Map<String, VduCpNode> getVduCpNodes() throws MalformattedElementException {
-        // TODO not supported
-        return Collections.emptyMap();
-//		return nodeTemplates.entrySet()
-//				.stream()
-//				.filter(e -> e.getValue() instanceof VduCpNode)
-//				.collect(Collectors.toMap(Map.Entry::getKey, e -> (VduCpNode) e.getValue()));
+
+		return nodeTemplates.entrySet()
+				.stream()
+				.filter(e -> e.getValue() instanceof VduCpNode)
+				.collect(Collectors.toMap(Map.Entry::getKey, e -> (VduCpNode) e.getValue()));
     }
 
     @JsonIgnore
     public Map<String, VnfExtCpNode> getVnfExtCpNodes() throws MalformattedElementException {
 
-        return Collections.emptyMap();
-//		return nodeTemplates.entrySet()
-//				.stream()
-//				.filter(e -> e.getValue() instanceof VnfExtCpNode)
-//				.collect(Collectors.toMap(Map.Entry::getKey, e -> (VnfExtCpNode) e.getValue()));
+		return nodeTemplates.entrySet()
+				.stream()
+				.filter(e -> e.getValue() instanceof VnfExtCpNode)
+				.collect(Collectors.toMap(Map.Entry::getKey, e -> (VnfExtCpNode) e.getValue()));
     }
 
     @JsonIgnore
     public Map<String, VDUComputeNode> getVDUComputeNodes() throws MalformattedElementException {
-        // TODO not supported
-        return Collections.emptyMap();
-//		return nodeTemplates.entrySet()
-//				.stream()
-//				.filter(e -> e.getValue() instanceof VDUComputeNode)
-//				.collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUComputeNode) e.getValue()));
+
+		return nodeTemplates.entrySet()
+				.stream()
+				.filter(e -> e.getValue() instanceof VDUComputeNode)
+				.collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUComputeNode) e.getValue()));
     }
 
     @JsonIgnore
     public Map<String, VDUVirtualBlockStorageNode> getVDUStorageNodes() throws MalformattedElementException {
-        // TODO not supported
-        return Collections.emptyMap();
+
+        return nodeTemplates.entrySet()
+                .stream()
+                .filter(e -> e.getValue() instanceof VDUVirtualBlockStorageNode)
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUVirtualBlockStorageNode) e.getValue()));
     }
 
     @JsonIgnore
@@ -192,8 +204,11 @@ public class TopologyTemplate implements DescriptorInformationElement {
 
     @JsonIgnore
     public Map<String, VnfVirtualLinkNode> getVnfVirtualLinkNodes() throws MalformattedElementException {
-        // TODO not supported
-        return Collections.emptyMap();
+
+        return nodeTemplates.entrySet()
+                .stream()
+                .filter(e -> e.getValue() instanceof VnfVirtualLinkNode)
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VnfVirtualLinkNode) e.getValue()));
     }
 
     @Override

@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
+import it.nextworks.nfvmano.libs.descriptors.policies.ScalingAspectsProperties;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -34,6 +35,10 @@ public class ScalingAspect implements DescriptorInformationElement {
     @GeneratedValue
     @JsonIgnore
     private Long id;
+
+    @ManyToOne
+    @JsonIgnore
+    private ScalingAspectsProperties scalingAspectsProperties;
 
     private String name;
     private String description;
@@ -54,8 +59,20 @@ public class ScalingAspect implements DescriptorInformationElement {
         this.stepDeltas = stepDeltas;
     }
 
+    public ScalingAspect(ScalingAspectsProperties scalingAspectsProperties, String name, String description, Integer maxScaleLevel, List<String> stepDeltas) {
+        this.scalingAspectsProperties = scalingAspectsProperties;
+        this.name = name;
+        this.description = description;
+        this.maxScaleLevel = maxScaleLevel;
+        this.stepDeltas = stepDeltas;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public ScalingAspectsProperties getScalingAspectsProperties() {
+        return scalingAspectsProperties;
     }
 
     @JsonProperty("stepDeltas")

@@ -15,10 +15,12 @@
  */
 package it.nextworks.nfvmano.libs.descriptors.elements;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.elements.ScaleInfo;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
+import it.nextworks.nfvmano.libs.descriptors.policies.InstantiationLevelsProperties;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -33,6 +35,10 @@ public class InstantiationLevel implements DescriptorInformationElement {
     @Id
     @GeneratedValue
     Long id;
+
+    @ManyToOne
+    @JsonIgnore
+    private InstantiationLevelsProperties instantiationLevelsProperties;
 
     private String description;
 
@@ -50,9 +56,18 @@ public class InstantiationLevel implements DescriptorInformationElement {
         this.scaleInfo = scaleInfo;
     }
 
+    public InstantiationLevel(InstantiationLevelsProperties instantiationLevelsProperties, String description, Map<String, ScaleInfo> scaleInfo) {
+        this.instantiationLevelsProperties = instantiationLevelsProperties;
+        this.description = description;
+        this.scaleInfo = scaleInfo;
+    }
 
     public Long getId() {
         return id;
+    }
+
+    public InstantiationLevelsProperties getInstantiationLevelsProperties() {
+        return instantiationLevelsProperties;
     }
 
     @JsonProperty("description")

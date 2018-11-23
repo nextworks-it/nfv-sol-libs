@@ -20,6 +20,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
+import it.nextworks.nfvmano.libs.descriptors.policies.VirtualLinkBitrateInitialDeltaProperties;
+import it.nextworks.nfvmano.libs.descriptors.policies.VirtualLinkInstantiationLevelsProperties;
+import it.nextworks.nfvmano.libs.descriptors.policies.VirtualLinkScalingAspectDeltasProperties;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfExtCp.VnfExtCpProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -37,6 +40,18 @@ public class VirtualLinkBitrateLevel implements DescriptorInformationElement {
     @ManyToOne
     @JsonIgnore
     private VnfExtCpProperties vnfExtCpProperties;
+
+    @ManyToOne
+    @JsonIgnore
+    private VirtualLinkInstantiationLevelsProperties vlInstantiationLevels;
+
+    @ManyToOne
+    @JsonIgnore
+    private VirtualLinkScalingAspectDeltasProperties vlScalingAspectDeltas;
+
+    @OneToOne
+    @JsonIgnore
+    private VirtualLinkBitrateInitialDeltaProperties vlBitrateInitialDelta;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "vlBitrateLevel", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -56,12 +71,39 @@ public class VirtualLinkBitrateLevel implements DescriptorInformationElement {
         this.bitrateRequirements = bitrateRequirements;
     }
 
+    public VirtualLinkBitrateLevel(VirtualLinkInstantiationLevelsProperties vlInstantiationLevels, LinkBitrateRequirements bitrateRequirements) {
+        this.vlInstantiationLevels = vlInstantiationLevels;
+        this.bitrateRequirements = bitrateRequirements;
+    }
+
+    public VirtualLinkBitrateLevel(VirtualLinkScalingAspectDeltasProperties vlScalingAspectDeltas, LinkBitrateRequirements bitrateRequirements) {
+        this.vlScalingAspectDeltas = vlScalingAspectDeltas;
+        this.bitrateRequirements = bitrateRequirements;
+    }
+
+    public VirtualLinkBitrateLevel(VirtualLinkBitrateInitialDeltaProperties vlBitrateInitialDelta, LinkBitrateRequirements bitrateRequirements) {
+        this.vlBitrateInitialDelta = vlBitrateInitialDelta;
+        this.bitrateRequirements = bitrateRequirements;
+    }
+
     public Long getId() {
         return id;
     }
 
     public VnfExtCpProperties getVnfExtCpProperties() {
         return vnfExtCpProperties;
+    }
+
+    public VirtualLinkInstantiationLevelsProperties getVlInstantiationLevels() {
+        return vlInstantiationLevels;
+    }
+
+    public VirtualLinkScalingAspectDeltasProperties getVlScalingAspectDeltas() {
+        return vlScalingAspectDeltas;
+    }
+
+    public VirtualLinkBitrateInitialDeltaProperties getVlBitrateInitialDelta() {
+        return vlBitrateInitialDelta;
     }
 
     @JsonProperty("bitrateRequirements")
