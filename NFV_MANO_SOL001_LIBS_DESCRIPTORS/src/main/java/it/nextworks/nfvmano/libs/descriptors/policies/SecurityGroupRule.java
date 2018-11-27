@@ -25,7 +25,10 @@ import it.nextworks.nfvmano.libs.descriptors.templates.TopologyTemplate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 @Entity

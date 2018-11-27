@@ -30,50 +30,50 @@ import java.util.List;
 @Entity
 public class VnfVirtualLinkCapabilities implements DescriptorInformationElement {
 
-	@Id
-	@GeneratedValue
-	@JsonIgnore
-	private Long id;
+    @Id
+    @GeneratedValue
+    @JsonIgnore
+    private Long id;
 
-	@OneToOne
-	@JsonIgnore
-	private VnfVirtualLinkNode vnfVirtualLinkNode;
+    @OneToOne
+    @JsonIgnore
+    private VnfVirtualLinkNode vnfVirtualLinkNode;
 
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SELECT)
-	@Cascade(org.hibernate.annotations.CascadeType.ALL)
-	private List<String> virtualLinkable = new ArrayList<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<String> virtualLinkable = new ArrayList<>();
 
-	public VnfVirtualLinkCapabilities() {
+    public VnfVirtualLinkCapabilities() {
 
-	}
+    }
 
-	public VnfVirtualLinkCapabilities(List<String> virtualLinkable) {
-		this.virtualLinkable = virtualLinkable;
-	}
+    public VnfVirtualLinkCapabilities(List<String> virtualLinkable) {
+        this.virtualLinkable = virtualLinkable;
+    }
 
-	public VnfVirtualLinkCapabilities(VnfVirtualLinkNode vnfVlNode, List<String> virtualLinkable) {
-		this.vnfVirtualLinkNode = vnfVlNode;
-		this.virtualLinkable = virtualLinkable;
-	}
+    public VnfVirtualLinkCapabilities(VnfVirtualLinkNode vnfVlNode, List<String> virtualLinkable) {
+        this.vnfVirtualLinkNode = vnfVlNode;
+        this.virtualLinkable = virtualLinkable;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public VnfVirtualLinkNode getVnfVirtualLinkNode() {
-		return vnfVirtualLinkNode;
-	}
+    public VnfVirtualLinkNode getVnfVirtualLinkNode() {
+        return vnfVirtualLinkNode;
+    }
 
-	@JsonProperty("virtualLinkable")
-	public List<String> getVirtualLinkable() {
-		return virtualLinkable;
-	}
+    @JsonProperty("virtualLinkable")
+    public List<String> getVirtualLinkable() {
+        return virtualLinkable;
+    }
 
-	@Override
-	public void isValid() throws MalformattedElementException {
+    @Override
+    public void isValid() throws MalformattedElementException {
 
-	}
+    }
 
 }

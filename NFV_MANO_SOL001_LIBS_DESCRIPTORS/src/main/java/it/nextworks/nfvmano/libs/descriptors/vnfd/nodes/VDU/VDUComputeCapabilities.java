@@ -21,13 +21,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.capabilities.VirtualComputeCapability;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.CascadeType;
 import javax.persistence.*;
-import javax.persistence.Entity;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class VDUComputeCapabilities implements DescriptorInformationElement {

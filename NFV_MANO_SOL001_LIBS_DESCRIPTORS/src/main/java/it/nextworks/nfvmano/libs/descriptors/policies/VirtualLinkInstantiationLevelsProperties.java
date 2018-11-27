@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
-import it.nextworks.nfvmano.libs.descriptors.elements.InstantiationLevel;
 import it.nextworks.nfvmano.libs.descriptors.elements.VirtualLinkBitrateLevel;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -77,7 +76,7 @@ public class VirtualLinkInstantiationLevelsProperties implements DescriptorInfor
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.levels == null || this.levels.isEmpty())
-            throw  new MalformattedElementException("VirtualLinkInstantiationLevelsProperties without levels");
+            throw new MalformattedElementException("VirtualLinkInstantiationLevelsProperties without levels");
         else
             for (Map.Entry<String, VirtualLinkBitrateLevel> level : this.levels.entrySet()) {
                 level.getValue().isValid();

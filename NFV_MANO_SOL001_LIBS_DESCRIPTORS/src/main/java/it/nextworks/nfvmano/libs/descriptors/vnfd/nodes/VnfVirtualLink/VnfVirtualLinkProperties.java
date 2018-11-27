@@ -26,8 +26,8 @@ import it.nextworks.nfvmano.libs.descriptors.elements.VirtualLinkMonitoringParam
 import it.nextworks.nfvmano.libs.descriptors.elements.VlProfile;
 import org.hibernate.annotations.*;
 
-import javax.persistence.*;
 import javax.persistence.CascadeType;
+import javax.persistence.*;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,102 +35,102 @@ import java.util.List;
 @Entity
 public class VnfVirtualLinkProperties implements DescriptorInformationElement {
 
-	@Id
-	@GeneratedValue
-	@JsonIgnore
-	private Long id;
+    @Id
+    @GeneratedValue
+    @JsonIgnore
+    private Long id;
 
-	@OneToOne
-	@JsonIgnore
-	private VnfVirtualLinkNode vnfVirtualLinkNode;
+    @OneToOne
+    @JsonIgnore
+    private VnfVirtualLinkNode vnfVirtualLinkNode;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "vnfVLProperties", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-	private ConnectivityType connectivityType;
-
-	@ElementCollection(fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SELECT)
-	@Cascade(org.hibernate.annotations.CascadeType.ALL)
-	private List<TestAccess> testAccess = new ArrayList<>();
-
-	private String description;
-
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "vnfVLProperties", cascade = CascadeType.ALL, orphanRemoval = true)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private VlProfile vlProfile;
+    private ConnectivityType connectivityType;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-	private List<VirtualLinkMonitoringParameter> monitoringParameters = new ArrayList<>();
+    private List<TestAccess> testAccess = new ArrayList<>();
 
-	public VnfVirtualLinkProperties() {
-	}
+    private String description;
 
-	public VnfVirtualLinkProperties(VnfVirtualLinkNode vnfVirtualLinkNode, ConnectivityType connectivityType,
-			List<TestAccess> testAccess, String description, VlProfile vlProfile, List<VirtualLinkMonitoringParameter> monitoringParameters) {
-		this.vnfVirtualLinkNode = vnfVirtualLinkNode;
-		this.connectivityType = connectivityType;
-		this.testAccess = testAccess;
-		this.description = description;
-		this.vlProfile = vlProfile;
-		this.monitoringParameters = monitoringParameters;
-	}
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "vnfVLProperties", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private VlProfile vlProfile;
 
-	public Long getId() {
-		return id;
-	}
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<VirtualLinkMonitoringParameter> monitoringParameters = new ArrayList<>();
 
-	public VnfVirtualLinkNode getVnfVirtualLinkNode() {
-		return vnfVirtualLinkNode;
-	}
+    public VnfVirtualLinkProperties() {
+    }
 
-	@JsonProperty("connectivityType")
-	public ConnectivityType getConnectivityType() {
-		return connectivityType;
-	}
+    public VnfVirtualLinkProperties(VnfVirtualLinkNode vnfVirtualLinkNode, ConnectivityType connectivityType,
+                                    List<TestAccess> testAccess, String description, VlProfile vlProfile, List<VirtualLinkMonitoringParameter> monitoringParameters) {
+        this.vnfVirtualLinkNode = vnfVirtualLinkNode;
+        this.connectivityType = connectivityType;
+        this.testAccess = testAccess;
+        this.description = description;
+        this.vlProfile = vlProfile;
+        this.monitoringParameters = monitoringParameters;
+    }
 
-	@JsonProperty("testAccess")
-	public List<TestAccess> getTestAccess() {
-		return testAccess;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	@JsonProperty("description")
-	public String getDescription() {
-		return description;
-	}
+    public VnfVirtualLinkNode getVnfVirtualLinkNode() {
+        return vnfVirtualLinkNode;
+    }
 
-	@JsonProperty("vlProfile")
-	public VlProfile getVlProfile() {
-		return vlProfile;
-	}
+    @JsonProperty("connectivityType")
+    public ConnectivityType getConnectivityType() {
+        return connectivityType;
+    }
 
-	@JsonProperty("monitoringParameters")
+    @JsonProperty("testAccess")
+    public List<TestAccess> getTestAccess() {
+        return testAccess;
+    }
+
+    @JsonProperty("description")
+    public String getDescription() {
+        return description;
+    }
+
+    @JsonProperty("vlProfile")
+    public VlProfile getVlProfile() {
+        return vlProfile;
+    }
+
+    @JsonProperty("monitoringParameters")
     public List<VirtualLinkMonitoringParameter> getMonitoringParameters() {
         return monitoringParameters;
     }
 
     @Override
-	public void isValid() throws MalformattedElementException {
-		if (this.testAccess != null) {
-			for (TestAccess testAccess : this.testAccess) {
-				if (testAccess != TestAccess.NONE && testAccess != TestAccess.ACTIVE_LOOPBACK
-						&& testAccess != TestAccess.PASSIVE_MONITORING)
-					throw new MalformattedElementException("Wrong testAccess values in VFN VL Properties");
-			}
-		}
+    public void isValid() throws MalformattedElementException {
+        if (this.testAccess != null) {
+            for (TestAccess testAccess : this.testAccess) {
+                if (testAccess != TestAccess.NONE && testAccess != TestAccess.ACTIVE_LOOPBACK
+                        && testAccess != TestAccess.PASSIVE_MONITORING)
+                    throw new MalformattedElementException("Wrong testAccess values in VFN VL Properties");
+            }
+        }
 
-		if (this.connectivityType == null)
-			throw new MalformattedElementException("ConnectivityType is missing in VFN VL Properties");
-		else
-			this.connectivityType.isValid();
+        if (this.connectivityType == null)
+            throw new MalformattedElementException("ConnectivityType is missing in VFN VL Properties");
+        else
+            this.connectivityType.isValid();
 
-		if (this.vlProfile == null)
-			throw new MalformattedElementException("VlProfile is missing in VFN VL Properties");
-		else
-			this.vlProfile.isValid();
-	}
+        if (this.vlProfile == null)
+            throw new MalformattedElementException("VlProfile is missing in VFN VL Properties");
+        else
+            this.vlProfile.isValid();
+    }
 
 }

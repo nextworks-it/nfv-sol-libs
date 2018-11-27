@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
-import it.nextworks.nfvmano.libs.descriptors.elements.ScalingAspect;
 import it.nextworks.nfvmano.libs.descriptors.elements.VduLevel;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
@@ -85,7 +84,7 @@ public class VduScalingAspectDeltasProperties implements DescriptorInformationEl
         if (this.aspect == null)
             throw new MalformattedElementException("VduScalingAspectDeltasProperties without aspect");
         if (this.deltas == null || this.deltas.isEmpty())
-            throw  new MalformattedElementException("VduScalingAspectDeltasProperties without deltas");
+            throw new MalformattedElementException("VduScalingAspectDeltasProperties without deltas");
         else
             for (Map.Entry<String, VduLevel> delta : this.deltas.entrySet()) {
                 delta.getValue().isValid();

@@ -16,7 +16,6 @@
 package it.nextworks.nfvmano.libs.descriptors.nsd.nodes.Sap;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.enums.CpRole;
 import it.nextworks.nfvmano.libs.common.enums.LayerProtocol;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;

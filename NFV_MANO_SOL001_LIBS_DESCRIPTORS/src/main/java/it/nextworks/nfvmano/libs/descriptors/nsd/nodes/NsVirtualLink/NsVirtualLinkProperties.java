@@ -19,16 +19,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
-import it.nextworks.nfvmano.libs.common.elements.QoS;
 import it.nextworks.nfvmano.libs.common.enums.TestAccess;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.elements.ConnectivityType;
-import it.nextworks.nfvmano.libs.descriptors.elements.ServiceAvailability;
 import it.nextworks.nfvmano.libs.descriptors.elements.VlProfile;
 import org.hibernate.annotations.*;
 
-import javax.persistence.*;
 import javax.persistence.CascadeType;
+import javax.persistence.*;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;

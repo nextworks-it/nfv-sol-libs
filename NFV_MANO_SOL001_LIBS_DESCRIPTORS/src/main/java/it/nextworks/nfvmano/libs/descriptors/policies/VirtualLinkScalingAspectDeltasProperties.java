@@ -20,13 +20,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
-import it.nextworks.nfvmano.libs.descriptors.elements.VduLevel;
 import it.nextworks.nfvmano.libs.descriptors.elements.VirtualLinkBitrateLevel;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -87,7 +87,7 @@ public class VirtualLinkScalingAspectDeltasProperties implements DescriptorInfor
         if (this.aspect == null)
             throw new MalformattedElementException("VirtualLinkScalingAspectDeltasProperties without aspect");
         if (this.aspectDeltas == null || this.aspectDeltas.isEmpty())
-            throw  new MalformattedElementException("VirtualLinkScalingAspectDeltasProperties without deltas");
+            throw new MalformattedElementException("VirtualLinkScalingAspectDeltasProperties without deltas");
         else
             for (Map.Entry<String, VirtualLinkBitrateLevel> delta : this.aspectDeltas.entrySet()) {
                 delta.getValue().isValid();

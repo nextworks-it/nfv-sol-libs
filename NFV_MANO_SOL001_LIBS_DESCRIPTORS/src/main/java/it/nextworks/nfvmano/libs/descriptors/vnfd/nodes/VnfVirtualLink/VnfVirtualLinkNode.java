@@ -31,51 +31,51 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class VnfVirtualLinkNode extends Node implements DescriptorInformationElement {
-	
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "vnfVirtualLinkNode", cascade = CascadeType.ALL, orphanRemoval = true)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private VnfVirtualLinkProperties properties;
 
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "vnfVirtualLinkNode", cascade = CascadeType.ALL, orphanRemoval = true)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private VnfVirtualLinkCapabilities capabilities;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "vnfVirtualLinkNode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private VnfVirtualLinkProperties properties;
 
-	public VnfVirtualLinkNode() {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "vnfVirtualLinkNode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private VnfVirtualLinkCapabilities capabilities;
 
-	}
+    public VnfVirtualLinkNode() {
 
-	public VnfVirtualLinkNode(String type, VnfVirtualLinkProperties properties,
-			VnfVirtualLinkCapabilities capabilities) {
-		super(type);
-		this.properties = properties;
-		this.capabilities = capabilities;
-	}
+    }
 
-	public VnfVirtualLinkNode(TopologyTemplate topologyTemplate, String type, VnfVirtualLinkProperties properties,
+    public VnfVirtualLinkNode(String type, VnfVirtualLinkProperties properties,
                               VnfVirtualLinkCapabilities capabilities) {
-		super(topologyTemplate, type);
-		this.properties = properties;
-		this.capabilities = capabilities;
-	}
+        super(type);
+        this.properties = properties;
+        this.capabilities = capabilities;
+    }
 
-	@JsonProperty("properties")
-	public VnfVirtualLinkProperties getProperties() {
-		return properties;
-	}
+    public VnfVirtualLinkNode(TopologyTemplate topologyTemplate, String type, VnfVirtualLinkProperties properties,
+                              VnfVirtualLinkCapabilities capabilities) {
+        super(topologyTemplate, type);
+        this.properties = properties;
+        this.capabilities = capabilities;
+    }
 
-	@JsonProperty("capabilities")
-	public VnfVirtualLinkCapabilities getCapabilities() {
-		return capabilities;
-	}
+    @JsonProperty("properties")
+    public VnfVirtualLinkProperties getProperties() {
+        return properties;
+    }
 
-	@Override
-	public void isValid() throws MalformattedElementException {
-		if (this.properties == null)
-			throw new MalformattedElementException("Properties are missing in VNF VL Node");
-		if (this.capabilities == null)
-			throw new MalformattedElementException("Capabilities are missing in VNF VL Node");
-	}
+    @JsonProperty("capabilities")
+    public VnfVirtualLinkCapabilities getCapabilities() {
+        return capabilities;
+    }
+
+    @Override
+    public void isValid() throws MalformattedElementException {
+        if (this.properties == null)
+            throw new MalformattedElementException("Properties are missing in VNF VL Node");
+        if (this.capabilities == null)
+            throw new MalformattedElementException("Capabilities are missing in VNF VL Node");
+    }
 
 }

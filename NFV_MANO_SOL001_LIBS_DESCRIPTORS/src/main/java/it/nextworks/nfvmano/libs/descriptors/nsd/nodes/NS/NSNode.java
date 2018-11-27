@@ -39,8 +39,10 @@ public class NSNode extends Node implements DescriptorInformationElement {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private NSRequirements requirements;
 
-    // TODO Still to be specified in ETSI SOL001
-    // private NSInterfaces interfaces;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "nsNode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private NSInterfaces interfaces;
 
     public NSNode() {
 

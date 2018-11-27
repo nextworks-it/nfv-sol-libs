@@ -47,24 +47,31 @@ public class VNFNode extends Node implements DescriptorInformationElement {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private VNFCapabilities capabilities;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "vnfNode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private VNFInterfaces interfaces;
+
     public VNFNode() {
 
     }
 
     public VNFNode(String type, String name, VNFProperties properties, VNFRequirements requirements,
-                   VNFCapabilities capabilities) {
+                   VNFCapabilities capabilities, VNFInterfaces interfaces) {
         super(type);
         this.properties = properties;
         this.requirements = requirements;
         this.capabilities = capabilities;
+        this.interfaces = interfaces;
     }
 
     public VNFNode(TopologyTemplate topologyTemplate, String type, String name, VNFProperties properties,
-                   VNFRequirements requirements, VNFCapabilities capabilities) {
+                   VNFRequirements requirements, VNFCapabilities capabilities, VNFInterfaces interfaces) {
         super(topologyTemplate, type);
         this.properties = properties;
         this.requirements = requirements;
         this.capabilities = capabilities;
+        this.interfaces = interfaces;
     }
 
     @JsonProperty("properties")
@@ -80,6 +87,11 @@ public class VNFNode extends Node implements DescriptorInformationElement {
     @JsonProperty("capabilities")
     public VNFCapabilities getCapabilities() {
         return capabilities;
+    }
+
+    @JsonProperty("interfaces")
+    public VNFInterfaces getInterfaces() {
+        return interfaces;
     }
 
     @Override

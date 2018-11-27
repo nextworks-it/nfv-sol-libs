@@ -15,19 +15,15 @@
  */
 package it.nextworks.nfvmano.libs.descriptors.policies;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
-import it.nextworks.nfvmano.libs.descriptors.templates.Node;
 import it.nextworks.nfvmano.libs.descriptors.templates.Policy;
 import it.nextworks.nfvmano.libs.descriptors.templates.TopologyTemplate;
-import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.Cp.CpProperties;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
 import java.util.List;
 
 @Entity

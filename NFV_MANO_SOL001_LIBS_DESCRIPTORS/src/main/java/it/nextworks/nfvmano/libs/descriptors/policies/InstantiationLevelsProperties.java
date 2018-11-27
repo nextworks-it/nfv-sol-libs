@@ -84,7 +84,7 @@ public class InstantiationLevelsProperties implements DescriptorInformationEleme
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.levels == null || this.levels.isEmpty())
-            throw  new MalformattedElementException("InstantiationLevelsProperties without levels");
+            throw new MalformattedElementException("InstantiationLevelsProperties without levels");
         else
             for (Map.Entry<String, InstantiationLevel> level : this.levels.entrySet()) {
                 level.getValue().isValid();

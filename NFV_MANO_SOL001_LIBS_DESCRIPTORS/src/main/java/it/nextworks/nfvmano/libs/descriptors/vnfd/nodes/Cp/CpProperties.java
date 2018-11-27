@@ -25,8 +25,8 @@ import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.elements.CpProtocolData;
 import org.hibernate.annotations.*;
 
-import javax.persistence.*;
 import javax.persistence.CascadeType;
+import javax.persistence.*;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;

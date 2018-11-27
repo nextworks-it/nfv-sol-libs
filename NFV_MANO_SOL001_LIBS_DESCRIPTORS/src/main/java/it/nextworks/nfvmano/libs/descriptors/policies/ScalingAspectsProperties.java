@@ -33,20 +33,18 @@ import java.util.Map;
 @Entity
 public class ScalingAspectsProperties implements DescriptorInformationElement {
 
-    @Id
-    @GeneratedValue
-    @JsonIgnore
-    private Long id;
-
-    @OneToOne
-    @JsonIgnore
-    private ScalingAspects scalingAspects;
-
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "scalingAspectsProperties", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @LazyCollection(LazyCollectionOption.FALSE)
     Map<String, ScalingAspect> aspects = new HashMap<>();
+    @Id
+    @GeneratedValue
+    @JsonIgnore
+    private Long id;
+    @OneToOne
+    @JsonIgnore
+    private ScalingAspects scalingAspects;
 
     public ScalingAspectsProperties() {
     }
@@ -76,7 +74,7 @@ public class ScalingAspectsProperties implements DescriptorInformationElement {
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.aspects == null || this.aspects.isEmpty())
-            throw  new MalformattedElementException("ScalingAspectsProperties without aspects");
+            throw new MalformattedElementException("ScalingAspectsProperties without aspects");
         else
             for (Map.Entry<String, ScalingAspect> aspect : this.aspects.entrySet()) {
                 aspect.getValue().isValid();

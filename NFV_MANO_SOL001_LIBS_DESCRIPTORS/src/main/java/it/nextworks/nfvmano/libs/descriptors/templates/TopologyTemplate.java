@@ -36,7 +36,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -76,6 +75,12 @@ public class TopologyTemplate implements DescriptorInformationElement {
     @LazyCollection(LazyCollectionOption.FALSE)
     private Map<String, Policy> policies = new HashMap<>();
 
+    /*@JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @OneToMany(mappedBy = "topologyTemplate", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Map<String, Group> groups = new HashMap<>();*/
+
     public TopologyTemplate() {
 
     }
@@ -85,12 +90,13 @@ public class TopologyTemplate implements DescriptorInformationElement {
     }
 
     public TopologyTemplate(DescriptorTemplate descriptorTemplate, SubstitutionMapping substitutionMapping, Map<String, Node> nodeTemplates,
-                            Map<String, Relationship> relationshipTemplates, Map<String, Policy> policies) {
+                            Map<String, Relationship> relationshipTemplates, Map<String, Policy> policies/*, Map<String, Group> groups*/) {
         this.descriptorTemplate = descriptorTemplate;
         this.substituitionMapping = substitutionMapping;
         this.nodeTemplates = nodeTemplates;
         this.relationshipTemplates = relationshipTemplates;
         this.policies = policies;
+        //this.groups = groups;
     }
 
     public Long getId() {
@@ -121,6 +127,11 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return policies;
     }
 
+    /*@JsonProperty("groups")
+    public Map<String, Group> getGroups() {
+        return groups;
+    }*/
+
     @JsonIgnore
     public Map<String, CpNode> getCPNodes() throws MalformattedElementException {
 
@@ -142,28 +153,28 @@ public class TopologyTemplate implements DescriptorInformationElement {
     @JsonIgnore
     public Map<String, VduCpNode> getVduCpNodes() throws MalformattedElementException {
 
-		return nodeTemplates.entrySet()
-				.stream()
-				.filter(e -> e.getValue() instanceof VduCpNode)
-				.collect(Collectors.toMap(Map.Entry::getKey, e -> (VduCpNode) e.getValue()));
+        return nodeTemplates.entrySet()
+                .stream()
+                .filter(e -> e.getValue() instanceof VduCpNode)
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VduCpNode) e.getValue()));
     }
 
     @JsonIgnore
     public Map<String, VnfExtCpNode> getVnfExtCpNodes() throws MalformattedElementException {
 
-		return nodeTemplates.entrySet()
-				.stream()
-				.filter(e -> e.getValue() instanceof VnfExtCpNode)
-				.collect(Collectors.toMap(Map.Entry::getKey, e -> (VnfExtCpNode) e.getValue()));
+        return nodeTemplates.entrySet()
+                .stream()
+                .filter(e -> e.getValue() instanceof VnfExtCpNode)
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VnfExtCpNode) e.getValue()));
     }
 
     @JsonIgnore
     public Map<String, VDUComputeNode> getVDUComputeNodes() throws MalformattedElementException {
 
-		return nodeTemplates.entrySet()
-				.stream()
-				.filter(e -> e.getValue() instanceof VDUComputeNode)
-				.collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUComputeNode) e.getValue()));
+        return nodeTemplates.entrySet()
+                .stream()
+                .filter(e -> e.getValue() instanceof VDUComputeNode)
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUComputeNode) e.getValue()));
     }
 
     @JsonIgnore

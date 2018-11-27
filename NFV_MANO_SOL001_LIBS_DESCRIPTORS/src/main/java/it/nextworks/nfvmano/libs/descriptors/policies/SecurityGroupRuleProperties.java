@@ -23,7 +23,10 @@ import it.nextworks.nfvmano.libs.common.enums.IpVersion;
 import it.nextworks.nfvmano.libs.common.enums.LayerProtocol;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class SecurityGroupRuleProperties implements DescriptorInformationElement {

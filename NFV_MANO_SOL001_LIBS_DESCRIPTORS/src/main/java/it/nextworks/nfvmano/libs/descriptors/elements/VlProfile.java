@@ -44,9 +44,9 @@ public class VlProfile implements DescriptorInformationElement {
     @JsonIgnore
     private NsVirtualLinkProperties nsVLProperties;
 
-	@OneToOne
-	@JsonIgnore
-	private VnfVirtualLinkProperties vnfVLProperties;
+    @OneToOne
+    @JsonIgnore
+    private VnfVirtualLinkProperties vnfVLProperties;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "vlProfile", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -89,15 +89,15 @@ public class VlProfile implements DescriptorInformationElement {
         this.virtualLinkProtocolData = virtualLinkProtocolData;
     }
 
-	public VlProfile(VnfVirtualLinkProperties vnfVLProperties, LinkBitrateRequirements maxBitrateRequirements,
-			LinkBitrateRequirements minBitrateRequirements, QoS qos,
-			List<VirtualLinkProtocolData> virtualLinkProtocolData) {
-		this.vnfVLProperties = vnfVLProperties;
-		this.maxBitrateRequirements = maxBitrateRequirements;
-		this.minBitrateRequirements = minBitrateRequirements;
-		this.qos = qos;
-		this.virtualLinkProtocolData = virtualLinkProtocolData;
-	}
+    public VlProfile(VnfVirtualLinkProperties vnfVLProperties, LinkBitrateRequirements maxBitrateRequirements,
+                     LinkBitrateRequirements minBitrateRequirements, QoS qos,
+                     List<VirtualLinkProtocolData> virtualLinkProtocolData) {
+        this.vnfVLProperties = vnfVLProperties;
+        this.maxBitrateRequirements = maxBitrateRequirements;
+        this.minBitrateRequirements = minBitrateRequirements;
+        this.qos = qos;
+        this.virtualLinkProtocolData = virtualLinkProtocolData;
+    }
 
     public Long getId() {
         return id;
@@ -107,9 +107,9 @@ public class VlProfile implements DescriptorInformationElement {
         return nsVLProperties;
     }
 
-	public VnfVirtualLinkProperties getVnfVLProperties() {
-		return vnfVLProperties;
-	}
+    public VnfVirtualLinkProperties getVnfVLProperties() {
+        return vnfVLProperties;
+    }
 
     @JsonProperty("maxBitrateRequirements")
     public LinkBitrateRequirements getMaxBitrateRequirements() {

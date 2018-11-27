@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
-import it.nextworks.nfvmano.libs.descriptors.policies.*;
+import it.nextworks.nfvmano.libs.descriptors.groups.PlacementGroup;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -30,21 +30,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+/*@Entity
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
-@JsonSubTypes({@JsonSubTypes.Type(value = AntiAffinityRule.class, name = "tosca.policies.nfv.AntiAffinityRule"),
-        @JsonSubTypes.Type(value = InstantiationLevels.class, name = "tosca.policies.nfv.InstantiationLevels"),
-        @JsonSubTypes.Type(value = ScalingAspects.class, name = "tosca.policies.nfv.ScalingAspects"),
-        @JsonSubTypes.Type(value = SecurityGroupRule.class, name = "tosca.policies.nfv.SecurityGroupRule"),
-        @JsonSubTypes.Type(value = SupportedVnfInterface.class, name = "tosca.policies.nfv.SupportedVnfInterface"),
-        @JsonSubTypes.Type(value = VduInitialDelta.class, name = "tosca.policies.nfv.VduInitialDelta"),
-        @JsonSubTypes.Type(value = VduScalingAspectDeltas.class, name = "tosca.policies.nfv.VduScalingAspectDeltas"),
-        @JsonSubTypes.Type(value = VirtualLinkBitrateInitialDelta.class, name = "tosca.policies.nfv.VirtualLinkBitrateInitialDelta"),
-        @JsonSubTypes.Type(value = VirtualLinkInstantiationLevels.class, name = "tosca.policies.nfv.VirtualLinkInstantiationLevels"),
-        @JsonSubTypes.Type(value = VirtualLinkScalingAspectDeltas.class, name = "tosca.policies.nfv.VirtualLinkScalingAspectDeltas")})
-public abstract class Policy implements DescriptorInformationElement {
+@JsonSubTypes({@JsonSubTypes.Type(value = PlacementGroup.class, name = "tosca.groups.nfv.PlacementGroup")})*/
+public abstract class Group /*implements DescriptorInformationElement*/ {
 
-    @Id
+    /*@Id
     @GeneratedValue
     @JsonIgnore
     private Long id;
@@ -58,21 +49,21 @@ public abstract class Policy implements DescriptorInformationElement {
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<String> targets = new ArrayList<>();
+    private List<String> members = new ArrayList<>();
 
-    public Policy() {
+    public Group() {
 
     }
 
-    public Policy(String type, List<String> targets) {
+    public Group(String type, List<String> members) {
         this.type = type;
-        this.targets = targets;
+        this.members = members;
     }
 
-    public Policy(TopologyTemplate topologyTemplate, String type, List<String> targets) {
+    public Group(TopologyTemplate topologyTemplate, String type, List<String> members) {
         this.topologyTemplate = topologyTemplate;
         this.type = type;
-        this.targets = targets;
+        this.members = members;
     }
 
     public Long getId() {
@@ -88,16 +79,16 @@ public abstract class Policy implements DescriptorInformationElement {
         return type;
     }
 
-    @JsonProperty("targets")
-    public List<String> getTargets() {
-        return targets;
+    @JsonProperty("members")
+    public List<String> getMembers() {
+        return members;
     }
 
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.type == null)
-            throw new MalformattedElementException("Policy without type");
-        if (this.targets == null || this.targets.isEmpty())
-            throw new MalformattedElementException("Policy without targets");
-    }
+            throw new MalformattedElementException("Group without type");
+        if (this.members == null || this.members.isEmpty())
+            throw new MalformattedElementException("Group without members");
+    }*/
 }
