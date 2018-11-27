@@ -34,6 +34,10 @@ public class VirtualLinkBitrateInitialDeltaProperties implements DescriptorInfor
     @JsonIgnore
     private Long id;
 
+    @OneToOne
+    @JsonIgnore
+    private VirtualLinkBitrateInitialDelta virtualLinkBitrateInitialDelta;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "vlBitrateInitialDelta", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -48,6 +52,10 @@ public class VirtualLinkBitrateInitialDeltaProperties implements DescriptorInfor
 
     public Long getId() {
         return id;
+    }
+
+    public VirtualLinkBitrateInitialDelta getVirtualLinkBitrateInitialDelta() {
+        return virtualLinkBitrateInitialDelta;
     }
 
     @JsonProperty("initialDelta")

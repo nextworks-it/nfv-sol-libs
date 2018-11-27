@@ -28,10 +28,10 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
-//@Entity
-public class SupportedVnfInterfaceProperties /*implements DescriptorInformationElement*/ {
+@Entity
+public class SupportedVnfInterfaceProperties implements DescriptorInformationElement {
 
-    /*@Id
+    @Id
     @GeneratedValue
     @JsonIgnore
     private Long id;
@@ -83,5 +83,5 @@ public class SupportedVnfInterfaceProperties /*implements DescriptorInformationE
     public void isValid() throws MalformattedElementException {
         if (this.interfaceName == null)
             throw new MalformattedElementException("SupportedVnfInterfaceProperties without interfaceName");
-    }*/
+    }
 }

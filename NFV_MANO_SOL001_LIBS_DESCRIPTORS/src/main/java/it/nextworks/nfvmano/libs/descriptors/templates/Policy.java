@@ -39,9 +39,14 @@ import java.util.List;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
 @JsonSubTypes({@JsonSubTypes.Type(value = AntiAffinityRule.class, name = "tosca.policies.nfv.AntiAffinityRule"),
         @JsonSubTypes.Type(value = InstantiationLevels.class, name = "tosca.policies.nfv.InstantiationLevels"),
-        @JsonSubTypes.Type(value = ScalingAspects.class, name = "tosca.policies.nfv.ScalingAspects")/*,
+        @JsonSubTypes.Type(value = ScalingAspects.class, name = "tosca.policies.nfv.ScalingAspects"),
         @JsonSubTypes.Type(value = SecurityGroupRule.class, name = "tosca.policies.nfv.SecurityGroupRule"),
-        @JsonSubTypes.Type(value = SupportedVnfInterface.class, name = "tosca.policies.nfv.SupportedVnfInterface")*/})
+        @JsonSubTypes.Type(value = SupportedVnfInterface.class, name = "tosca.policies.nfv.SupportedVnfInterface"),
+        @JsonSubTypes.Type(value = VduInitialDelta.class, name = "tosca.policies.nfv.VduInitialDelta"),
+        @JsonSubTypes.Type(value = VduScalingAspectDeltas.class, name = "tosca.policies.nfv.VduScalingAspectDeltas"),
+        @JsonSubTypes.Type(value = VirtualLinkBitrateInitialDelta.class, name = "tosca.policies.nfv.VirtualLinkBitrateInitialDelta"),
+        @JsonSubTypes.Type(value = VirtualLinkInstantiationLevels.class, name = "tosca.policies.nfv.VirtualLinkInstantiationLevels"),
+        @JsonSubTypes.Type(value = VirtualLinkScalingAspectDeltas.class, name = "tosca.policies.nfv.VirtualLinkScalingAspectDeltas")})
 public abstract class Policy implements DescriptorInformationElement {
 
     @Id

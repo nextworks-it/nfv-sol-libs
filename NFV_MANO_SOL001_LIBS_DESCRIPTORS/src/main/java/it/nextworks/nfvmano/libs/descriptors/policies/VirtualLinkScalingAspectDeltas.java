@@ -32,37 +32,37 @@ import javax.persistence.OneToOne;
 import java.util.List;
 
 @Entity
-@JsonTypeName("SupportedVnfInterface")
-public class SupportedVnfInterface extends Policy implements DescriptorInformationElement {
+@JsonTypeName("VirtualLinkScalingAspectDeltas")
+public class VirtualLinkScalingAspectDeltas extends Policy implements DescriptorInformationElement {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "supportedVnfInterface", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "virtualLinkScalingAspectDeltas", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private SupportedVnfInterfaceProperties properties;
+    private VirtualLinkScalingAspectDeltasProperties properties;
 
-    public SupportedVnfInterface() {
+    public VirtualLinkScalingAspectDeltas() {
 
     }
 
-    public SupportedVnfInterface(String type, List<String> targets, SupportedVnfInterfaceProperties properties) {
+    public VirtualLinkScalingAspectDeltas(String type, List<String> targets, VirtualLinkScalingAspectDeltasProperties properties) {
         super(type, targets);
         this.properties = properties;
     }
 
-    public SupportedVnfInterface(TopologyTemplate topologyTemplate, String type, List<String> targets, SupportedVnfInterfaceProperties properties) {
+    public VirtualLinkScalingAspectDeltas(TopologyTemplate topologyTemplate, String type, List<String> targets, VirtualLinkScalingAspectDeltasProperties properties) {
         super(topologyTemplate, type, targets);
         this.properties = properties;
     }
 
     @JsonProperty("properties")
-    public SupportedVnfInterfaceProperties getProperties() {
+    public VirtualLinkScalingAspectDeltasProperties getProperties() {
         return properties;
     }
 
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.properties == null)
-            throw new MalformattedElementException("SupportedVnfInterface without properties");
+            throw new MalformattedElementException("VirtualLinkScalingAspectDeltas without properties");
         else
             this.properties.isValid();
     }

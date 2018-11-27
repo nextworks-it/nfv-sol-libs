@@ -39,6 +39,10 @@ public class VirtualLinkInstantiationLevelsProperties implements DescriptorInfor
     @JsonIgnore
     private Long id;
 
+    @OneToOne
+    @JsonIgnore
+    private VirtualLinkInstantiationLevels virtualLinkInstantiationLevels;
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "vlInstantiationLevels", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -52,8 +56,17 @@ public class VirtualLinkInstantiationLevelsProperties implements DescriptorInfor
         this.levels = levels;
     }
 
+    public VirtualLinkInstantiationLevelsProperties(VirtualLinkInstantiationLevels virtualLinkInstantiationLevels, Map<String, VirtualLinkBitrateLevel> levels) {
+        this.virtualLinkInstantiationLevels = virtualLinkInstantiationLevels;
+        this.levels = levels;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public VirtualLinkInstantiationLevels getVirtualLinkInstantiationLevels() {
+        return virtualLinkInstantiationLevels;
     }
 
     @JsonProperty("levels")

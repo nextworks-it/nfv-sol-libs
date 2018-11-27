@@ -38,6 +38,10 @@ public class VirtualLinkScalingAspectDeltasProperties implements DescriptorInfor
     @JsonIgnore
     private Long id;
 
+    @OneToOne
+    @JsonIgnore
+    private VirtualLinkScalingAspectDeltas virtualLinkScalingAspectDeltas;
+
     private String aspect;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -54,8 +58,18 @@ public class VirtualLinkScalingAspectDeltasProperties implements DescriptorInfor
         this.aspectDeltas = aspectDeltas;
     }
 
+    public VirtualLinkScalingAspectDeltasProperties(VirtualLinkScalingAspectDeltas virtualLinkScalingAspectDeltas, String aspect, Map<String, VirtualLinkBitrateLevel> aspectDeltas) {
+        this.virtualLinkScalingAspectDeltas = virtualLinkScalingAspectDeltas;
+        this.aspect = aspect;
+        this.aspectDeltas = aspectDeltas;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public VirtualLinkScalingAspectDeltas getVirtualLinkScalingAspectDeltas() {
+        return virtualLinkScalingAspectDeltas;
     }
 
     @JsonProperty("aspect")

@@ -32,37 +32,37 @@ import javax.persistence.OneToOne;
 import java.util.List;
 
 @Entity
-@JsonTypeName("SupportedVnfInterface")
-public class SupportedVnfInterface extends Policy implements DescriptorInformationElement {
+@JsonTypeName("VduScalingAspectDeltas")
+public class VduScalingAspectDeltas extends Policy implements DescriptorInformationElement {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "supportedVnfInterface", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "vduScalingAspectDeltas", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private SupportedVnfInterfaceProperties properties;
+    private VduScalingAspectDeltasProperties properties;
 
-    public SupportedVnfInterface() {
+    public VduScalingAspectDeltas() {
 
     }
 
-    public SupportedVnfInterface(String type, List<String> targets, SupportedVnfInterfaceProperties properties) {
+    public VduScalingAspectDeltas(String type, List<String> targets, VduScalingAspectDeltasProperties properties) {
         super(type, targets);
         this.properties = properties;
     }
 
-    public SupportedVnfInterface(TopologyTemplate topologyTemplate, String type, List<String> targets, SupportedVnfInterfaceProperties properties) {
+    public VduScalingAspectDeltas(TopologyTemplate topologyTemplate, String type, List<String> targets, VduScalingAspectDeltasProperties properties) {
         super(topologyTemplate, type, targets);
         this.properties = properties;
     }
 
     @JsonProperty("properties")
-    public SupportedVnfInterfaceProperties getProperties() {
+    public VduScalingAspectDeltasProperties getProperties() {
         return properties;
     }
 
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.properties == null)
-            throw new MalformattedElementException("SupportedVnfInterface without properties");
+            throw new MalformattedElementException("VduScalingAspectDeltas without properties");
         else
             this.properties.isValid();
     }

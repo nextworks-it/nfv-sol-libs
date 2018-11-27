@@ -32,37 +32,37 @@ import javax.persistence.OneToOne;
 import java.util.List;
 
 @Entity
-@JsonTypeName("SupportedVnfInterface")
-public class SupportedVnfInterface extends Policy implements DescriptorInformationElement {
+@JsonTypeName("VirtualLinkBitrateInitialDelta")
+public class VirtualLinkBitrateInitialDelta extends Policy implements DescriptorInformationElement {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "supportedVnfInterface", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "virtualLinkBitrateInitialDelta", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private SupportedVnfInterfaceProperties properties;
+    private VirtualLinkBitrateInitialDeltaProperties properties;
 
-    public SupportedVnfInterface() {
+    public VirtualLinkBitrateInitialDelta() {
 
     }
 
-    public SupportedVnfInterface(String type, List<String> targets, SupportedVnfInterfaceProperties properties) {
+    public VirtualLinkBitrateInitialDelta(String type, List<String> targets, VirtualLinkBitrateInitialDeltaProperties properties) {
         super(type, targets);
         this.properties = properties;
     }
 
-    public SupportedVnfInterface(TopologyTemplate topologyTemplate, String type, List<String> targets, SupportedVnfInterfaceProperties properties) {
+    public VirtualLinkBitrateInitialDelta(TopologyTemplate topologyTemplate, String type, List<String> targets, VirtualLinkBitrateInitialDeltaProperties properties) {
         super(topologyTemplate, type, targets);
         this.properties = properties;
     }
 
     @JsonProperty("properties")
-    public SupportedVnfInterfaceProperties getProperties() {
+    public VirtualLinkBitrateInitialDeltaProperties getProperties() {
         return properties;
     }
 
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.properties == null)
-            throw new MalformattedElementException("SupportedVnfInterface without properties");
+            throw new MalformattedElementException("VirtualLinkBitrateInitialDelta without properties");
         else
             this.properties.isValid();
     }

@@ -35,9 +35,9 @@ public class InterfaceDetails implements DescriptorInformationElement {
     @JsonIgnore
     private Long id;
 
-    /*@OneToOne
+    @OneToOne
     @JsonIgnore
-    private SupportedVnfInterfaceProperties supportedVnfInterfaceProperties;*/
+    private SupportedVnfInterfaceProperties supportedVnfInterfaceProperties;
 
     @Embedded
     private UriComponents uriComponents;
@@ -56,7 +56,7 @@ public class InterfaceDetails implements DescriptorInformationElement {
     }
 
     public InterfaceDetails(SupportedVnfInterfaceProperties supportedVnfInterfaceProperties, UriComponents uriComponents, Map<String, String> interfaceSpecificData) {
-        //this.supportedVnfInterfaceProperties = supportedVnfInterfaceProperties;
+        this.supportedVnfInterfaceProperties = supportedVnfInterfaceProperties;
         this.uriComponents = uriComponents;
         this.interfaceSpecificData = interfaceSpecificData;
     }
@@ -65,9 +65,9 @@ public class InterfaceDetails implements DescriptorInformationElement {
         return id;
     }
 
-    /*public SupportedVnfInterfaceProperties getSupportedVnfInterfaceProperties() {
+    public SupportedVnfInterfaceProperties getSupportedVnfInterfaceProperties() {
         return supportedVnfInterfaceProperties;
-    }*/
+    }
 
     @JsonProperty("uriComponents")
     public UriComponents getUriComponents() {

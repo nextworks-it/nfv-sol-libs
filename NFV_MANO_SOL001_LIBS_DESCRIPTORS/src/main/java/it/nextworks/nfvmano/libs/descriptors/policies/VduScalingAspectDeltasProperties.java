@@ -37,6 +37,10 @@ public class VduScalingAspectDeltasProperties implements DescriptorInformationEl
     @JsonIgnore
     private Long id;
 
+    @OneToOne
+    @JsonIgnore
+    private VduScalingAspectDeltas vduScalingAspectDeltas;
+
     private String aspect;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -52,8 +56,18 @@ public class VduScalingAspectDeltasProperties implements DescriptorInformationEl
         this.deltas = deltas;
     }
 
+    public VduScalingAspectDeltasProperties(VduScalingAspectDeltas vduScalingAspectDeltas, String aspect, Map<String, VduLevel> deltas) {
+        this.vduScalingAspectDeltas = vduScalingAspectDeltas;
+        this.aspect = aspect;
+        this.deltas = deltas;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public VduScalingAspectDeltas getVduScalingAspectDeltas() {
+        return vduScalingAspectDeltas;
     }
 
     @JsonProperty("aspect")

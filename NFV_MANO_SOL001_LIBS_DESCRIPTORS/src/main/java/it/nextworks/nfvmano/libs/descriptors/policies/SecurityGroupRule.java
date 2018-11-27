@@ -15,22 +15,26 @@
  */
 package it.nextworks.nfvmano.libs.descriptors.policies;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.templates.Policy;
 import it.nextworks.nfvmano.libs.descriptors.templates.TopologyTemplate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.List;
 
-/*@Entity
-@JsonTypeName("SecurityGroupRule")*/
-public class SecurityGroupRule /*extends Policy implements DescriptorInformationElement*/ {
+@Entity
+@JsonTypeName("SecurityGroupRule")
+public class SecurityGroupRule extends Policy implements DescriptorInformationElement {
 
-    /*@Embedded
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "securityGroupRule", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private SecurityGroupRuleProperties properties;
 
     public SecurityGroupRule() {
@@ -58,6 +62,6 @@ public class SecurityGroupRule /*extends Policy implements DescriptorInformation
             throw new MalformattedElementException("SecurityGroupRule without properties");
         else
             this.properties.isValid();
-    }*/
+    }
 
 }
