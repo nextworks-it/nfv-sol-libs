@@ -39,7 +39,12 @@ import javax.persistence.ManyToOne;
         @JsonSubTypes.Type(value = NsVirtualLinkNode.class, name = "tosca.nodes.nfv.NsVirtualLink"),
         @JsonSubTypes.Type(value = NsVirtualLinkNode.class, name = "tosca.nodes.nfv.VnfVirtualLink"),
         @JsonSubTypes.Type(value = CpNode.class, name = "tosca.nodes.nfv.Cp"),
-        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.Sap")})
+        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.Sap"),
+        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.VnfExtCp"),
+        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.VduCp"),
+        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.Vdu.VirtualBlockStorage"),
+        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.Vdu.VirtualObjectStorage"),
+        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.Vdu.VirtualFileStorage")})
 public abstract class Node implements DescriptorInformationElement {
 
     @Id
