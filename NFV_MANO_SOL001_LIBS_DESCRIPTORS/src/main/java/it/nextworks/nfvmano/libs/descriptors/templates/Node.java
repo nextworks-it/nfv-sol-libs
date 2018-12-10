@@ -25,7 +25,14 @@ import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.NS.NSNode;
 import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.NsVirtualLink.NsVirtualLinkNode;
 import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.Sap.SapNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.Cp.CpNode;
+import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUComputeNode;
+import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUVirtualBlockStorageNode;
+import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUVirtualFileStorageNode;
+import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUVirtualObjectStorageNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VNF.VNFNode;
+import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VduCp.VduCpNode;
+import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfExtCp.VnfExtCpNode;
+import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfVirtualLink.VnfVirtualLinkNode;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,14 +44,15 @@ import javax.persistence.ManyToOne;
 @JsonSubTypes({@JsonSubTypes.Type(value = NSNode.class, name = "tosca.nodes.nfv.NS"),
         @JsonSubTypes.Type(value = VNFNode.class, name = "tosca.nodes.nfv.VNF"),
         @JsonSubTypes.Type(value = NsVirtualLinkNode.class, name = "tosca.nodes.nfv.NsVirtualLink"),
-        @JsonSubTypes.Type(value = NsVirtualLinkNode.class, name = "tosca.nodes.nfv.VnfVirtualLink"),
+        @JsonSubTypes.Type(value = VnfVirtualLinkNode.class, name = "tosca.nodes.nfv.VnfVirtualLink"),
         @JsonSubTypes.Type(value = CpNode.class, name = "tosca.nodes.nfv.Cp"),
         @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.Sap"),
-        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.VnfExtCp"),
-        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.VduCp"),
-        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.Vdu.VirtualBlockStorage"),
-        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.Vdu.VirtualObjectStorage"),
-        @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.Vdu.VirtualFileStorage")})
+        @JsonSubTypes.Type(value = VnfExtCpNode.class, name = "tosca.nodes.nfv.VnfExtCp"),
+        @JsonSubTypes.Type(value = VduCpNode.class, name = "tosca.nodes.nfv.VduCp"),
+        @JsonSubTypes.Type(value = VDUComputeNode.class, name = "tosca.nodes.nfv.Vdu.Compute"),
+        @JsonSubTypes.Type(value = VDUVirtualBlockStorageNode.class, name = "tosca.nodes.nfv.Vdu.VirtualBlockStorage"),
+        @JsonSubTypes.Type(value = VDUVirtualObjectStorageNode.class, name = "tosca.nodes.nfv.Vdu.VirtualObjectStorage"),
+        @JsonSubTypes.Type(value = VDUVirtualFileStorageNode.class, name = "tosca.nodes.nfv.Vdu.VirtualFileStorage")})
 public abstract class Node implements DescriptorInformationElement {
 
     @Id

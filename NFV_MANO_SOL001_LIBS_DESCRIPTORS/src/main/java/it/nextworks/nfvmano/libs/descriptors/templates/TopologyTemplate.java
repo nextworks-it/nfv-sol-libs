@@ -26,6 +26,8 @@ import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.Sap.SapNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.Cp.CpNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUComputeNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUVirtualBlockStorageNode;
+import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUVirtualFileStorageNode;
+import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUVirtualObjectStorageNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VNF.VNFNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VduCp.VduCpNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfExtCp.VnfExtCpNode;
@@ -178,12 +180,30 @@ public class TopologyTemplate implements DescriptorInformationElement {
     }
 
     @JsonIgnore
-    public Map<String, VDUVirtualBlockStorageNode> getVDUStorageNodes() throws MalformattedElementException {
+    public Map<String, VDUVirtualBlockStorageNode> getVDUBlockStorageNodes() throws MalformattedElementException {
 
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof VDUVirtualBlockStorageNode)
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUVirtualBlockStorageNode) e.getValue()));
+    }
+
+    @JsonIgnore
+    public Map<String, VDUVirtualFileStorageNode> getVDUFileStorageNodes() throws MalformattedElementException {
+
+        return nodeTemplates.entrySet()
+                .stream()
+                .filter(e -> e.getValue() instanceof VDUVirtualFileStorageNode)
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUVirtualFileStorageNode) e.getValue()));
+    }
+
+    @JsonIgnore
+    public Map<String, VDUVirtualObjectStorageNode> getVDUObjectStorageNodes() throws MalformattedElementException {
+
+        return nodeTemplates.entrySet()
+                .stream()
+                .filter(e -> e.getValue() instanceof VDUVirtualObjectStorageNode)
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUVirtualObjectStorageNode) e.getValue()));
     }
 
     @JsonIgnore

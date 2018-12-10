@@ -57,7 +57,7 @@ public class SwImageData implements DescriptorInformationElement {
     }
 
     @JsonProperty("imageName")
-    public String getName() {
+    public String getImageName() {
         return imageName;
     }
 
