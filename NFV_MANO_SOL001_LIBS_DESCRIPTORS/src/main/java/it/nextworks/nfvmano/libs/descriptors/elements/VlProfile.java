@@ -59,6 +59,7 @@ public class VlProfile implements DescriptorInformationElement {
     private LinkBitrateRequirements minBitrateRequirements;
 
     @Embedded
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private QoS qos;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)

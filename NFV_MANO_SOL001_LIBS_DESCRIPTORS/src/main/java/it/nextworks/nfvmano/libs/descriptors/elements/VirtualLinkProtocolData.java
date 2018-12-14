@@ -39,6 +39,7 @@ public class VirtualLinkProtocolData implements DescriptorInformationElement {
     private String associatedLayerProtocol;
 
     @Embedded
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private L2ProtocolData l2ProtocolData;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)

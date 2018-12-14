@@ -71,6 +71,11 @@ public class NSNode extends Node implements DescriptorInformationElement {
         return requirements;
     }
 
+    @JsonProperty("interfaces")
+    public NSInterfaces getInterfaces() {
+        return interfaces;
+    }
+
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.properties == null)

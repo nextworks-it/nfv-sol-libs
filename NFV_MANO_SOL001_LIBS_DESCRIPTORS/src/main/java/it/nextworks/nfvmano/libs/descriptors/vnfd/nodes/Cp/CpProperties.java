@@ -45,6 +45,7 @@ public class CpProperties implements DescriptorInformationElement {
     @JsonIgnore
     private CpNode cpNode;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)

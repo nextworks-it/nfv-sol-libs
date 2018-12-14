@@ -15,6 +15,7 @@
  */
 package it.nextworks.nfvmano.libs.descriptors.policies;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
@@ -26,6 +27,7 @@ import javax.persistence.Embedded;
 @Embeddable
 public class VduInitialDeltaProperties implements DescriptorInformationElement {
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Embedded
     private VduLevel initialDelta;
 

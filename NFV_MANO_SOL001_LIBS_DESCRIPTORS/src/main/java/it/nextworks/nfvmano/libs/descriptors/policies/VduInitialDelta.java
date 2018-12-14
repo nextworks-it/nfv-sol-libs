@@ -15,6 +15,7 @@
  */
 package it.nextworks.nfvmano.libs.descriptors.policies;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
@@ -30,6 +31,7 @@ import java.util.List;
 @JsonTypeName("VduInitialDelta")
 public class VduInitialDelta extends Policy implements DescriptorInformationElement {
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Embedded
     private VduInitialDeltaProperties properties;
 

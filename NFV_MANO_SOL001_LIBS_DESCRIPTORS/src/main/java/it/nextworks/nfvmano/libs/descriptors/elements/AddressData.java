@@ -16,6 +16,7 @@
 package it.nextworks.nfvmano.libs.descriptors.elements;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.enums.AddressType;
@@ -38,9 +39,11 @@ public class AddressData implements DescriptorInformationElement {
     private AddressType addressType;
 
     @Embedded
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private L2AddressData l2AddressData;
 
     @Embedded
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private L3AddressData l3AddressData;
 
     public AddressData() {

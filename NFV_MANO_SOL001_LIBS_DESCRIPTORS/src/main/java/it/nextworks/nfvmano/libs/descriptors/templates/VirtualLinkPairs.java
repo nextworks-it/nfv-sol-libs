@@ -16,6 +16,7 @@
 package it.nextworks.nfvmano.libs.descriptors.templates;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
@@ -39,6 +40,7 @@ public class VirtualLinkPairs implements DescriptorInformationElement {
     @JsonIgnore
     private SubstitutionMapping subMapping;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)

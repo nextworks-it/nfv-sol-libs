@@ -45,9 +45,11 @@ public class NsVlProfile implements DescriptorInformationElement {
     private LinkBitrateRequirements minBitrateRequirements;
 
     @Embedded
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private QoS qos;
 
     @Embedded
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private ServiceAvailability serviceAvailability;
 
     public NsVlProfile() {

@@ -38,22 +38,27 @@ public class VnfLcmOperationsConfiguration implements DescriptorInformationEleme
     @JsonIgnore
     private VNFProperties vnfProperties;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "config", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private InstantiateVnfOpConfig instantiate;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "config", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ScaleVnfOpConfig scale;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "config", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ScaleVnfToLevelOpConfig scaleToLevel;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "config", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ChangeVnfFlavourOpConfig changeFlavour;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "config", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private HealVnfOpConfig heal;
@@ -66,6 +71,7 @@ public class VnfLcmOperationsConfiguration implements DescriptorInformationEleme
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private TerminateVnfOpConfig terminate;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "config", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ChangeExtVnfConnectivityOpConfig changeExtConnectivity;

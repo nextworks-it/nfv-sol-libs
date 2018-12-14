@@ -38,10 +38,12 @@ public class ScalingAspectsProperties implements DescriptorInformationElement {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @LazyCollection(LazyCollectionOption.FALSE)
     Map<String, ScalingAspect> aspects = new HashMap<>();
+
     @Id
     @GeneratedValue
     @JsonIgnore
     private Long id;
+
     @OneToOne
     @JsonIgnore
     private ScalingAspects scalingAspects;

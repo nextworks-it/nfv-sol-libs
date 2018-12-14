@@ -49,6 +49,7 @@ public class VnfVirtualLinkProperties implements DescriptorInformationElement {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ConnectivityType connectivityType;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
@@ -61,6 +62,7 @@ public class VnfVirtualLinkProperties implements DescriptorInformationElement {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private VlProfile vlProfile;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)

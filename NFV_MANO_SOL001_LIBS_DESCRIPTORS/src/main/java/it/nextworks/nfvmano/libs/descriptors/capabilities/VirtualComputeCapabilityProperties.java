@@ -58,6 +58,7 @@ public class VirtualComputeCapabilityProperties implements DescriptorInformation
     @LazyCollection(LazyCollectionOption.FALSE)
     private Map<String, RequestedAdditionalCapability> requestedAdditionalCapabilities = new HashMap<>();
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
@@ -73,6 +74,7 @@ public class VirtualComputeCapabilityProperties implements DescriptorInformation
     @OnDelete(action = OnDeleteAction.CASCADE)
     private VirtualCpu virtualCpu;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)

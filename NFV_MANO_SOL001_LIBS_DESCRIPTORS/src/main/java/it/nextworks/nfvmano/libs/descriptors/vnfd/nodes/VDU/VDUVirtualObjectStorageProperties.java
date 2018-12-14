@@ -16,6 +16,7 @@
 package it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
@@ -36,6 +37,7 @@ public class VDUVirtualObjectStorageProperties implements DescriptorInformationE
     @JsonIgnore
     private VDUVirtualObjectStorageNode vduStorageNode;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Embedded
     private VirtualObjectStorageData virtualObjectStorageData;
 

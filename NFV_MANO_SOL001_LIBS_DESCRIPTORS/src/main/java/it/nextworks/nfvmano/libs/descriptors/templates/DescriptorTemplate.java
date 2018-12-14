@@ -42,8 +42,10 @@ public class DescriptorTemplate implements DescriptorInformationElement {
     private String description;
 
     @Embedded
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Metadata metadata;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)

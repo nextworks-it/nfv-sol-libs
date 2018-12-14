@@ -47,6 +47,7 @@ public class VirtualCpu implements DescriptorInformationElement {
 
     private String virtualCpuOversubscriptionPolicy;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)

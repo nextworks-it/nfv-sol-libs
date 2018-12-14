@@ -65,7 +65,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
     @LazyCollection(LazyCollectionOption.FALSE)
     private Map<String, Node> nodeTemplates = new HashMap<>();
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "topologyTemplate", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @LazyCollection(LazyCollectionOption.FALSE)

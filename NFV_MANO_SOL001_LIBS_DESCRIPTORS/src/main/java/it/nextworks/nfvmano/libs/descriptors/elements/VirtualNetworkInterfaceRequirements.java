@@ -50,6 +50,7 @@ public class VirtualNetworkInterfaceRequirements implements DescriptorInformatio
     private String description;
     private boolean supportMandatory;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)

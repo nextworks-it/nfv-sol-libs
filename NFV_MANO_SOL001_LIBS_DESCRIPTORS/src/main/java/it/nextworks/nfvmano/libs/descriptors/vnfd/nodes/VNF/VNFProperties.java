@@ -53,11 +53,13 @@ public class VNFProperties implements DescriptorInformationElement {
     private String productInfoName;
     private String productInfoDescription;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<String> vnfmInfo = new ArrayList<>();
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
@@ -80,6 +82,7 @@ public class VNFProperties implements DescriptorInformationElement {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private VnfLcmOperationsConfiguration lcmOperationsConfiguration;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
