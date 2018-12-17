@@ -32,12 +32,11 @@ import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VNF.VNFNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VduCp.VduCpNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfExtCp.VnfExtCpNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfVirtualLink.VnfVirtualLinkNode;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -58,6 +57,12 @@ public class TopologyTemplate implements DescriptorInformationElement {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "topologyTemplate", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private SubstitutionMapping substituitionMapping;
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private Map<String, String> inputs = new HashMap<>();
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "topologyTemplate", cascade = CascadeType.ALL)
@@ -91,10 +96,11 @@ public class TopologyTemplate implements DescriptorInformationElement {
         this.descriptorTemplate = descriptorTemplate;
     }
 
-    public TopologyTemplate(DescriptorTemplate descriptorTemplate, SubstitutionMapping substitutionMapping, Map<String, Node> nodeTemplates,
+    public TopologyTemplate(DescriptorTemplate descriptorTemplate, SubstitutionMapping substitutionMapping, Map<String, String> inputs, Map<String, Node> nodeTemplates,
                             Map<String, Relationship> relationshipTemplates, Map<String, Policy> policies/*, Map<String, Group> groups*/) {
         this.descriptorTemplate = descriptorTemplate;
         this.substituitionMapping = substitutionMapping;
+        this.inputs = inputs;
         this.nodeTemplates = nodeTemplates;
         this.relationshipTemplates = relationshipTemplates;
         this.policies = policies;
@@ -112,6 +118,11 @@ public class TopologyTemplate implements DescriptorInformationElement {
     @JsonProperty("substitutionMapping")
     public SubstitutionMapping getSubstituitionMapping() {
         return substituitionMapping;
+    }
+
+    @JsonProperty("inputs")
+    public Map<String, String> getInputs() {
+        return inputs;
     }
 
     @JsonProperty("nodeTemplates")

@@ -25,9 +25,7 @@ import org.hibernate.annotations.*;
 import javax.persistence.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 public class DescriptorTemplate implements DescriptorInformationElement {
@@ -44,6 +42,18 @@ public class DescriptorTemplate implements DescriptorInformationElement {
     @Embedded
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Metadata metadata;
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @OneToMany(mappedBy = "descriptorTemplate", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Map<String, DataType>  dataTypes = new HashMap<>();
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @OneToMany(mappedBy = "descriptorTemplate", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Map<String, NodeType> nodeTypes = new HashMap<>();
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
@@ -69,11 +79,14 @@ public class DescriptorTemplate implements DescriptorInformationElement {
     }
 
     public DescriptorTemplate(String toscaDefinitionsVersion, String toscaDefaultNamespace, String description,
-                              Metadata metadata, List<String> imports, TopologyTemplate topologyTemplate) {
+                              Metadata metadata, Map<String, DataType> dataTypes, Map<String, NodeType> nodeTypes,
+                              List<String> imports, TopologyTemplate topologyTemplate) {
         this.toscaDefinitionsVersion = toscaDefinitionsVersion;
         this.toscaDefaultNamespace = toscaDefaultNamespace;
         this.description = description;
         this.metadata = metadata;
+        this.dataTypes = dataTypes;
+        this.nodeTypes = nodeTypes;
         this.imports = imports;
         this.topologyTemplate = topologyTemplate;
     }
@@ -109,6 +122,16 @@ public class DescriptorTemplate implements DescriptorInformationElement {
     @JsonProperty("metadata")
     public Metadata getMetadata() {
         return metadata;
+    }
+
+    @JsonProperty("dataTypes")
+    public Map<String, DataType> getDataTypes() {
+        return dataTypes;
+    }
+
+    @JsonProperty("nodeTypes")
+    public Map<String, NodeType> getNodeTypes() {
+        return nodeTypes;
     }
 
     @JsonProperty("imports")

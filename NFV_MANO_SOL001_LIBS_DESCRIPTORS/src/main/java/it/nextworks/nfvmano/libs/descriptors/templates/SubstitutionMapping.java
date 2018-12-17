@@ -20,14 +20,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class SubstitutionMapping implements DescriptorInformationElement {
@@ -44,24 +45,32 @@ public class SubstitutionMapping implements DescriptorInformationElement {
     private String nodeType;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @OneToMany(mappedBy = "subMapping", cascade = CascadeType.ALL)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private Map<String, String> properties = new HashMap<>();
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "subMapping", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VirtualLinkPairs> requirements = new ArrayList<>();
+    private SubstitutionMappingRequirements requirements;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "subMapping", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private SubstitutionMappingCapabilities capabilities;
 
     public SubstitutionMapping() {
 
     }
 
-    public SubstitutionMapping(String nodeType, List<VirtualLinkPairs> requirements) {
-        this.nodeType = nodeType;
-        this.requirements = requirements;
-    }
-
-    public SubstitutionMapping(TopologyTemplate topologyTemplate, String nodeType, List<VirtualLinkPairs> requirements) {
+    public SubstitutionMapping(TopologyTemplate topologyTemplate, String nodeType, Map<String, String> properties,
+                               SubstitutionMappingRequirements requirements, SubstitutionMappingCapabilities capabilities) {
         this.topologyTemplate = topologyTemplate;
         this.nodeType = nodeType;
+        this.properties = properties;
         this.requirements = requirements;
+        this.capabilities = capabilities;
     }
 
     public Long getId() {
@@ -77,9 +86,19 @@ public class SubstitutionMapping implements DescriptorInformationElement {
         return nodeType;
     }
 
+    @JsonProperty("properties")
+    public Map<String, String> getProperties() {
+        return properties;
+    }
+
     @JsonProperty("requirements")
-    public List<VirtualLinkPairs> getRequirements() {
+    public SubstitutionMappingRequirements getRequirements() {
         return requirements;
+    }
+
+    @JsonProperty("capabilities")
+    public SubstitutionMappingCapabilities getCapabilities() {
+        return capabilities;
     }
 
     @Override
