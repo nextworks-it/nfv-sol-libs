@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class SubstitutionMappingCapabilities implements DescriptorInformationElement {
+public class SubstitutionMappingsCapabilities implements DescriptorInformationElement {
 
     @Id
     @GeneratedValue
@@ -24,7 +24,7 @@ public class SubstitutionMappingCapabilities implements DescriptorInformationEle
 
     @OneToOne
     @JsonIgnore
-    private SubstitutionMapping subMapping;
+    private SubstitutionMappings subMapping;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
@@ -38,10 +38,10 @@ public class SubstitutionMappingCapabilities implements DescriptorInformationEle
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     List<String> virtualStorage = new ArrayList<>();
 
-    public SubstitutionMappingCapabilities() {
+    public SubstitutionMappingsCapabilities() {
     }
 
-    public SubstitutionMappingCapabilities(SubstitutionMapping subMapping, List<String> virtualCompute, List<String> virtualStorage) {
+    public SubstitutionMappingsCapabilities(SubstitutionMappings subMapping, List<String> virtualCompute, List<String> virtualStorage) {
         this.subMapping = subMapping;
         this.virtualCompute = virtualCompute;
         this.virtualStorage = virtualStorage;
@@ -52,7 +52,7 @@ public class SubstitutionMappingCapabilities implements DescriptorInformationEle
         return id;
     }
 
-    public SubstitutionMapping getSubMapping() {
+    public SubstitutionMappings getSubMapping() {
         return subMapping;
     }
 

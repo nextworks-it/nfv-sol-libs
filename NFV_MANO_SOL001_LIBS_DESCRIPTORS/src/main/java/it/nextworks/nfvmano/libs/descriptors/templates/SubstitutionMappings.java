@@ -25,13 +25,11 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Entity
-public class SubstitutionMapping implements DescriptorInformationElement {
+public class SubstitutionMappings implements DescriptorInformationElement {
 
     @Id
     @GeneratedValue
@@ -53,19 +51,19 @@ public class SubstitutionMapping implements DescriptorInformationElement {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "subMapping", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private SubstitutionMappingRequirements requirements;
+    private SubstitutionMappingsRequirements requirements;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "subMapping", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private SubstitutionMappingCapabilities capabilities;
+    private SubstitutionMappingsCapabilities capabilities;
 
-    public SubstitutionMapping() {
+    public SubstitutionMappings() {
 
     }
 
-    public SubstitutionMapping(TopologyTemplate topologyTemplate, String nodeType, Map<String, String> properties,
-                               SubstitutionMappingRequirements requirements, SubstitutionMappingCapabilities capabilities) {
+    public SubstitutionMappings(TopologyTemplate topologyTemplate, String nodeType, Map<String, String> properties,
+                                SubstitutionMappingsRequirements requirements, SubstitutionMappingsCapabilities capabilities) {
         this.topologyTemplate = topologyTemplate;
         this.nodeType = nodeType;
         this.properties = properties;
@@ -92,12 +90,12 @@ public class SubstitutionMapping implements DescriptorInformationElement {
     }
 
     @JsonProperty("requirements")
-    public SubstitutionMappingRequirements getRequirements() {
+    public SubstitutionMappingsRequirements getRequirements() {
         return requirements;
     }
 
     @JsonProperty("capabilities")
-    public SubstitutionMappingCapabilities getCapabilities() {
+    public SubstitutionMappingsCapabilities getCapabilities() {
         return capabilities;
     }
 

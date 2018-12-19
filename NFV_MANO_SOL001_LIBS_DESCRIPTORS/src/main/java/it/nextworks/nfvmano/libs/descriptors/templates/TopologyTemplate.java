@@ -56,7 +56,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "topologyTemplate", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private SubstitutionMapping substituitionMapping;
+    private SubstitutionMappings substituitionMappings;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
@@ -96,10 +96,10 @@ public class TopologyTemplate implements DescriptorInformationElement {
         this.descriptorTemplate = descriptorTemplate;
     }
 
-    public TopologyTemplate(DescriptorTemplate descriptorTemplate, SubstitutionMapping substitutionMapping, Map<String, String> inputs, Map<String, Node> nodeTemplates,
+    public TopologyTemplate(DescriptorTemplate descriptorTemplate, SubstitutionMappings substitutionMappings, Map<String, String> inputs, Map<String, Node> nodeTemplates,
                             Map<String, Relationship> relationshipTemplates, Map<String, Policy> policies/*, Map<String, Group> groups*/) {
         this.descriptorTemplate = descriptorTemplate;
-        this.substituitionMapping = substitutionMapping;
+        this.substituitionMappings = substitutionMappings;
         this.inputs = inputs;
         this.nodeTemplates = nodeTemplates;
         this.relationshipTemplates = relationshipTemplates;
@@ -115,9 +115,9 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return descriptorTemplate;
     }
 
-    @JsonProperty("substitutionMapping")
-    public SubstitutionMapping getSubstituitionMapping() {
-        return substituitionMapping;
+    @JsonProperty("substitutionMappings")
+    public SubstitutionMappings getSubstituitionMappings() {
+        return substituitionMappings;
     }
 
     @JsonProperty("inputs")

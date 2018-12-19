@@ -3,7 +3,6 @@ package it.nextworks.nfvmano.libs.descriptors.templates;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.org.apache.xpath.internal.operations.String;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import org.hibernate.annotations.Cascade;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class SubstitutionMappingRequirements implements DescriptorInformationElement {
+public class SubstitutionMappingsRequirements implements DescriptorInformationElement {
 
     @Id
     @GeneratedValue
@@ -24,7 +23,7 @@ public class SubstitutionMappingRequirements implements DescriptorInformationEle
 
     @OneToOne
     @JsonIgnore
-    private SubstitutionMapping subMapping;
+    private SubstitutionMappings subMapping;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
@@ -44,10 +43,10 @@ public class SubstitutionMappingRequirements implements DescriptorInformationEle
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     List<String> virtualLinkService = new ArrayList<>();
 
-    public SubstitutionMappingRequirements() {
+    public SubstitutionMappingsRequirements() {
     }
 
-    public SubstitutionMappingRequirements(SubstitutionMapping subMapping, List<String> virtualLink, List<String> virtualLinkBackend, List<String> virtualLinkService) {
+    public SubstitutionMappingsRequirements(SubstitutionMappings subMapping, List<String> virtualLink, List<String> virtualLinkBackend, List<String> virtualLinkService) {
         this.subMapping = subMapping;
         this.virtualLink = virtualLink;
         this.virtualLinkBackend = virtualLinkBackend;
@@ -58,7 +57,7 @@ public class SubstitutionMappingRequirements implements DescriptorInformationEle
         return id;
     }
 
-    public SubstitutionMapping getSubMapping() {
+    public SubstitutionMappings getSubMapping() {
         return subMapping;
     }
 

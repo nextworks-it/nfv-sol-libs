@@ -38,7 +38,7 @@ public class VirtualLinkPairs implements DescriptorInformationElement {
 
     @ManyToOne
     @JsonIgnore
-    private SubstitutionMapping subMapping;
+    private SubstitutionMappings subMapping;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
@@ -54,7 +54,7 @@ public class VirtualLinkPairs implements DescriptorInformationElement {
         this.virtualLink = virtualLink;
     }
 
-    public VirtualLinkPairs(SubstitutionMapping subMapping, List<String> virtualLink) {
+    public VirtualLinkPairs(SubstitutionMappings subMapping, List<String> virtualLink) {
         this.subMapping = subMapping;
         this.virtualLink = virtualLink;
     }
@@ -63,7 +63,7 @@ public class VirtualLinkPairs implements DescriptorInformationElement {
         return id;
     }
 
-    public SubstitutionMapping getSubMapping() {
+    public SubstitutionMappings getSubMapping() {
         return subMapping;
     }
 
