@@ -47,7 +47,7 @@ public class DescriptorTemplate implements DescriptorInformationElement {
     @OneToMany(mappedBy = "descriptorTemplate", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private Map<String, DataType>  dataTypes = new HashMap<>();
+    private Map<String, DataType> dataTypes = new HashMap<>();
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "descriptorTemplate", cascade = CascadeType.ALL)

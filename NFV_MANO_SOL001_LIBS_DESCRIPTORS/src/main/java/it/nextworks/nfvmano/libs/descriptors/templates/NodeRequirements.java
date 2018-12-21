@@ -17,32 +17,28 @@ import java.util.List;
 @Entity
 public class NodeRequirements implements DescriptorInformationElement {
 
-    @Id
-    @GeneratedValue
-    @JsonIgnore
-    private Long id;
-
-    @OneToOne
-    @JsonIgnore
-    private NodeType nodeType;
-
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     List<String> virtualLink = new ArrayList<>();
-
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     List<String> virtualLinkBackend = new ArrayList<>();
-
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     List<String> virtualLinkService = new ArrayList<>();
+    @Id
+    @GeneratedValue
+    @JsonIgnore
+    private Long id;
+    @OneToOne
+    @JsonIgnore
+    private NodeType nodeType;
 
     public NodeRequirements() {
     }

@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.elements.VirtualFileStorageData;
-import it.nextworks.nfvmano.libs.descriptors.elements.VirtualObjectStorageData;
 
 import javax.persistence.*;
 

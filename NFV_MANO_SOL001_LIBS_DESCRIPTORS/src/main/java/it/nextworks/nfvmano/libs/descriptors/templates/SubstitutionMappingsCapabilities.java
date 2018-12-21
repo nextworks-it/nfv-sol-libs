@@ -21,22 +21,19 @@ public class SubstitutionMappingsCapabilities implements DescriptorInformationEl
     @GeneratedValue
     @JsonIgnore
     Long id;
-
-    @OneToOne
-    @JsonIgnore
-    private SubstitutionMappings subMapping;
-
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     List<String> virtualCompute = new ArrayList<>();
-
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     List<String> virtualStorage = new ArrayList<>();
+    @OneToOne
+    @JsonIgnore
+    private SubstitutionMappings subMapping;
 
     public SubstitutionMappingsCapabilities() {
     }

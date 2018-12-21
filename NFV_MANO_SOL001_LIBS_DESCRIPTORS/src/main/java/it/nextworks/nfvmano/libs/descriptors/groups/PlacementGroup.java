@@ -1,14 +1,6 @@
 package it.nextworks.nfvmano.libs.descriptors.groups;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.templates.Group;
-import it.nextworks.nfvmano.libs.descriptors.templates.TopologyTemplate;
-
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import java.util.List;
 
 /*@Entity
 @JsonTypeName("PlacementGroup")*/

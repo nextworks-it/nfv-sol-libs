@@ -20,37 +20,21 @@ public class SubstitutionMappingsRequirements implements DescriptorInformationEl
     @GeneratedValue
     @JsonIgnore
     Long id;
-
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    List<VirtualLinkPair> virtualLink = new ArrayList<>();
     @OneToOne
     @JsonIgnore
     private SubstitutionMappings subMapping;
 
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SELECT)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    List<String> virtualLink = new ArrayList<>();
-
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SELECT)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    List<String> virtualLinkBackend = new ArrayList<>();
-
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SELECT)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    List<String> virtualLinkService = new ArrayList<>();
-
     public SubstitutionMappingsRequirements() {
     }
 
-    public SubstitutionMappingsRequirements(SubstitutionMappings subMapping, List<String> virtualLink, List<String> virtualLinkBackend, List<String> virtualLinkService) {
+    public SubstitutionMappingsRequirements(SubstitutionMappings subMapping, List<VirtualLinkPair> virtualLink) {
         this.subMapping = subMapping;
         this.virtualLink = virtualLink;
-        this.virtualLinkBackend = virtualLinkBackend;
-        this.virtualLinkService = virtualLinkService;
     }
 
     public Long getId() {
@@ -62,18 +46,8 @@ public class SubstitutionMappingsRequirements implements DescriptorInformationEl
     }
 
     @JsonProperty("virtualLink")
-    public List<String> getVirtualLink() {
+    public List<VirtualLinkPair> getVirtualLink() {
         return virtualLink;
-    }
-
-    @JsonProperty("virtualLinkBackend")
-    public List<String> getVirtualLinkBackend() {
-        return virtualLinkBackend;
-    }
-
-    @JsonProperty("virtualLinkService")
-    public List<String> getVirtualLinkService() {
-        return virtualLinkService;
     }
 
     @Override

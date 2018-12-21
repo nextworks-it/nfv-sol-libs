@@ -16,20 +16,18 @@ import java.util.Map;
 @Entity
 public class DataType implements DescriptorInformationElement {
 
-    @Id
-    @GeneratedValue
-    @JsonIgnore
-    private Long id;
-
-    @ManyToOne
-    @JsonIgnore
-    private DescriptorTemplate descriptorTemplate;
-
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     Map<String, ParameterProperties> properties = new HashMap<>();
+    @Id
+    @GeneratedValue
+    @JsonIgnore
+    private Long id;
+    @ManyToOne
+    @JsonIgnore
+    private DescriptorTemplate descriptorTemplate;
 
     public DataType() {
     }

@@ -76,7 +76,7 @@ public class VDUVirtualFileStorageNode extends Node implements DescriptorInforma
         else
             this.properties.isValid();
         if (this.requirements == null)
-            throw new  MalformattedElementException("VDUVirtualFileStorageNode Node without requirements");
+            throw new MalformattedElementException("VDUVirtualFileStorageNode Node without requirements");
         else
             this.requirements.isValid();
     }
