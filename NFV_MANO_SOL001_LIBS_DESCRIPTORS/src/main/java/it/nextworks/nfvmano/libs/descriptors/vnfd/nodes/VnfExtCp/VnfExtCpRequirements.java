@@ -1,87 +1,83 @@
 /*
-* Copyright 2018 Nextworks s.r.l.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2018 Nextworks s.r.l.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfExtCp;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
+import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
-import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class VnfExtCpRequirements implements DescriptorInformationElement {
 
-	@Id
-	@GeneratedValue
-	@JsonIgnore
-	private Long id;
+    @Id
+    @GeneratedValue
+    @JsonIgnore
+    private Long id;
 
-	@OneToOne
-	@JsonIgnore
-	private VnfExtCpNode vnfExtCpNode;
+    @OneToOne
+    @JsonIgnore
+    private VnfExtCpNode vnfExtCpNode;
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SELECT)
-	@Cascade(org.hibernate.annotations.CascadeType.ALL)
-	private List<String> externalVirtualLinks = new ArrayList<>();
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<String> externalVirtualLink = new ArrayList<>();
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SELECT)
-	@Cascade(org.hibernate.annotations.CascadeType.ALL)
-	private List<String> internalVirtualLinks = new ArrayList<>();
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<String> internalVirtualLink = new ArrayList<>();
 
-	public VnfExtCpRequirements() {
+    public VnfExtCpRequirements() {
 
-	}
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public VnfExtCpNode getVnfExtCpNode() {
-		return vnfExtCpNode;
-	}
+    public VnfExtCpNode getVnfExtCpNode() {
+        return vnfExtCpNode;
+    }
 
-	@JsonProperty("externalVirtualLinks")
-	public List<String> getExternalVirtualLinks() {
-		return externalVirtualLinks;
-	}
+    @JsonProperty("externalVirtualLink")
+    public List<String> getExternalVirtualLink() {
+        return externalVirtualLink;
+    }
 
-	@JsonProperty("internalVirtualLinks")
-	public List<String> getInternalVirtualLinks() {
-		return internalVirtualLinks;
-	}
+    @JsonProperty("internalVirtualLink")
+    public List<String> getInternalVirtualLink() {
+        return internalVirtualLink;
+    }
 
-	@Override
-	public void isValid() throws MalformattedElementException {
-		if (this.internalVirtualLinks.isEmpty() || this.internalVirtualLinks == null) {
-			throw new MalformattedElementException("VnfExtCpRequirements without internalVirtualLinks");
-		}
-	}
+    @Override
+    public void isValid() throws MalformattedElementException {
+        if (this.internalVirtualLink.isEmpty() || this.internalVirtualLink == null) {
+            throw new MalformattedElementException("VnfExtCpRequirements without internalVirtualLink");
+        }
+    }
 }
