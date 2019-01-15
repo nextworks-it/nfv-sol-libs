@@ -35,9 +35,9 @@ echo "Starting installation"
 
 cd $DIR_LIBS
 
-mvn_install_doc $DIR_LIBS_COMMON "NFV libs common"
+mvn_install $DIR_LIBS_COMMON "NFV libs common"
 cd ..
-mvn_install_doc $DIR_LIBS_DESC "NFV libs descriptors"
+mvn_install $DIR_LIBS_DESC "NFV libs descriptors"
 cd ..
 
 echo "All NFV SOL libs installed!"
