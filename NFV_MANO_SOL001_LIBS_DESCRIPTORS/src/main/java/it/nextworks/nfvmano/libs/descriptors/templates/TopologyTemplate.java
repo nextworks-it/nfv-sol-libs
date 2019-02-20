@@ -37,8 +37,8 @@ import org.hibernate.annotations.*;
 import javax.persistence.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Entity
@@ -68,7 +68,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
     @OneToMany(mappedBy = "topologyTemplate", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private Map<String, Node> nodeTemplates = new HashMap<>();
+    private Map<String, Node> nodeTemplates = new LinkedHashMap<>();
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "topologyTemplate", cascade = CascadeType.ALL)
@@ -96,7 +96,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         this.descriptorTemplate = descriptorTemplate;
     }
 
-    public TopologyTemplate(DescriptorTemplate descriptorTemplate, SubstitutionMappings substitutionMappings, Map<String, String> inputs, Map<String, Node> nodeTemplates,
+    public TopologyTemplate(DescriptorTemplate descriptorTemplate, SubstitutionMappings substitutionMappings, Map<String, String> inputs, SortedMap<String, Node> nodeTemplates,
                             Map<String, Relationship> relationshipTemplates, Map<String, Policy> policies/*, Map<String, Group> groups*/) {
         this.descriptorTemplate = descriptorTemplate;
         this.substituitionMappings = substitutionMappings;
@@ -151,7 +151,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof CpNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (CpNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (CpNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
@@ -160,7 +160,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof SapNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (SapNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (SapNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
@@ -169,7 +169,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof VduCpNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VduCpNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (VduCpNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
@@ -178,7 +178,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof VnfExtCpNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VnfExtCpNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (VnfExtCpNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
@@ -187,7 +187,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof VDUComputeNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUComputeNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (VDUComputeNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
@@ -196,7 +196,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof VDUVirtualBlockStorageNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUVirtualBlockStorageNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (VDUVirtualBlockStorageNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
@@ -205,7 +205,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof VDUVirtualFileStorageNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUVirtualFileStorageNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (VDUVirtualFileStorageNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
@@ -214,7 +214,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof VDUVirtualObjectStorageNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VDUVirtualObjectStorageNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (VDUVirtualObjectStorageNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
@@ -223,7 +223,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof VNFNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VNFNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (VNFNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
@@ -232,7 +232,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof NSNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (NSNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (NSNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
@@ -241,7 +241,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof NsVirtualLinkNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (NsVirtualLinkNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (NsVirtualLinkNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
@@ -250,7 +250,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         return nodeTemplates.entrySet()
                 .stream()
                 .filter(e -> e.getValue() instanceof VnfVirtualLinkNode)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> (VnfVirtualLinkNode) e.getValue()));
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (VnfVirtualLinkNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @Override
