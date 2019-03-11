@@ -1,8 +1,7 @@
-package it.nextworks.nfvmano.libs.descriptors.pnfd.nodes.PNF;
+package it.nextworks.nfvmano.libs.descriptors.pnfd.nodes.PnfExtCp;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.templates.Node;
@@ -16,54 +15,55 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 
 @Entity
-@JsonTypeName("PNFNode")
-public class PNFNode extends Node implements DescriptorInformationElement {
+public class PnfExtCpNode extends Node implements DescriptorInformationElement {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "pnfNode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "pnfExtCpNode", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private PNFProperties properties;
+    private PnfExtCpProperties properties;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "pnfNode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "pnfExtCpNode", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private PNFRequirements requirements;
+    private PnfExtCpRequirements requirements;
 
-    public PNFNode() {
+    public PnfExtCpNode() {
 
     }
 
-    public PNFNode(String type, PNFProperties properties, PNFRequirements requirements) {
+    public PnfExtCpNode(String type, PnfExtCpProperties properties,
+                        PnfExtCpRequirements requirements) {
         super(type);
         this.properties = properties;
         this.requirements = requirements;
     }
 
-    public PNFNode(TopologyTemplate topologyTemplate, String type, PNFProperties properties,
-                   PNFRequirements requirements) {
+    public PnfExtCpNode(TopologyTemplate topologyTemplate, String type, PnfExtCpProperties properties,
+                        PnfExtCpRequirements requirements) {
         super(topologyTemplate, type);
         this.properties = properties;
         this.requirements = requirements;
     }
 
     @JsonProperty("properties")
-    public PNFProperties getProperties() {
+    public PnfExtCpProperties getProperties() {
         return properties;
     }
 
     @JsonProperty("requirements")
-    public PNFRequirements getRequirements() {
+    public PnfExtCpRequirements getRequirements() {
         return requirements;
     }
 
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.properties == null)
-            throw new MalformattedElementException("PNF Node without properties");
+            throw new MalformattedElementException("PnfExtCp Node without properties");
         else
             this.properties.isValid();
-        if (this.requirements != null) {
+        if (this.requirements == null)
+            throw new MalformattedElementException("PnfExtCp Node without requirements");
+        else
             this.requirements.isValid();
-        }
     }
 }

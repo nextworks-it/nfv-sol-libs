@@ -24,8 +24,8 @@ import it.nextworks.nfvmano.libs.descriptors.capabilities.VirtualComputeCapabili
 import org.hibernate.annotations.*;
 
 import javax.persistence.CascadeType;
-import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 

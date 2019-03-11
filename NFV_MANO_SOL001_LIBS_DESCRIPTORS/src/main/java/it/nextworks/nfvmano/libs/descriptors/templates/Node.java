@@ -24,6 +24,8 @@ import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.NS.NSNode;
 import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.NsVirtualLink.NsVirtualLinkNode;
 import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.Sap.SapNode;
+import it.nextworks.nfvmano.libs.descriptors.pnfd.nodes.PNF.PNFNode;
+import it.nextworks.nfvmano.libs.descriptors.pnfd.nodes.PnfExtCp.PnfExtCpNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.Cp.CpNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUComputeNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUVirtualBlockStorageNode;
@@ -42,12 +44,14 @@ import javax.persistence.ManyToOne;
 @Entity
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
 @JsonSubTypes({@JsonSubTypes.Type(value = NSNode.class, name = "tosca.nodes.nfv.NS"),
+        @JsonSubTypes.Type(value = PNFNode.class, name = "tosca.nodes.nfv.PNF"),
         @JsonSubTypes.Type(value = VNFNode.class, name = "tosca.nodes.nfv.VNF"),
         @JsonSubTypes.Type(value = NsVirtualLinkNode.class, name = "tosca.nodes.nfv.NsVirtualLink"),
         @JsonSubTypes.Type(value = VnfVirtualLinkNode.class, name = "tosca.nodes.nfv.VnfVirtualLink"),
         @JsonSubTypes.Type(value = CpNode.class, name = "tosca.nodes.nfv.Cp"),
         @JsonSubTypes.Type(value = SapNode.class, name = "tosca.nodes.nfv.Sap"),
         @JsonSubTypes.Type(value = VnfExtCpNode.class, name = "tosca.nodes.nfv.VnfExtCp"),
+        @JsonSubTypes.Type(value = PnfExtCpNode.class, name = "tosca.nodes.nfv.PnfExtCp"),
         @JsonSubTypes.Type(value = VduCpNode.class, name = "tosca.nodes.nfv.VduCp"),
         @JsonSubTypes.Type(value = VDUComputeNode.class, name = "tosca.nodes.nfv.Vdu.Compute"),
         @JsonSubTypes.Type(value = VDUVirtualBlockStorageNode.class, name = "tosca.nodes.nfv.Vdu.VirtualBlockStorage"),

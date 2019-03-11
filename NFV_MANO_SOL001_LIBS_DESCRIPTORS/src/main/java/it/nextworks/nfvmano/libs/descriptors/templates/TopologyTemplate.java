@@ -23,6 +23,8 @@ import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.NS.NSNode;
 import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.NsVirtualLink.NsVirtualLinkNode;
 import it.nextworks.nfvmano.libs.descriptors.nsd.nodes.Sap.SapNode;
+import it.nextworks.nfvmano.libs.descriptors.pnfd.nodes.PNF.PNFNode;
+import it.nextworks.nfvmano.libs.descriptors.pnfd.nodes.PnfExtCp.PnfExtCpNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.Cp.CpNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUComputeNode;
 import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VDU.VDUVirtualBlockStorageNode;
@@ -35,11 +37,12 @@ import it.nextworks.nfvmano.libs.descriptors.vnfd.nodes.VnfVirtualLink.VnfVirtua
 import org.hibernate.annotations.*;
 
 import javax.persistence.CascadeType;
-import javax.persistence.*;
 import javax.persistence.Entity;
-import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+import javax.persistence.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.SortedMap;
 
 @Entity
 public class TopologyTemplate implements DescriptorInformationElement {
@@ -182,6 +185,15 @@ public class TopologyTemplate implements DescriptorInformationElement {
     }
 
     @JsonIgnore
+    public Map<String, PnfExtCpNode> getPnfExtCpNodes() throws MalformattedElementException {
+
+        return nodeTemplates.entrySet()
+                .stream()
+                .filter(e -> e.getValue() instanceof PnfExtCpNode)
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (PnfExtCpNode) e.getValue()), LinkedHashMap::putAll);
+    }
+
+    @JsonIgnore
     public Map<String, VDUComputeNode> getVDUComputeNodes() throws MalformattedElementException {
 
         return nodeTemplates.entrySet()
@@ -233,6 +245,15 @@ public class TopologyTemplate implements DescriptorInformationElement {
                 .stream()
                 .filter(e -> e.getValue() instanceof NSNode)
                 .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (NSNode) e.getValue()), LinkedHashMap::putAll);
+    }
+
+    @JsonIgnore
+    public Map<String, PNFNode> getPNFNodes() throws MalformattedElementException {
+
+        return nodeTemplates.entrySet()
+                .stream()
+                .filter(e -> e.getValue() instanceof PNFNode)
+                .collect(LinkedHashMap::new, (map, e) -> map.put(e.getKey(), (PNFNode) e.getValue()), LinkedHashMap::putAll);
     }
 
     @JsonIgnore
