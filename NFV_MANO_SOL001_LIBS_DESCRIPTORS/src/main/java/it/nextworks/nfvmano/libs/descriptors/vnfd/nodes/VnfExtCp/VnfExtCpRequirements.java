@@ -56,6 +56,17 @@ public class VnfExtCpRequirements implements DescriptorInformationElement {
 
     }
 
+    public VnfExtCpRequirements(VnfExtCpNode vnfExtCpNode, List<String> externalVirtualLink, List<String> internalVirtualLink) {
+        this.vnfExtCpNode = vnfExtCpNode;
+        this.externalVirtualLink = externalVirtualLink;
+        this.internalVirtualLink = internalVirtualLink;
+    }
+
+    public VnfExtCpRequirements(List<String> externalVirtualLink, List<String> internalVirtualLink) {
+        this.externalVirtualLink = externalVirtualLink;
+        this.internalVirtualLink = internalVirtualLink;
+    }
+
     public Long getId() {
         return id;
     }

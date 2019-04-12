@@ -26,8 +26,8 @@ import it.nextworks.nfvmano.libs.descriptors.elements.VlProfile;
 import org.hibernate.annotations.*;
 
 import javax.persistence.CascadeType;
-import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

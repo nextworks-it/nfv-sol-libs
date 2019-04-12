@@ -27,8 +27,8 @@ import it.nextworks.nfvmano.libs.descriptors.elements.VnfcConfigurableProperties
 import org.hibernate.annotations.*;
 
 import javax.persistence.CascadeType;
-import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
