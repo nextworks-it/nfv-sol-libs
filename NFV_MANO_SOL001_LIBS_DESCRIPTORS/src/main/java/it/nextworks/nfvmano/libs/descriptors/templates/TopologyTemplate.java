@@ -99,7 +99,7 @@ public class TopologyTemplate implements DescriptorInformationElement {
         this.descriptorTemplate = descriptorTemplate;
     }
 
-    public TopologyTemplate(DescriptorTemplate descriptorTemplate, SubstitutionMappings substitutionMappings, Map<String, String> inputs, SortedMap<String, Node> nodeTemplates,
+    public TopologyTemplate(DescriptorTemplate descriptorTemplate, SubstitutionMappings substitutionMappings, Map<String, String> inputs, LinkedHashMap<String, Node> nodeTemplates,
                             Map<String, Relationship> relationshipTemplates, Map<String, Policy> policies/*, Map<String, Group> groups*/) {
         this.descriptorTemplate = descriptorTemplate;
         this.substituitionMappings = substitutionMappings;
