@@ -23,7 +23,8 @@ import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,17 +45,17 @@ public class VNFRequirements implements DescriptorInformationElement {
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<String> virtualLink = new ArrayList<>();
+    private Map<String, String> virtualLink = new HashMap<>();
 
     public VNFRequirements() {
 
     }
 
-    public VNFRequirements(List<String> virtualLink) {
+    public VNFRequirements(Map<String, String> virtualLink) {
         this.virtualLink = virtualLink;
     }
 
-    public VNFRequirements(VNFNode vnfNode, List<String> virtualLink) {
+    public VNFRequirements(VNFNode vnfNode, Map<String, String> virtualLink) {
         this.vnfNode = vnfNode;
         this.virtualLink = virtualLink;
     }
@@ -68,7 +69,7 @@ public class VNFRequirements implements DescriptorInformationElement {
     }
 
     @JsonProperty("virtualLink")
-    public List<String> getVirtualLink() {
+    public Map<String, String> getVirtualLink() {
         return virtualLink;
     }
 
