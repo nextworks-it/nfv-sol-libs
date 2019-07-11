@@ -92,7 +92,7 @@ public class VirtualMemory implements DescriptorInformationElement {
     }
 
     @JsonProperty("numaEnabled")
-    public boolean isNumaENabled() {
+    public boolean isNumaEnabled() {
         return numaEnabled;
     }
 
