@@ -67,6 +67,14 @@ public class NSProperties implements DescriptorInformationElement {
         return invariantId;
     }
 
+    public void setDescriptorId(String descriptorId) {
+        this.descriptorId = descriptorId;
+    }
+
+    public void setInvariantId(String invariantId) {
+        this.invariantId = invariantId;
+    }
+
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.descriptorId == null)

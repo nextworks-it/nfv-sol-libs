@@ -53,6 +53,10 @@ public class Metadata implements DescriptorInformationElement {
         return version;
     }
 
+    public void setDescriptorId(String descriptorId) {
+        this.descriptorId = descriptorId;
+    }
+
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.descriptorId == null)

@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 
+import java.security.Key;
+
 @Embeddable
 public class KeyValuePair implements DescriptorInformationElement {
 
@@ -49,5 +51,11 @@ public class KeyValuePair implements DescriptorInformationElement {
 	@Override
 	public void isValid() throws MalformattedElementException {
 		
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		KeyValuePair object = (KeyValuePair) o;
+		return this.key.equals(object.key) && this.value.equals(object.value);
 	}
 }

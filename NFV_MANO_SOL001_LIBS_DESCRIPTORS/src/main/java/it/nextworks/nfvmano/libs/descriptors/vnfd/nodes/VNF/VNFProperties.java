@@ -231,6 +231,10 @@ public class VNFProperties implements DescriptorInformationElement {
         return vnfProfile;
     }
 
+    public void setDescriptorId(String descriptorId) {
+        this.descriptorId = descriptorId;
+    }
+
     @Override
     public void isValid() throws MalformattedElementException {
         if (this.descriptorId == null)
