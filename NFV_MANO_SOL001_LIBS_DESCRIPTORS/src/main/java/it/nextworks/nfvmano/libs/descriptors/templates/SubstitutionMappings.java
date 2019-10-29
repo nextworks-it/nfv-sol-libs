@@ -103,4 +103,14 @@ public class SubstitutionMappings implements DescriptorInformationElement {
     public void isValid() throws MalformattedElementException {
 
     }
+
+
+    public void setNodeType(String s) {
+
+        this.nodeType = s;
+    }
+
+    public void setRequirements(SubstitutionMappingsRequirements requirements) {
+        this.requirements = requirements;
+    }
 }

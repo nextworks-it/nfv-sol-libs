@@ -113,4 +113,16 @@ public class NsVirtualLinkProperties implements DescriptorInformationElement {
         else
             this.connectivityType.isValid();
     }
+
+    public void setDescription(String description) {
+        this.description=description;
+    }
+
+    public void setVlProfile(VlProfile vlProfile) {
+        this.vlProfile = vlProfile;
+    }
+
+    public void setConnectivityType(ConnectivityType connectivityType) {
+        this.connectivityType=connectivityType;
+    }
 }

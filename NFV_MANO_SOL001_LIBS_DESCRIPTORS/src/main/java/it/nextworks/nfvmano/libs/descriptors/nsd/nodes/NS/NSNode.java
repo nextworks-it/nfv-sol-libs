@@ -86,4 +86,12 @@ public class NSNode extends Node implements DescriptorInformationElement {
             this.requirements.isValid();
         }
     }
+
+    public void setProperties(NSProperties nsProperties) {
+        this.properties=nsProperties;
+    }
+
+    public void setRequirements(NSRequirements nsRequirements) {
+        this.requirements=nsRequirements;
+    }
 }

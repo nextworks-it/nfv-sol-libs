@@ -107,4 +107,12 @@ public class VNFNode extends Node implements DescriptorInformationElement {
         if (this.capabilities != null)
             this.capabilities.isValid();
     }
+
+    public void setProperties(VNFProperties vnfProperties) {
+        this.properties = vnfProperties;
+    }
+
+    public void setRequirements(VNFRequirements vnfRequirements) {
+        this.requirements = requirements;
+    }
 }

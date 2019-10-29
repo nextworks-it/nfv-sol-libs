@@ -54,4 +54,8 @@ public class SubstitutionMappingsRequirements implements DescriptorInformationEl
     public void isValid() throws MalformattedElementException {
 
     }
+
+    public void setVirtualLink(List<VirtualLinkPair> virtualLink) {
+        this.virtualLink = virtualLink;
+    }
 }

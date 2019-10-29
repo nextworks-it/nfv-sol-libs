@@ -80,4 +80,8 @@ public class NsVirtualLinkNode extends Node implements DescriptorInformationElem
         if (this.capabilities != null)
             this.capabilities.isValid();
     }
+
+    public void setProperties(NsVirtualLinkProperties nsVirtualLinkProperties) {
+        this.properties=properties;
+    }
 }
