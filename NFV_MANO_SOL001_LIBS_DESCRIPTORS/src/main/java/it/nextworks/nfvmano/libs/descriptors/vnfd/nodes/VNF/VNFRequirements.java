@@ -79,8 +79,5 @@ public class VNFRequirements implements DescriptorInformationElement {
             throw new MalformattedElementException("VirtualLinks are missing in VNF Requirements");
     }
 
-    //TODO: Fix this mapping
-    public void setVirtualLink(List<String> vnfVirtualLink) {
-       // this.virtualLink = vnfVirtualLink;
-    }
+
 }
