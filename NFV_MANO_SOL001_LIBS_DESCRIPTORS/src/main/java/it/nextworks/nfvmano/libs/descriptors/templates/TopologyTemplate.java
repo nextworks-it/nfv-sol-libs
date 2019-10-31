@@ -283,6 +283,10 @@ public class TopologyTemplate implements DescriptorInformationElement {
 
     }
 
+    public void setNodeTemplates(Map<String, Node> nodeTemplates){
+        this.nodeTemplates=nodeTemplates;
+    }
+
     public void setSubstituitionMappings(SubstitutionMappings substituitionMappings) {
         this.substituitionMappings = substituitionMappings;
     }
