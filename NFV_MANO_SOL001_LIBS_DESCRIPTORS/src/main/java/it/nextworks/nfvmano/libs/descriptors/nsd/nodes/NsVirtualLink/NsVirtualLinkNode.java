@@ -82,6 +82,6 @@ public class NsVirtualLinkNode extends Node implements DescriptorInformationElem
     }
 
     public void setProperties(NsVirtualLinkProperties nsVirtualLinkProperties) {
-        this.properties=properties;
+        this.properties = nsVirtualLinkProperties;
     }
 }

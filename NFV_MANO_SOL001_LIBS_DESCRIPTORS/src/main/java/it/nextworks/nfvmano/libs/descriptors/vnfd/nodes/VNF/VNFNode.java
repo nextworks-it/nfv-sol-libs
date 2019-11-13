@@ -113,6 +113,6 @@ public class VNFNode extends Node implements DescriptorInformationElement {
     }
 
     public void setRequirements(VNFRequirements vnfRequirements) {
-        this.requirements = requirements;
+        this.requirements = vnfRequirements;
     }
 }

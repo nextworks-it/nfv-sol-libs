@@ -115,7 +115,7 @@ public class NsVirtualLinkProperties implements DescriptorInformationElement {
     }
 
     public void setDescription(String description) {
-        this.description=description;
+        this.description = description;
     }
 
     public void setVlProfile(VlProfile vlProfile) {
@@ -123,6 +123,6 @@ public class NsVirtualLinkProperties implements DescriptorInformationElement {
     }
 
     public void setConnectivityType(ConnectivityType connectivityType) {
-        this.connectivityType=connectivityType;
+        this.connectivityType = connectivityType;
     }
 }

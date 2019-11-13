@@ -263,7 +263,7 @@ public class VNFProperties implements DescriptorInformationElement {
     }
 
     public void setDescriptorVersion(String version) {
-        this.descriptorVersion=version;
+        this.descriptorVersion = version;
     }
 
     public void setProvider(String designer) {
