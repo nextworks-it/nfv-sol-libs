@@ -40,6 +40,7 @@ public class NSInterfaces implements DescriptorInformationElement {
         return id;
     }
 
+    @JsonIgnore
     public NSNode getNSNode() {
         return nsNode;
     }

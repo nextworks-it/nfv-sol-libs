@@ -87,6 +87,8 @@ public class NSNode extends Node implements DescriptorInformationElement {
         }
     }
 
+
+    public void setInterfaces(NSInterfaces nsInterfaces){ this.interfaces = nsInterfaces;}
     public void setProperties(NSProperties nsProperties) {
         this.properties=nsProperties;
     }
