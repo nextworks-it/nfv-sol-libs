@@ -11,7 +11,9 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class PNFRequirements implements DescriptorInformationElement {
@@ -29,17 +31,17 @@ public class PNFRequirements implements DescriptorInformationElement {
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<String> virtualLink = new ArrayList<>();
+    private Map<String, String> virtualLink = new HashMap<>();
 
     public PNFRequirements() {
     }
 
-    public PNFRequirements(PNFNode pnfNode, List<String> virtualLink) {
+    public PNFRequirements(PNFNode pnfNode, Map<String,String> virtualLink) {
         this.pnfNode = pnfNode;
         this.virtualLink = virtualLink;
     }
 
-    public PNFRequirements(List<String> virtualLink) {
+    public PNFRequirements(Map<String,String> virtualLink) {
         this.virtualLink = virtualLink;
     }
 
@@ -52,7 +54,7 @@ public class PNFRequirements implements DescriptorInformationElement {
     }
 
     @JsonProperty("virtualLink")
-    public List<String> getVirtualLink() {
+    public Map<String,String> getVirtualLink() {
         return virtualLink;
     }
 
