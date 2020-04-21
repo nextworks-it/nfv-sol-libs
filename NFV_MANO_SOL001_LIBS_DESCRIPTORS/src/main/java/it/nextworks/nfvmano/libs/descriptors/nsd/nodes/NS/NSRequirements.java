@@ -26,7 +26,9 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class NSRequirements implements DescriptorInformationElement {
@@ -44,17 +46,17 @@ public class NSRequirements implements DescriptorInformationElement {
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<String> virtualLink = new ArrayList<>();
+    private Map<String, String> virtualLink = new HashMap<>();
 
     public NSRequirements() {
 
     }
 
-    public NSRequirements(List<String> virtualLink) {
+    public NSRequirements(Map<String,String>  virtualLink) {
         this.virtualLink = virtualLink;
     }
 
-    public NSRequirements(NSNode nsNode, List<String> virtualLink) {
+    public NSRequirements(NSNode nsNode, Map<String,String>  virtualLink) {
         this.nsNode = nsNode;
         this.virtualLink = virtualLink;
     }
@@ -68,7 +70,7 @@ public class NSRequirements implements DescriptorInformationElement {
     }
 
     @JsonProperty("virtualLink")
-    public List<String> getVirtualLink() {
+    public Map<String,String>  getVirtualLink() {
         return virtualLink;
     }
 
