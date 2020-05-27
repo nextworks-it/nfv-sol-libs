@@ -45,6 +45,9 @@ public class NsVirtualLinkProperties implements DescriptorInformationElement {
 
     private String description;
 
+    private boolean mgmtNet;
+    private boolean externalNet;
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
@@ -102,18 +105,16 @@ public class NsVirtualLinkProperties implements DescriptorInformationElement {
         return testAccess;
     }
 
-    @Override
-    public void isValid() throws MalformattedElementException {
-        if (this.vlProfile == null)
-            throw new MalformattedElementException("NsVirtualLink Node without vlProfile");
-        else
-            this.vlProfile.isValid();
-        if (this.connectivityType == null)
-            throw new MalformattedElementException("NsVirtualLink Node without connectivityType");
-        else
-            this.connectivityType.isValid();
+    @JsonProperty("mgmt_net")
+    public boolean isMgmtNet() {
+        return mgmtNet;
     }
 
+    @JsonProperty("external_net")
+    public boolean isExternalNet() {
+        return externalNet;
+    }
+    
     public void setDescription(String description) {
         this.description = description;
     }
@@ -124,5 +125,25 @@ public class NsVirtualLinkProperties implements DescriptorInformationElement {
 
     public void setConnectivityType(ConnectivityType connectivityType) {
         this.connectivityType = connectivityType;
+    }
+
+    public void setExternalNet(boolean externalNet) {
+        this.externalNet = externalNet;
+    }
+
+    public void setMgmtNet(boolean mgmtNet) {
+        this.mgmtNet = mgmtNet;
+    }
+
+    @Override
+    public void isValid() throws MalformattedElementException {
+        if (this.vlProfile == null)
+            throw new MalformattedElementException("NsVirtualLink Node without vlProfile");
+        else
+            this.vlProfile.isValid();
+        if (this.connectivityType == null)
+            throw new MalformattedElementException("NsVirtualLink Node without connectivityType");
+        else
+            this.connectivityType.isValid();
     }
 }
