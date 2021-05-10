@@ -1,10 +1,15 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 
-
-
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * CpdAddressdata
@@ -12,12 +17,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class CpdAddressdata {
 
-public class CpdAddressdata   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("l2-address-data")
+  @Embedded
   private CpdL2addressdata l2AddressData = null;
 
   @JsonProperty("l3-address-data")
+  @Embedded
   private CpdL3addressdata l3AddressData = null;
 
   @JsonProperty("type")

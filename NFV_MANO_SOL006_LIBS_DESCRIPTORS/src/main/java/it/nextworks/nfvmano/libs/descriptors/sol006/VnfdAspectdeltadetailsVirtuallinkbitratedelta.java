@@ -1,10 +1,16 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.springframework.validation.annotation.Validated;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * VnfdAspectdeltadetailsVirtuallinkbitratedelta
@@ -12,9 +18,17 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdAspectdeltadetailsVirtuallinkbitratedelta {
 
-public class VnfdAspectdeltadetailsVirtuallinkbitratedelta   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("bit-rate-requirements")
+  @Embedded
   private VnfdAspectdeltadetailsBitraterequirements bitRateRequirements = null;
 
   @JsonProperty("id")

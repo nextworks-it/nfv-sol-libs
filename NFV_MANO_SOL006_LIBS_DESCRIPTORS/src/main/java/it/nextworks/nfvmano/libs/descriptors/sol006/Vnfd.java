@@ -2,11 +2,12 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
-
 
 /**
  * Vnfd
@@ -14,46 +15,61 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class Vnfd extends SecurityGroupRule {
 
-public class Vnfd extends SecurityGroupRule  {
   @JsonProperty("default-localization-language")
   private String defaultLocalizationLanguage = null;
 
   @JsonProperty("ext-cpd")
-
-  private List<Object> extCpd = null;
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
+  private List<ExtCpd> extCpd = null;
 
   @JsonProperty("id")
   private String id = null;
 
   @JsonProperty("sw-image-desc")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
   private List<VnfdSwimagedesc> swImageDesc = null;
 
   @JsonProperty("element-group")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
   private List<VnfdElementgroup> elementGroup = null;
 
   @JsonProperty("virtual-storage-desc")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
   private List<VnfdVirtualstoragedesc> virtualStorageDesc = null;
 
   @JsonProperty("indicator")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
   private List<VnfdIndicator> indicator = null;
 
   @JsonProperty("virtual-compute-desc")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
   private List<VnfdVirtualcomputedesc> virtualComputeDesc = null;
 
   @JsonProperty("vnfm-info")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> vnfmInfo = null;
 
   @JsonProperty("product-info-name")
   private String productInfoName = null;
 
   @JsonProperty("modifiable-attributes")
+  @Embedded
   private VnfdModifiableattributes modifiableAttributes = null;
 
   @JsonProperty("version")
@@ -66,33 +82,44 @@ public class Vnfd extends SecurityGroupRule  {
   private String productName = null;
 
   @JsonProperty("df")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
   private List<VnfdDf> df = null;
 
   @JsonProperty("software-version")
   private String softwareVersion = null;
 
   @JsonProperty("configurable-properties")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_configurable_properties_fk", referencedColumnName = "uuid")
   private VnfdConfigurableproperties configurableProperties = null;
 
   @JsonProperty("auto-scale")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> autoScale = null;
 
   @JsonProperty("lifecycle-management-script")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
   private List<VnfdLifecyclemanagementscript> lifecycleManagementScript = null;
 
   @JsonProperty("vdu")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
   private List<VnfdVdu> vdu = null;
 
   @JsonProperty("localization-language")
   private String localizationLanguage = null;
 
   @JsonProperty("int-virtual-link-desc")
-
-  private List<Object> intVirtualLinkDesc = null;
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
+  private List<IntVirtualLinkDesc> intVirtualLinkDesc = null;
 
   @JsonProperty("product-info-description")
   private String productInfoDescription = null;
@@ -116,14 +143,14 @@ public class Vnfd extends SecurityGroupRule  {
     this.defaultLocalizationLanguage = defaultLocalizationLanguage;
   }
 
-  public Vnfd extCpd(List<Object> extCpd) {
+  public Vnfd extCpd(List<ExtCpd> extCpd) {
     this.extCpd = extCpd;
     return this;
   }
 
-  public Vnfd addExtCpdItem(Object extCpdItem) {
+  public Vnfd addExtCpdItem(ExtCpd extCpdItem) {
     if (this.extCpd == null) {
-      this.extCpd = new ArrayList<Object>();
+      this.extCpd = new ArrayList<ExtCpd>();
     }
     this.extCpd.add(extCpdItem);
     return this;
@@ -135,11 +162,11 @@ public class Vnfd extends SecurityGroupRule  {
    **/
   //@Schema(description = "Describes an external interface exposed by this VNF enabling connection with a Virual Link")
   
-    public List<Object> getExtCpd() {
+    public List<ExtCpd> getExtCpd() {
     return extCpd;
   }
 
-  public void setExtCpd(List<Object> extCpd) {
+  public void setExtCpd(List<ExtCpd> extCpd) {
     this.extCpd = extCpd;
   }
 
@@ -586,14 +613,14 @@ public class Vnfd extends SecurityGroupRule  {
     this.localizationLanguage = localizationLanguage;
   }
 
-  public Vnfd intVirtualLinkDesc(List<Object> intVirtualLinkDesc) {
+  public Vnfd intVirtualLinkDesc(List<IntVirtualLinkDesc> intVirtualLinkDesc) {
     this.intVirtualLinkDesc = intVirtualLinkDesc;
     return this;
   }
 
-  public Vnfd addIntVirtualLinkDescItem(Object intVirtualLinkDescItem) {
+  public Vnfd addIntVirtualLinkDescItem(IntVirtualLinkDesc intVirtualLinkDescItem) {
     if (this.intVirtualLinkDesc == null) {
-      this.intVirtualLinkDesc = new ArrayList<Object>();
+      this.intVirtualLinkDesc = new ArrayList<IntVirtualLinkDesc>();
     }
     this.intVirtualLinkDesc.add(intVirtualLinkDescItem);
     return this;
@@ -605,11 +632,11 @@ public class Vnfd extends SecurityGroupRule  {
    **/
   //@Schema(description = "Represents the type of network connectivity mandated by the VNF provider between two or more CPs which includes at least one internal CP.")
   
-    public List<Object> getIntVirtualLinkDesc() {
+    public List<IntVirtualLinkDesc> getIntVirtualLinkDesc() {
     return intVirtualLinkDesc;
   }
 
-  public void setIntVirtualLinkDesc(List<Object> intVirtualLinkDesc) {
+  public void setIntVirtualLinkDesc(List<IntVirtualLinkDesc> intVirtualLinkDesc) {
     this.intVirtualLinkDesc = intVirtualLinkDesc;
   }
 

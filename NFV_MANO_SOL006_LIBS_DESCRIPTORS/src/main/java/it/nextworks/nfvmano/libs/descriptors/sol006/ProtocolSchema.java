@@ -1,12 +1,16 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * ProtocolSchema
@@ -14,10 +18,19 @@ import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class ProtocolSchema {
 
-public class ProtocolSchema   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("address-data")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "protocol_schema_fk", referencedColumnName = "uuid")
   private List<CpdAddressdata> addressData = null;
 
   @JsonProperty("associated-layer-protocol")

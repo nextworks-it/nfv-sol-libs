@@ -1,11 +1,15 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import it.nextworks.nfvmano.libs.common.enums.NetworkTypeEnum;
+import org.hibernate.annotations.GenericGenerator;
 
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Specifies the L2 protocol data for this virtual link. Shall be present when the associatedLayerProtocol attribute indicates a L2 protocol and shall be absent otherwise.
@@ -14,8 +18,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VirtuallinkprotocoldataSchemaL2protocoldata {
 
-public class VirtuallinkprotocoldataSchemaL2protocoldata   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("mtu")
   private String mtu = null;
 
@@ -25,40 +36,6 @@ public class VirtuallinkprotocoldataSchemaL2protocoldata   {
   @JsonProperty("vlan-transparent")
   private Boolean vlanTransparent = null;
 
-  /**
-   * Specifies the network type for this L2 protocol. Possible values: FLAT, VLAN, VXLAN, GRE.
-   */
-  public enum NetworkTypeEnum {
-    FLAT("flat"),
-    
-    VLAN("vlan"),
-    
-    VXLAN("vxlan"),
-    
-    GRE("gre");
-
-    private String value;
-
-    NetworkTypeEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static NetworkTypeEnum fromValue(String text) {
-      for (NetworkTypeEnum b : NetworkTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("network-type")
   private NetworkTypeEnum networkType = null;
 

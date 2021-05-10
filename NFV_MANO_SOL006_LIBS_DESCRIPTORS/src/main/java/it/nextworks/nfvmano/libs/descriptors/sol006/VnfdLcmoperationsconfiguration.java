@@ -1,10 +1,15 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 
-import org.springframework.validation.annotation.Validated;
-
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * This information element is a container for all attributes that affect the invocation of the VNF Lifecycle Management operations, structured by operation.
@@ -13,30 +18,47 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+// TODO check if works
 
-public class VnfdLcmoperationsconfiguration   {
+@Entity
+public class VnfdLcmoperationsconfiguration {
+
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("instantiate-vnf-op-config")
+  @Embedded
   private VnfdLcmoperationsconfigurationInstantiatevnfopconfig instantiateVnfOpConfig = null;
 
   @JsonProperty("terminate-vnf-op-config")
+  @Embedded
   private VnfdLcmoperationsconfigurationTerminatevnfopconfig terminateVnfOpConfig = null;
 
   @JsonProperty("scale-vnf-to-level-op-config")
+  @Embedded
   private VnfdLcmoperationsconfigurationScalevnftolevelopconfig scaleVnfToLevelOpConfig = null;
 
   @JsonProperty("operate-vnf-op-config")
+  @Embedded
   private VnfdLcmoperationsconfigurationOperatevnfopconfig operateVnfOpConfig = null;
 
   @JsonProperty("scale-vnf-op-config")
+  @Embedded
   private VnfdLcmoperationsconfigurationScalevnfopconfig scaleVnfOpConfig = null;
 
   @JsonProperty("change-vnf-flavour-op-config")
+  @Embedded
   private VnfdLcmoperationsconfigurationChangevnfflavouropconfig changeVnfFlavourOpConfig = null;
 
   @JsonProperty("heal-vnf-op-config")
+  @Embedded
   private VnfdLcmoperationsconfigurationHealvnfopconfig healVnfOpConfig = null;
 
   @JsonProperty("change-ext-vnf-connectivity-op-config")
+  @Embedded
   private VnfdLcmoperationsconfigurationChangeextvnfconnectivityopconfig changeExtVnfConnectivityOpConfig = null;
 
   public VnfdLcmoperationsconfiguration instantiateVnfOpConfig(VnfdLcmoperationsconfigurationInstantiatevnfopconfig instantiateVnfOpConfig) {

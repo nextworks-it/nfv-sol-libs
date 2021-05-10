@@ -2,11 +2,12 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
-
 
 /**
  * AllOfvnfdDfVirtualLinkProfileItems
@@ -14,26 +15,41 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdDfVirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRule {
 
-public class VnfdDfVirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRule  {
   @JsonProperty("flavour")
   private String flavour = null;
 
   @JsonProperty("max-bit-rate-requirements")
-  private Object maxBitRateRequirements = null;
+  @Embedded
+  @AttributeOverrides({
+          @AttributeOverride(name = "leaf", column = @Column(name = "max_bit_rate_requirements_leaf")),
+          @AttributeOverride(name = "root", column = @Column(name = "max_bit_rate_requirements_root"))
+  })
+  private MaxBitRateRequirementsSchema maxBitRateRequirements = null;
 
   @JsonProperty("affinity-or-anti-affinity-group")
-
-  private List<Object> affinityOrAntiAffinityGroup = null;
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_df_virtual_link_profile_item_fk", referencedColumnName = "uuid")
+  private List<AffinityOrAntiAffinityGroupIdSchema> affinityOrAntiAffinityGroup = null;
 
   @JsonProperty("virtual-link-protocol-data")
-  private Object virtualLinkProtocolData = null;
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "virtual_link_protocol_data_schema_fk", referencedColumnName = "uuid")
+  private VirtualLinkProtocolDataSchema virtualLinkProtocolData = null;
 
   @JsonProperty("id")
   private String id = null;
 
   @JsonProperty("min-bit-rate-requirements")
-  private Object minBitRateRequirements = null;
+  @Embedded
+  @AttributeOverrides({
+          @AttributeOverride(name = "leaf", column = @Column(name = "min_bit_rate_requirements_leaf")),
+          @AttributeOverride(name = "root", column = @Column(name = "min_bit_rate_requirements_root"))
+  })
+  private MinBitRateRequirementsSchema minBitRateRequirements = null;
 
   public VnfdDfVirtualLinkProfileItem flavour(String flavour) {
     this.flavour = flavour;
@@ -54,7 +70,7 @@ public class VnfdDfVirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRul
     this.flavour = flavour;
   }
 
-  public VnfdDfVirtualLinkProfileItem maxBitRateRequirements(Object maxBitRateRequirements) {
+  public VnfdDfVirtualLinkProfileItem maxBitRateRequirements(MaxBitRateRequirementsSchema maxBitRateRequirements) {
     this.maxBitRateRequirements = maxBitRateRequirements;
     return this;
   }
@@ -69,18 +85,20 @@ public class VnfdDfVirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRul
     return maxBitRateRequirements;
   }
 
-  public void setMaxBitRateRequirements(Object maxBitRateRequirements) {
+  public void setMaxBitRateRequirements(MaxBitRateRequirementsSchema maxBitRateRequirements) {
     this.maxBitRateRequirements = maxBitRateRequirements;
   }
 
-  public VnfdDfVirtualLinkProfileItem affinityOrAntiAffinityGroup(List<Object> affinityOrAntiAffinityGroup) {
+  public VnfdDfVirtualLinkProfileItem affinityOrAntiAffinityGroup(List<AffinityOrAntiAffinityGroupIdSchema>
+                                                                          affinityOrAntiAffinityGroup) {
     this.affinityOrAntiAffinityGroup = affinityOrAntiAffinityGroup;
     return this;
   }
 
-  public VnfdDfVirtualLinkProfileItem addAffinityOrAntiAffinityGroupItem(Object affinityOrAntiAffinityGroupItem) {
+  public VnfdDfVirtualLinkProfileItem addAffinityOrAntiAffinityGroupItem(AffinityOrAntiAffinityGroupIdSchema
+                                                                                 affinityOrAntiAffinityGroupItem) {
     if (this.affinityOrAntiAffinityGroup == null) {
-      this.affinityOrAntiAffinityGroup = new ArrayList<Object>();
+      this.affinityOrAntiAffinityGroup = new ArrayList<AffinityOrAntiAffinityGroupIdSchema>();
     }
     this.affinityOrAntiAffinityGroup.add(affinityOrAntiAffinityGroupItem);
     return this;
@@ -92,15 +110,15 @@ public class VnfdDfVirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRul
    **/
   //@Schema(description = "Identifier(s) of the affinity or anti-affinity group(s) the VnfVirtualLinkDesc belongs to.")
   
-    public List<Object> getAffinityOrAntiAffinityGroup() {
+    public List<AffinityOrAntiAffinityGroupIdSchema> getAffinityOrAntiAffinityGroup() {
     return affinityOrAntiAffinityGroup;
   }
 
-  public void setAffinityOrAntiAffinityGroup(List<Object> affinityOrAntiAffinityGroup) {
+  public void setAffinityOrAntiAffinityGroup(List<AffinityOrAntiAffinityGroupIdSchema> affinityOrAntiAffinityGroup) {
     this.affinityOrAntiAffinityGroup = affinityOrAntiAffinityGroup;
   }
 
-  public VnfdDfVirtualLinkProfileItem virtualLinkProtocolData(Object virtualLinkProtocolData) {
+  public VnfdDfVirtualLinkProfileItem virtualLinkProtocolData(VirtualLinkProtocolDataSchema virtualLinkProtocolData) {
     this.virtualLinkProtocolData = virtualLinkProtocolData;
     return this;
   }
@@ -115,7 +133,7 @@ public class VnfdDfVirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRul
     return virtualLinkProtocolData;
   }
 
-  public void setVirtualLinkProtocolData(Object virtualLinkProtocolData) {
+  public void setVirtualLinkProtocolData(VirtualLinkProtocolDataSchema virtualLinkProtocolData) {
     this.virtualLinkProtocolData = virtualLinkProtocolData;
   }
 
@@ -138,7 +156,7 @@ public class VnfdDfVirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRul
     this.id = id;
   }
 
-  public VnfdDfVirtualLinkProfileItem minBitRateRequirements(Object minBitRateRequirements) {
+  public VnfdDfVirtualLinkProfileItem minBitRateRequirements(MinBitRateRequirementsSchema minBitRateRequirements) {
     this.minBitRateRequirements = minBitRateRequirements;
     return this;
   }
@@ -153,7 +171,7 @@ public class VnfdDfVirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRul
     return minBitRateRequirements;
   }
 
-  public void setMinBitRateRequirements(Object minBitRateRequirements) {
+  public void setMinBitRateRequirements(MinBitRateRequirementsSchema minBitRateRequirements) {
     this.minBitRateRequirements = minBitRateRequirements;
   }
 

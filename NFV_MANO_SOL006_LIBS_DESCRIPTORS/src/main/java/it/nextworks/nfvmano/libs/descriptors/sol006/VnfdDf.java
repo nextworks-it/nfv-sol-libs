@@ -2,11 +2,13 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.*;
 
 /**
  * VnfdDf
@@ -14,51 +16,71 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdDf {
 
-public class VnfdDf   {
   @JsonProperty("supported-vnf-interfaces")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_df_fk", referencedColumnName = "uuid")
   private List<VnfdSupportedvnfinterfaces> supportedVnfInterfaces = null;
 
   @JsonProperty("indicator")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_df_fk", referencedColumnName = "uuid")
   private List<VnfdIndicator> indicator = null;
 
   @JsonProperty("description")
   private String description = null;
 
   @JsonProperty("affinity-or-anti-affinity-group")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_df_fk", referencedColumnName = "uuid")
   private List<VnfdAffinityorantiaffinitygroup> affinityOrAntiAffinityGroup = null;
 
   @JsonProperty("lcm-operations-configuration")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_lcm_operations_configuration_fk", referencedColumnName = "uuid")
   private VnfdLcmoperationsconfiguration lcmOperationsConfiguration = null;
 
   @JsonProperty("virtual-link-profile")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_df_fk", referencedColumnName = "uuid")
   private List<VnfdDfVirtualLinkProfileItem> virtualLinkProfile = null;
 
   @JsonProperty("instantiation-level")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_df_fk", referencedColumnName = "uuid")
   private List<VnfdInstantiationlevel> instantiationLevel = null;
 
   @JsonProperty("vdu-profile")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_df_fk", referencedColumnName = "uuid")
   private List<VnfdDfVduProfileItem> vduProfile = null;
 
   @JsonProperty("supported-operation")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> supportedOperation = null;
 
   @JsonProperty("scaling-aspect")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_df_fk", referencedColumnName = "uuid")
   private List<VnfdScalingaspect> scalingAspect = null;
 
   @JsonProperty("default-instantiation-level")
   private String defaultInstantiationLevel = null;
 
   @JsonProperty("monitoring-parameter")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_df_fk", referencedColumnName = "uuid")
   private List<VnfdDfMonitoringParameterItem> monitoringParameter = null;
 
   @JsonProperty("id")

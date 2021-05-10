@@ -2,11 +2,13 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.*;
 
 /**
  * AllOfvnfdVduIntCpdItems
@@ -14,17 +16,21 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdVduIntCpdItem extends VirtualNetworkInterfaceRequirements {
 
-public class VnfdVduIntCpdItem extends VirtualNetworkInterfaceRequirements  {
   @JsonProperty("protocol")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_vdu_int_cpd_item_fk", referencedColumnName = "uuid")
   private List<CpdProtocol> protocol = null;
 
   @JsonProperty("description")
   private String description = null;
 
   @JsonProperty("layer-protocol")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> layerProtocol = null;
 
   @JsonProperty("trunk-mode")
@@ -49,7 +55,8 @@ public class VnfdVduIntCpdItem extends VirtualNetworkInterfaceRequirements  {
   private String bitrateRequirement = null;
 
   @JsonProperty("order")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> order = null;
 
   public VnfdVduIntCpdItem protocol(List<CpdProtocol> protocol) {

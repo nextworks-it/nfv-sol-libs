@@ -16,12 +16,12 @@ import org.springframework.validation.annotation.Validated;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
 
-public class AspectDeltaDetailsSchema   {
+public class AspectDeltaDetailsSchema {
+
   @JsonProperty("step-deltas")
   private String stepDeltas = null;
 
   @JsonProperty("deltas")
-
   private List<VnfdAspectdeltadetailsDeltas> deltas = null;
 
   public AspectDeltaDetailsSchema stepDeltas(String stepDeltas) {

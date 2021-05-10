@@ -1,21 +1,36 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * VirtualNetworkInterfaceRequirementSchema
  */
 
+@Entity
+public class VirtualNetworkInterfaceRequirementSchema {
 
-public class VirtualNetworkInterfaceRequirementSchema   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("network-interface-requirements")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdVdustoragerequirements> networkInterfaceRequirements = null;
 
   @JsonProperty("name")
@@ -34,7 +49,7 @@ public class VirtualNetworkInterfaceRequirementSchema   {
 
   public VirtualNetworkInterfaceRequirementSchema addNetworkInterfaceRequirementsItem(VnfdVdustoragerequirements networkInterfaceRequirementsItem) {
     if (this.networkInterfaceRequirements == null) {
-      this.networkInterfaceRequirements = new ArrayList<VnfdVdustoragerequirements>();
+      this.networkInterfaceRequirements = new ArrayList<>();
     }
     this.networkInterfaceRequirements.add(networkInterfaceRequirementsItem);
     return this;

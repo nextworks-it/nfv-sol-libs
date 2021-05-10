@@ -1,9 +1,12 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.springframework.validation.annotation.Validated;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 
 /**
@@ -13,12 +16,23 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VirtualLinkProtocolDataSchema {
 
-public class VirtualLinkProtocolDataSchema   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("l2-protocol-data")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "virtual_link_protocol_data_schema_l2_protocol_data_fk", referencedColumnName = "uuid")
   private VirtuallinkprotocoldataSchemaL2protocoldata l2ProtocolData = null;
 
   @JsonProperty("l3-protocol-data")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "virtual_link_protocol_data_schema_l3_protocol_data_fk", referencedColumnName = "uuid")
   private VirtuallinkprotocoldataSchemaL3protocoldata l3ProtocolData = null;
 
   @JsonProperty("associated-layer-protocol")

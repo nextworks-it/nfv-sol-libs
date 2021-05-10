@@ -3,7 +3,7 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.springframework.validation.annotation.Validated;
+import javax.persistence.Embeddable;
 
 /**
  * Provides the information on the MAC addresses to be assigned to the CP(s) instantiated from the parent CPD. Shall be present when the addressType is MAC address.
@@ -12,8 +12,9 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Embeddable
+public class CpdL2addressdata {
 
-public class CpdL2addressdata   {
   @JsonProperty("mac-address-assignment")
   private Boolean macAddressAssignment = null;
 

@@ -1,12 +1,16 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * Describes the configurable properties of the VNF (e.g. related to auto scaling and auto healing).
@@ -15,8 +19,15 @@ import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdConfigurableproperties {
 
-public class VnfdConfigurableproperties   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("is-auto-scalable-enabled")
   private Boolean isAutoScalableEnabled = null;
 
@@ -24,7 +35,8 @@ public class VnfdConfigurableproperties   {
   private Boolean isAutoHealEnabled = null;
 
   @JsonProperty("additional-configurable-property")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdVdustoragerequirements> additionalConfigurableProperty = null;
 
   public VnfdConfigurableproperties isAutoScalableEnabled(Boolean isAutoScalableEnabled) {

@@ -1,12 +1,11 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 
 /**
  * MonitoringParameter
@@ -19,8 +18,16 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = VnfdVduMonitoringParameterItem.class, name = "AllOfvnfd_vduMonitoringParameterItems"),
 })
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class MonitoringParameter {
 
-public class MonitoringParameter   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("collection-period")
   private String collectionPeriod = null;
 

@@ -3,7 +3,7 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
+import javax.persistence.Embeddable;
 
 /**
  * Specifies the minimum bitrate requirements for a VL instantiated according to this profile.
@@ -12,8 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Embeddable
+public class MinBitRateRequirementsSchema {
 
-public class MinBitRateRequirementsSchema   {
   @JsonProperty("leaf")
   private String leaf = null;
 

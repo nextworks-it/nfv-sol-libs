@@ -1,9 +1,14 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.*;
 
 
 /**
@@ -12,12 +17,15 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Embeddable
+public class AddressDataSchema {
 
-public class AddressDataSchema   {
   @JsonProperty("l2-address-data")
+  @Embedded
   private CpdL2addressdata l2AddressData = null;
 
   @JsonProperty("l3-address-data")
+  @Embedded
   private CpdL3addressdata l3AddressData = null;
 
   @JsonProperty("type")

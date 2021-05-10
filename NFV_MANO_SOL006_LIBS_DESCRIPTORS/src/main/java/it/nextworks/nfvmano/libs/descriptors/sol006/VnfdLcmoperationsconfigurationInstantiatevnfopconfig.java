@@ -2,11 +2,13 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * Configuration parameters for the InstantiateVnf operation.
@@ -15,10 +17,12 @@ import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Embeddable
+public class VnfdLcmoperationsconfigurationInstantiatevnfopconfig {
 
-public class VnfdLcmoperationsconfigurationInstantiatevnfopconfig   {
   @JsonProperty("parameter")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdVdustoragerequirements> parameter = null;
 
   public VnfdLcmoperationsconfigurationInstantiatevnfopconfig parameter(List<VnfdVdustoragerequirements> parameter) {

@@ -1,14 +1,17 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import it.nextworks.nfvmano.libs.common.enums.ContainerFormatEnum;
+import it.nextworks.nfvmano.libs.common.enums.DiskFormatEnum;
+import org.hibernate.annotations.*;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * VnfdSwimagedesc
@@ -16,12 +19,20 @@ import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdSwimagedesc {
 
-public class VnfdSwimagedesc   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("name")
   private String name = null;
 
   @JsonProperty("checksum")
+  @Embedded
   private VnfdChecksum checksum = null;
 
   @JsonProperty("image")
@@ -36,95 +47,9 @@ public class VnfdSwimagedesc   {
   @JsonProperty("min-disk")
   private String minDisk = null;
 
-  /**
-   * The disk format of a software image is the format of the underlying disk image.
-   */
-  public enum DiskFormatEnum {
-    AKI("aki"),
-    
-    AMI("ami"),
-    
-    ARI("ari"),
-    
-    ISO("iso"),
-    
-    QCOW2("qcow2"),
-    
-    RAW("raw"),
-    
-    VDI("vdi"),
-    
-    VHD("vhd"),
-    
-    VHDX("vhdx"),
-    
-    VMDK("vmdk");
-
-    private String value;
-
-    DiskFormatEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static DiskFormatEnum fromValue(String text) {
-      for (DiskFormatEnum b : DiskFormatEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("disk-format")
   private DiskFormatEnum diskFormat = null;
 
-  /**
-   * The container format describes the container file format in which software image is provided.
-   */
-  public enum ContainerFormatEnum {
-    AKI("aki"),
-    
-    AMI("ami"),
-    
-    ARI("ari"),
-    
-    BARE("bare"),
-    
-    DOCKER("docker"),
-    
-    OVA("ova"),
-    
-    OVF("ovf");
-
-    private String value;
-
-    ContainerFormatEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static ContainerFormatEnum fromValue(String text) {
-      for (ContainerFormatEnum b : ContainerFormatEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("container-format")
   private ContainerFormatEnum containerFormat = null;
 
@@ -135,7 +60,8 @@ public class VnfdSwimagedesc   {
   private String id = null;
 
   @JsonProperty("supported-virtualization-environment")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> supportedVirtualizationEnvironment = null;
 
   @JsonProperty("size")

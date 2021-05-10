@@ -1,14 +1,19 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import it.nextworks.nfvmano.libs.common.enums.PolicyEnum;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
 
 /**
  * The virtual CPU pinning configuration for the virtualised compute resource.
@@ -17,43 +22,21 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdVirtualcpuPinning {
 
-public class VnfdVirtualcpuPinning   {
-  /**
-   * The policy can take values of 'static' or 'dynamic'. In case of 'static' the virtual CPU cores are requested to be allocated to logical CPU cores according to the rules defined in virtualCpuPinningRules. In case of 'dynamic' the allocation of virtual CPU cores to logical CPU cores is decided by the VIM. (e.g. SMT (Simultaneous MultiThreading) requirements).
-   */
-  public enum PolicyEnum {
-    STATIC("static"),
-    
-    DYNAMIC("dynamic");
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
 
-    private String value;
-
-    PolicyEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static PolicyEnum fromValue(String text) {
-      for (PolicyEnum b : PolicyEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("policy")
   private PolicyEnum policy = null;
 
   @JsonProperty("rule")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdVdustoragerequirements> rule = null;
 
   public VnfdVirtualcpuPinning policy(PolicyEnum policy) {

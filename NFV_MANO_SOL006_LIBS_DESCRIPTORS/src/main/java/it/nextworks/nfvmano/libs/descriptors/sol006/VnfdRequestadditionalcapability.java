@@ -1,12 +1,19 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * VnfdRequestadditionalcapability
@@ -14,8 +21,15 @@ import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdRequestadditionalcapability {
 
-public class VnfdRequestadditionalcapability   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("support-mandatory")
   private Boolean supportMandatory = null;
 
@@ -26,7 +40,8 @@ public class VnfdRequestadditionalcapability   {
   private String name = null;
 
   @JsonProperty("target-performance-parameters")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdVdustoragerequirements> targetPerformanceParameters = null;
 
   @JsonProperty("preferred-version")

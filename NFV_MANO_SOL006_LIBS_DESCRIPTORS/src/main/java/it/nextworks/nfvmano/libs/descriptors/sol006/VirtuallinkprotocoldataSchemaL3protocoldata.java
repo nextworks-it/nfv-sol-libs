@@ -1,14 +1,23 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import it.nextworks.nfvmano.libs.common.enums.IpVersionEnum;
+import it.nextworks.nfvmano.libs.common.enums.Ipv6AddressModeEnum;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Specifies the L3 protocol data for this virtual link. Shall be present when the associatedLayerProtocol attribute indicates a L3 protocol and shall be absent otherwise.
@@ -17,45 +26,23 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VirtuallinkprotocoldataSchemaL3protocoldata {
 
-public class VirtuallinkprotocoldataSchemaL3protocoldata   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("name")
   private String name = null;
 
   @JsonProperty("ip-allocation-pools")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> ipAllocationPools = null;
 
-  /**
-   * Specifies IP version of this L3 protocol. Value: • IPV4. • IPV6.
-   */
-  public enum IpVersionEnum {
-    IPV4("ipv4"),
-    
-    IPV6("ipv6");
-
-    private String value;
-
-    IpVersionEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static IpVersionEnum fromValue(String text) {
-      for (IpVersionEnum b : IpVersionEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("ip-version")
   private IpVersionEnum ipVersion = null;
 
@@ -68,38 +55,6 @@ public class VirtuallinkprotocoldataSchemaL3protocoldata   {
   @JsonProperty("gateway-ip")
   private String gatewayIp = null;
 
-  /**
-   * Specifies IPv6 address mode. Possible values: • SLAAC. • DHCPV6-STATEFUL. • DHCPV6-STATELESS. May be present when the value of the ipVersion attribute is 'IPV6' and shall be absent otherwise.
-   */
-  public enum Ipv6AddressModeEnum {
-    SLAAC("slaac"),
-    
-    DHCPV6_STATEFUL("dhcpv6-stateful"),
-    
-    DHCPV6_STATELESS("dhcpv6-stateless");
-
-    private String value;
-
-    Ipv6AddressModeEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static Ipv6AddressModeEnum fromValue(String text) {
-      for (Ipv6AddressModeEnum b : Ipv6AddressModeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("ipv6-address-mode")
   private Ipv6AddressModeEnum ipv6AddressMode = null;
 

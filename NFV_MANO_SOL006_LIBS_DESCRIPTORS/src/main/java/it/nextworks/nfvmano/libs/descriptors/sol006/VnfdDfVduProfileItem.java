@@ -2,11 +2,16 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  * AllOfvnfdDfVduProfileItems
@@ -14,14 +19,17 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdDfVduProfileItem extends LocalAffinityOrAntiAffinityRule {
 
-public class VnfdDfVduProfileItem extends LocalAffinityOrAntiAffinityRule  {
   @JsonProperty("min-number-of-instances")
   private String minNumberOfInstances = null;
 
   @JsonProperty("affinity-or-anti-affinity-group")
-
-  private List<Object> affinityOrAntiAffinityGroup = null;
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_df_vdu_profile_item_fk", referencedColumnName = "uuid")
+  private List<AffinityOrAntiAffinityGroupIdSchema> affinityOrAntiAffinityGroup = null;
 
   @JsonProperty("max-number-of-instances")
   private String maxNumberOfInstances = null;
@@ -48,14 +56,16 @@ public class VnfdDfVduProfileItem extends LocalAffinityOrAntiAffinityRule  {
     this.minNumberOfInstances = minNumberOfInstances;
   }
 
-  public VnfdDfVduProfileItem affinityOrAntiAffinityGroup(List<Object> affinityOrAntiAffinityGroup) {
+  public VnfdDfVduProfileItem affinityOrAntiAffinityGroup(List<AffinityOrAntiAffinityGroupIdSchema>
+                                                                  affinityOrAntiAffinityGroup) {
     this.affinityOrAntiAffinityGroup = affinityOrAntiAffinityGroup;
     return this;
   }
 
-  public VnfdDfVduProfileItem addAffinityOrAntiAffinityGroupItem(Object affinityOrAntiAffinityGroupItem) {
+  public VnfdDfVduProfileItem addAffinityOrAntiAffinityGroupItem(AffinityOrAntiAffinityGroupIdSchema
+                                                                         affinityOrAntiAffinityGroupItem) {
     if (this.affinityOrAntiAffinityGroup == null) {
-      this.affinityOrAntiAffinityGroup = new ArrayList<Object>();
+      this.affinityOrAntiAffinityGroup = new ArrayList<AffinityOrAntiAffinityGroupIdSchema>();
     }
     this.affinityOrAntiAffinityGroup.add(affinityOrAntiAffinityGroupItem);
     return this;
@@ -67,11 +77,11 @@ public class VnfdDfVduProfileItem extends LocalAffinityOrAntiAffinityRule  {
    **/
   //@Schema(description = "Identifier(s) of the affinity or anti-affinity group(s) the VDU belongs to.")
   
-    public List<Object> getAffinityOrAntiAffinityGroup() {
+    public List<AffinityOrAntiAffinityGroupIdSchema> getAffinityOrAntiAffinityGroup() {
     return affinityOrAntiAffinityGroup;
   }
 
-  public void setAffinityOrAntiAffinityGroup(List<Object> affinityOrAntiAffinityGroup) {
+  public void setAffinityOrAntiAffinityGroup(List<AffinityOrAntiAffinityGroupIdSchema> affinityOrAntiAffinityGroup) {
     this.affinityOrAntiAffinityGroup = affinityOrAntiAffinityGroup;
   }
 

@@ -1,12 +1,18 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
 
 /**
  * VnfdVirtualcomputedesc
@@ -14,23 +20,38 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdVirtualcomputedesc {
 
-public class VnfdVirtualcomputedesc   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("compute-requirements")
   private String computeRequirements = null;
 
   @JsonProperty("virtual-memory")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_virtual_memory_fk", referencedColumnName = "uuid")
   private VnfdVirtualmemory virtualMemory = null;
 
   @JsonProperty("logical-node")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_virtual_compute_desc_fk", referencedColumnName = "uuid")
   private List<VnfdLogicalnode> logicalNode = null;
 
   @JsonProperty("virtual-cpu")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_virtual_cpu_fk", referencedColumnName = "uuid")
   private VnfdVirtualcpu virtualCpu = null;
 
   @JsonProperty("request-additional-capability")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_virtual_compute_desc_fk", referencedColumnName = "uuid")
   private List<VnfdRequestadditionalcapability> requestAdditionalCapability = null;
 
   @JsonProperty("id")

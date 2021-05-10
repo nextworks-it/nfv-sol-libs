@@ -1,11 +1,17 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import it.nextworks.nfvmano.libs.common.enums.DirectionEnum;
+import it.nextworks.nfvmano.libs.common.enums.EtherTypeEnum;
+import it.nextworks.nfvmano.libs.common.enums.ProtocolEnum;
+import org.hibernate.annotations.GenericGenerator;
 
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * SecuritygroupruleSecuritygrouprule
@@ -13,73 +19,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class SecuritygroupruleSecuritygrouprule {
 
-public class SecuritygroupruleSecuritygrouprule   {
-  /**
-   * The direction in which the security group rule is applied. Permitted values: INGRESS, EGRESS. Defaults to INGRESS.
-   */
-  public enum DirectionEnum {
-    INGRESS("ingress"),
-    
-    EGRESS("egress");
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
 
-    private String value;
-
-    DirectionEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static DirectionEnum fromValue(String text) {
-      for (DirectionEnum b : DirectionEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("direction")
   private DirectionEnum direction = null;
 
-  /**
-   * Indicates the protocol carried over the IP layer. Permitted values: any protocol defined in the IANA protocol registry, e.g. TCP, UDP, ICMP, etc. Defaults to TCP.
-   */
-  public enum ProtocolEnum {
-    TCP("tcp"),
-    
-    UDP("udp"),
-    
-    ICMP("icmp");
-
-    private String value;
-
-    ProtocolEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static ProtocolEnum fromValue(String text) {
-      for (ProtocolEnum b : ProtocolEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("protocol")
   private ProtocolEnum protocol = null;
 
@@ -89,36 +40,6 @@ public class SecuritygroupruleSecuritygrouprule   {
   @JsonProperty("port-range-max")
   private String portRangeMax = null;
 
-  /**
-   * Indicates the protocol carried over the Ethernet layer. Permitted values: IPV4, IPV6. Defaults to IPV4.
-   */
-  public enum EtherTypeEnum {
-    IPV4("ipv4"),
-    
-    IPV6("ipv6");
-
-    private String value;
-
-    EtherTypeEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static EtherTypeEnum fromValue(String text) {
-      for (EtherTypeEnum b : EtherTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("ether-type")
   private EtherTypeEnum etherType = null;
 

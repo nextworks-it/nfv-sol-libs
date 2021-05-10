@@ -1,12 +1,17 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.*;
 
 /**
  * VnfdVdu
@@ -14,10 +19,18 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdVdu {
 
-public class VnfdVdu   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("virtual-storage-desc")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> virtualStorageDesc = null;
 
   @JsonProperty("boot-data")
@@ -30,26 +43,33 @@ public class VnfdVdu   {
   private String virtualComputeDesc = null;
 
   @JsonProperty("int-cpd")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_vdu_fk", referencedColumnName = "uuid")
   private List<VnfdVduIntCpdItem> intCpd = null;
 
   @JsonProperty("configurable-properties")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdVdustoragerequirements> configurableProperties = null;
 
   @JsonProperty("id")
   private String id = null;
 
   @JsonProperty("boot-order")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdBootorder> bootOrder = null;
 
   @JsonProperty("nfvi-constraint")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> nfviConstraint = null;
 
   @JsonProperty("monitoring-parameter")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_vdu_fk", referencedColumnName = "uuid")
   private List<VnfdVduMonitoringParameterItem> monitoringParameter = null;
 
   @JsonProperty("sw-image-desc")

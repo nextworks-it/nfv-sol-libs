@@ -5,8 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
 
 /**
  * This information element defines attributes that affect the invocation of the HealVnf operation.
@@ -15,14 +19,17 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Embeddable
+public class VnfdLcmoperationsconfigurationHealvnfopconfig {
 
-public class VnfdLcmoperationsconfigurationHealvnfopconfig   {
   @JsonProperty("cause")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> cause = null;
 
   @JsonProperty("parameter")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdVdustoragerequirements> parameter = null;
 
   public VnfdLcmoperationsconfigurationHealvnfopconfig cause(List<String> cause) {

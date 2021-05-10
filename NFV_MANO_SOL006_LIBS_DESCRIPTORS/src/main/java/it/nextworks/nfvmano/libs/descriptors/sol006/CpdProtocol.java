@@ -1,8 +1,14 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +16,19 @@ import java.util.List;
  * CpdProtocol
  */
 
+@Entity
+public class CpdProtocol {
 
-public class CpdProtocol   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("address-data")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "cpd_protocol_fk", referencedColumnName = "uuid")
   private List<CpdAddressdata> addressData = null;
 
   @JsonProperty("associated-layer-protocol")
@@ -26,7 +41,7 @@ public class CpdProtocol   {
 
   public CpdProtocol addAddressDataItem(CpdAddressdata addressDataItem) {
     if (this.addressData == null) {
-      this.addressData = new ArrayList<CpdAddressdata>();
+      this.addressData = new ArrayList<>();
     }
     this.addressData.add(addressDataItem);
     return this;

@@ -2,10 +2,9 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import it.nextworks.nfvmano.libs.common.enums.IpAddressTypeEnum;
 
-import org.springframework.validation.annotation.Validated;
+import javax.persistence.Embeddable;
 
 /**
  * CpdL3addressdata
@@ -13,8 +12,9 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Embeddable
+public class CpdL3addressdata {
 
-public class CpdL3addressdata   {
   @JsonProperty("ip-address-assignment")
   private Boolean ipAddressAssignment = null;
 
@@ -24,36 +24,6 @@ public class CpdL3addressdata   {
   @JsonProperty("number-of-ip-addresses")
   private String numberOfIpAddresses = null;
 
-  /**
-   * Define address type. The address type should be aligned with the address type supported by the layerProtocol attribute of the parent VnfExtCpd.
-   */
-  public enum IpAddressTypeEnum {
-    IPV4("ipv4"),
-    
-    IPV6("ipv6");
-
-    private String value;
-
-    IpAddressTypeEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static IpAddressTypeEnum fromValue(String text) {
-      for (IpAddressTypeEnum b : IpAddressTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("ip-address-type")
   private IpAddressTypeEnum ipAddressType = null;
 

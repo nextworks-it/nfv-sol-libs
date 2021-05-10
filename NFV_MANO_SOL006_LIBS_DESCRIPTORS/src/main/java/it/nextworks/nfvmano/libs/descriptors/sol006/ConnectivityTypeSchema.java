@@ -2,13 +2,14 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import it.nextworks.nfvmano.libs.common.enums.FlowPatternEnum;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * ConnectivityTypeSchema
@@ -16,45 +17,15 @@ import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Embeddable
+public class ConnectivityTypeSchema {
 
-public class ConnectivityTypeSchema   {
-  /**
-   * Identifies the flow pattern of the connectivity (Line, Tree, Mesh).
-   */
-  public enum FlowPatternEnum {
-    LINE("line"),
-    
-    TREE("tree"),
-    
-    MESH("mesh");
-
-    private String value;
-
-    FlowPatternEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static FlowPatternEnum fromValue(String text) {
-      for (FlowPatternEnum b : FlowPatternEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("flow-pattern")
   private FlowPatternEnum flowPattern = null;
 
   @JsonProperty("layer-protocol")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> layerProtocol = null;
 
   public ConnectivityTypeSchema flowPattern(FlowPatternEnum flowPattern) {

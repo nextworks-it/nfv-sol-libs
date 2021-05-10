@@ -1,12 +1,16 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * The virtual CPU(s)of the virtualised compute.
@@ -15,8 +19,15 @@ import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdVirtualcpu {
 
-public class VnfdVirtualcpu   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("num-virtual-cpu")
   private String numVirtualCpu = null;
 
@@ -24,13 +35,16 @@ public class VnfdVirtualcpu   {
   private String clock = null;
 
   @JsonProperty("pinning")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_virtual_cpu_pinnning_fk", referencedColumnName = "uuid")
   private VnfdVirtualcpuPinning pinning = null;
 
   @JsonProperty("cpu-architecture")
   private String cpuArchitecture = null;
 
   @JsonProperty("vdu-cpu-requirements")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdVdustoragerequirements> vduCpuRequirements = null;
 
   @JsonProperty("oversubscription-policy")

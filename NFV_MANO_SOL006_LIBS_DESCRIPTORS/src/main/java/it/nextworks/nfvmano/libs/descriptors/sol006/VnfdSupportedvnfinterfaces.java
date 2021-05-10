@@ -1,14 +1,17 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import it.nextworks.nfvmano.libs.common.enums.NameEnum;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * VnfdSupportedvnfinterfaces
@@ -16,47 +19,26 @@ import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfdSupportedvnfinterfaces {
 
-public class VnfdSupportedvnfinterfaces   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("cpd-id")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> cpdId = null;
 
-  /**
-   * Identifies an interface produced by the VNF. Valid values: - VNF_CONFIGURATION - VNF_INDICATOR
-   */
-  public enum NameEnum {
-    CONFIGURATION("vnf-configuration"),
-    
-    INDICATOR("vnf-indicator");
-
-    private String value;
-
-    NameEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static NameEnum fromValue(String text) {
-      for (NameEnum b : NameEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("name")
   private NameEnum name = null;
 
   @JsonProperty("interface-details")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdVdustoragerequirements> interfaceDetails = null;
 
   public VnfdSupportedvnfinterfaces cpdId(List<String> cpdId) {
