@@ -8,10 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +27,7 @@ public class VirtualNetworkInterfaceRequirementSchema {
 
   @JsonProperty("network-interface-requirements")
   @ElementCollection
+  @CollectionTable(name = "virtual_network_interface_req_schema_network_interface_req")
   @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdVdustoragerequirements> networkInterfaceRequirements = null;
 

@@ -1,15 +1,17 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 /**
  * This information element defines attributes that affect the invocation of the ScaleVnfToLevel operation.
@@ -18,14 +20,22 @@ import javax.persistence.Embeddable;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
-@Embeddable
+@Entity
+@Table(name = "vnfd_lcm_ops_config_scale_vnf_to_level_op_config")
 public class VnfdLcmoperationsconfigurationScalevnftolevelopconfig {
+
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
 
   @JsonProperty("arbitrary-target-levels-supported")
   private Boolean arbitraryTargetLevelsSupported = null;
 
   @JsonProperty("parameter")
   @ElementCollection
+  @CollectionTable(name = "vnfd_lcm_ops_config_scale_vnf_to_level_op_config_parameter")
   @LazyCollection(LazyCollectionOption.FALSE)
   private List<VnfdVdustoragerequirements> parameter = null;
 

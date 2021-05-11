@@ -14,10 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Specifies the L3 protocol data for this virtual link. Shall be present when the associatedLayerProtocol attribute indicates a L3 protocol and shall be absent otherwise.
@@ -40,6 +37,7 @@ public class VirtuallinkprotocoldataSchemaL3protocoldata {
 
   @JsonProperty("ip-allocation-pools")
   @ElementCollection
+  @CollectionTable(name = "virtual_link_protocol_data_schema_l3_pdata_ip_alloc_pools")
   @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> ipAllocationPools = null;
 

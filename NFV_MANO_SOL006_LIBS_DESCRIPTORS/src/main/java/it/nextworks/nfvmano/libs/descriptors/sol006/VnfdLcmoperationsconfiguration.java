@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * This information element is a container for all attributes that affect the invocation of the VNF Lifecycle Management operations, structured by operation.
@@ -17,8 +14,6 @@ import javax.persistence.Id;
 //@Schema(description = "This information element is a container for all attributes that affect the invocation of the VNF Lifecycle Management operations, structured by operation.")
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
-
-// TODO check if works
 
 @Entity
 public class VnfdLcmoperationsconfiguration {
@@ -30,35 +25,43 @@ public class VnfdLcmoperationsconfiguration {
   private String uuid = null;
 
   @JsonProperty("instantiate-vnf-op-config")
-  @Embedded
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_lcm_ops_config_instantiate_vnf_op_config_fk", referencedColumnName = "uuid")
   private VnfdLcmoperationsconfigurationInstantiatevnfopconfig instantiateVnfOpConfig = null;
 
   @JsonProperty("terminate-vnf-op-config")
-  @Embedded
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_lcm_ops_config_terminate_vnf_op_config_fk", referencedColumnName = "uuid")
   private VnfdLcmoperationsconfigurationTerminatevnfopconfig terminateVnfOpConfig = null;
 
   @JsonProperty("scale-vnf-to-level-op-config")
-  @Embedded
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_lcm_ops_config_scale_vnf_to_level_op_config_fk", referencedColumnName = "uuid")
   private VnfdLcmoperationsconfigurationScalevnftolevelopconfig scaleVnfToLevelOpConfig = null;
 
   @JsonProperty("operate-vnf-op-config")
-  @Embedded
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_lcm_ops_config_operate_vnf_op_config_fk", referencedColumnName = "uuid")
   private VnfdLcmoperationsconfigurationOperatevnfopconfig operateVnfOpConfig = null;
 
   @JsonProperty("scale-vnf-op-config")
-  @Embedded
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_lcm_ops_config_scale_vnf_op_config_fk", referencedColumnName = "uuid")
   private VnfdLcmoperationsconfigurationScalevnfopconfig scaleVnfOpConfig = null;
 
   @JsonProperty("change-vnf-flavour-op-config")
-  @Embedded
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_lcm_ops_config_change_vnf_flavour_op_config_fk", referencedColumnName = "uuid")
   private VnfdLcmoperationsconfigurationChangevnfflavouropconfig changeVnfFlavourOpConfig = null;
 
   @JsonProperty("heal-vnf-op-config")
-  @Embedded
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_lcm_ops_config_heal_vnf_op_config_fk", referencedColumnName = "uuid")
   private VnfdLcmoperationsconfigurationHealvnfopconfig healVnfOpConfig = null;
 
   @JsonProperty("change-ext-vnf-connectivity-op-config")
-  @Embedded
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "vnfd_lcm_ops_config_change_ext_vnf_conn_op_config_fk", referencedColumnName = "uuid")
   private VnfdLcmoperationsconfigurationChangeextvnfconnectivityopconfig changeExtVnfConnectivityOpConfig = null;
 
   public VnfdLcmoperationsconfiguration instantiateVnfOpConfig(VnfdLcmoperationsconfigurationInstantiatevnfopconfig instantiateVnfOpConfig) {

@@ -35,6 +35,7 @@ public class MonitoringParameter {
   private String name = null;
 
   @JsonTypeId
+  @JsonProperty("performance-metric")
   private String performanceMetric = null;
 
   public MonitoringParameter collectionPeriod(String collectionPeriod) {

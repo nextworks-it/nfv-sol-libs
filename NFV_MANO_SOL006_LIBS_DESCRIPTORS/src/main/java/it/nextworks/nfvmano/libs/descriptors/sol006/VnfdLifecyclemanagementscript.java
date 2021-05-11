@@ -50,8 +50,6 @@ public class VnfdLifecyclemanagementscript {
   @JsonProperty("script-dsl")
   private String scriptDsl = null;
 
-  // TODO check if the converter gets called
-
   @JsonProperty("event")
   @ElementCollection
   @LazyCollection(LazyCollectionOption.FALSE)

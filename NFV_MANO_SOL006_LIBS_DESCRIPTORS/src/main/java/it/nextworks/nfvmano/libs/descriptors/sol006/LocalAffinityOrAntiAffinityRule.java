@@ -32,6 +32,7 @@ public class LocalAffinityOrAntiAffinityRule {
 
   @JsonProperty("local-affinity-or-anti-affinity-rule")
   @ElementCollection
+  @CollectionTable(name = "local_affinity_or_anti_affinity_rule_loc_aff_or_anti_aff_rule")
   @LazyCollection(LazyCollectionOption.FALSE)
   private List<LocalAffinityOrAntiaffinityRuleItem> localAffinityOrAntiAffinityRule = null;
 

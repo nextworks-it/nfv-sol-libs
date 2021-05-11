@@ -57,6 +57,7 @@ public class VnfdVduIntCpdItem extends VirtualNetworkInterfaceRequirements {
   @JsonProperty("order")
   @ElementCollection
   @LazyCollection(LazyCollectionOption.FALSE)
+  @Column(name = "sort")
   private List<String> order = null;
 
   public VnfdVduIntCpdItem protocol(List<CpdProtocol> protocol) {
