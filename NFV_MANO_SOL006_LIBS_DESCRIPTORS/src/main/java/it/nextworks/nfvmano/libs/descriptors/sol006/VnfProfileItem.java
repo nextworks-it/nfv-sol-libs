@@ -2,11 +2,16 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  * AllOfnsdDfVnfProfileItems
@@ -14,14 +19,17 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class VnfProfileItem extends LocalAffinityOrAntiAffinityRule {
 
-public class VnfProfileItem extends LocalAffinityOrAntiAffinityRule  {
   @JsonProperty("flavour-id")
   private String flavourId = null;
 
   @JsonProperty("affinity-or-anti-affinity-group")
-
-  private List<Object> affinityOrAntiAffinityGroup = null;
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnf_profile_item_fk", referencedColumnName = "uuid")
+  private List<AffinityOrAntiAffinityGroupIdSchema> affinityOrAntiAffinityGroup = null;
 
   @JsonProperty("min-number-of-instances")
   private String minNumberOfInstances = null;
@@ -39,8 +47,10 @@ public class VnfProfileItem extends LocalAffinityOrAntiAffinityRule  {
   private String id = null;
 
   @JsonProperty("virtual-link-connectivity")
-
-  private List<Object> virtualLinkConnectivity = null;
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnf_profile_item_fk", referencedColumnName = "uuid")
+  private List<VirtualLinkConnectivitySchema> virtualLinkConnectivity = null;
 
   public VnfProfileItem flavourId(String flavourId) {
     this.flavourId = flavourId;
@@ -61,14 +71,16 @@ public class VnfProfileItem extends LocalAffinityOrAntiAffinityRule  {
     this.flavourId = flavourId;
   }
 
-  public VnfProfileItem affinityOrAntiAffinityGroup(List<Object> affinityOrAntiAffinityGroup) {
+  public
+  VnfProfileItem affinityOrAntiAffinityGroup(List<AffinityOrAntiAffinityGroupIdSchema> affinityOrAntiAffinityGroup) {
     this.affinityOrAntiAffinityGroup = affinityOrAntiAffinityGroup;
     return this;
   }
 
-  public VnfProfileItem addAffinityOrAntiAffinityGroupItem(Object affinityOrAntiAffinityGroupItem) {
+  public
+  VnfProfileItem addAffinityOrAntiAffinityGroupItem(AffinityOrAntiAffinityGroupIdSchema affinityOrAntiAffinityGroupItem) {
     if (this.affinityOrAntiAffinityGroup == null) {
-      this.affinityOrAntiAffinityGroup = new ArrayList<Object>();
+      this.affinityOrAntiAffinityGroup = new ArrayList<AffinityOrAntiAffinityGroupIdSchema>();
     }
     this.affinityOrAntiAffinityGroup.add(affinityOrAntiAffinityGroupItem);
     return this;
@@ -80,11 +92,11 @@ public class VnfProfileItem extends LocalAffinityOrAntiAffinityRule  {
    **/
   //@Schema(description = "Identifier(s) of the affinity or anti-affinity group(s) the VnfProfile belongs to.")
   
-    public List<Object> getAffinityOrAntiAffinityGroup() {
+    public List<AffinityOrAntiAffinityGroupIdSchema> getAffinityOrAntiAffinityGroup() {
     return affinityOrAntiAffinityGroup;
   }
 
-  public void setAffinityOrAntiAffinityGroup(List<Object> affinityOrAntiAffinityGroup) {
+  public void setAffinityOrAntiAffinityGroup(List<AffinityOrAntiAffinityGroupIdSchema> affinityOrAntiAffinityGroup) {
     this.affinityOrAntiAffinityGroup = affinityOrAntiAffinityGroup;
   }
 
@@ -183,14 +195,14 @@ public class VnfProfileItem extends LocalAffinityOrAntiAffinityRule  {
     this.id = id;
   }
 
-  public VnfProfileItem virtualLinkConnectivity(List<Object> virtualLinkConnectivity) {
+  public VnfProfileItem virtualLinkConnectivity(List<VirtualLinkConnectivitySchema> virtualLinkConnectivity) {
     this.virtualLinkConnectivity = virtualLinkConnectivity;
     return this;
   }
 
-  public VnfProfileItem addVirtualLinkConnectivityItem(Object virtualLinkConnectivityItem) {
+  public VnfProfileItem addVirtualLinkConnectivityItem(VirtualLinkConnectivitySchema virtualLinkConnectivityItem) {
     if (this.virtualLinkConnectivity == null) {
-      this.virtualLinkConnectivity = new ArrayList<Object>();
+      this.virtualLinkConnectivity = new ArrayList<VirtualLinkConnectivitySchema>();
     }
     this.virtualLinkConnectivity.add(virtualLinkConnectivityItem);
     return this;
@@ -202,11 +214,11 @@ public class VnfProfileItem extends LocalAffinityOrAntiAffinityRule  {
    **/
   //@Schema(description = "Defines the connection information of the VNF, it contains connection relationship between a VNF connection point and a NS Virtual Link.")
   
-    public List<Object> getVirtualLinkConnectivity() {
+    public List<VirtualLinkConnectivitySchema> getVirtualLinkConnectivity() {
     return virtualLinkConnectivity;
   }
 
-  public void setVirtualLinkConnectivity(List<Object> virtualLinkConnectivity) {
+  public void setVirtualLinkConnectivity(List<VirtualLinkConnectivitySchema> virtualLinkConnectivity) {
     this.virtualLinkConnectivity = virtualLinkConnectivity;
   }
 

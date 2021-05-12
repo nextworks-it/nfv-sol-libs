@@ -1,12 +1,17 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.*;
 
 /**
  * NsdNsinstantiationlevel
@@ -14,21 +19,32 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class NsdNsinstantiationlevel {
 
-public class NsdNsinstantiationlevel   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("virtual-link-to-level-mapping")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_ns_instantiation_level_fk", referencedColumnName = "uuid")
   private List<VirtualLinkToLevelMappingItem> virtualLinkToLevelMapping = null;
 
   @JsonProperty("vnf-to-level-mapping")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<NsdVnftolevelmapping> vnfToLevelMapping = null;
 
   @JsonProperty("id")
   private String id = null;
 
   @JsonProperty("ns-to-level-mapping")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<NsdNstolevelmapping> nsToLevelMapping = null;
 
   @JsonProperty("description")

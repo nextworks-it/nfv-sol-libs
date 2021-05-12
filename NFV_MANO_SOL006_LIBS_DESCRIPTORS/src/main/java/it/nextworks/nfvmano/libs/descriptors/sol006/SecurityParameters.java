@@ -1,9 +1,12 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Embeddable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 /**
  * SecurityParameters
@@ -11,8 +14,15 @@ import javax.persistence.Embeddable;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
-@Embeddable
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class SecurityParameters {
+
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
 
   @JsonProperty("certificate")
   private String certificate = null;
@@ -104,7 +114,7 @@ public class SecurityParameters {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SecurityParameters {\n");
-    
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    certificate: ").append(toIndentedString(certificate)).append("\n");
     sb.append("    algorithm: ").append(toIndentedString(algorithm)).append("\n");
     sb.append("    signature: ").append(toIndentedString(signature)).append("\n");

@@ -1,12 +1,17 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.*;
 
 /**
  * NsdDf
@@ -14,41 +19,64 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class NsdDf {
 
-public class NsdDf   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("flavour-key")
   private String flavourKey = null;
 
   @JsonProperty("affinity-or-anti-affinity-group")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_df_fk", referencedColumnName = "uuid")
   private List<NsdAffinityOrAntiaffinityGroup> affinityOrAntiAffinityGroup = null;
 
   @JsonProperty("vnf-profile")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_df_fk", referencedColumnName = "uuid")
   private List<VnfProfileItem> vnfProfile = null;
 
   @JsonProperty("virtual-link-profile")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_df_fk", referencedColumnName = "uuid")
   private List<VirtualLinkProfileItem> virtualLinkProfile = null;
 
   @JsonProperty("ns-instantiation-level")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_df_fk", referencedColumnName = "uuid")
   private List<NsdNsinstantiationlevel> nsInstantiationLevel = null;
 
   @JsonProperty("dependencies")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_df_fk", referencedColumnName = "uuid")
   private List<NsdDependencies> dependencies = null;
 
   @JsonProperty("monitored-info")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_df_fk", referencedColumnName = "uuid")
   private List<NsdMonitoredinfo> monitoredInfo = null;
 
   @JsonProperty("scaling-aspect")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_df_fk", referencedColumnName = "uuid")
   private List<NsdScalingaspect> scalingAspect = null;
 
   @JsonProperty("pnf-profile")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_df_fk", referencedColumnName = "uuid")
   private List<NsdPnfprofile> pnfProfile = null;
 
   @JsonProperty("default-instantiation-level")
@@ -58,7 +86,9 @@ public class NsdDf   {
   private String id = null;
 
   @JsonProperty("ns-profile")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_df_fk", referencedColumnName = "uuid")
   private List<NsdNsprofile> nsProfile = null;
 
   public NsdDf flavourKey(String flavourKey) {

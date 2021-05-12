@@ -2,11 +2,13 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.*;
 
 /**
  * AllOfnsdDfVirtualLinkProfileItems
@@ -14,17 +16,22 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
-
+@Entity
 public class VirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRule  {
+
   @JsonProperty("flavour-id")
   private String flavourId = null;
 
   @JsonProperty("min-bitrate-requirements")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "min_bitrate_requirements_fk", referencedColumnName = "uuid")
   private LinkBitrateRequirements minBitrateRequirements = null;
 
   @JsonProperty("affinity-or-anti-affinity-group")
-
-  private List<Object> affinityOrAntiAffinityGroup = null;
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "virtual_link_profile_item_fk", referencedColumnName = "uuid")
+  private List<AffinityOrAntiAffinityGroupIdSchema> affinityOrAntiAffinityGroup = null;
 
   @JsonProperty("virtual-link-desc-id")
   private String virtualLinkDescId = null;
@@ -33,6 +40,8 @@ public class VirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRule  {
   private String id = null;
 
   @JsonProperty("max-bitrate-requirements")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "max_bitrate_requirements_fk", referencedColumnName = "uuid")
   private LinkBitrateRequirements maxBitrateRequirements = null;
 
   public VirtualLinkProfileItem flavourId(String flavourId) {
@@ -74,14 +83,16 @@ public class VirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRule  {
     this.minBitrateRequirements = minBitrateRequirements;
   }
 
-  public VirtualLinkProfileItem affinityOrAntiAffinityGroup(List<Object> affinityOrAntiAffinityGroup) {
+  public VirtualLinkProfileItem
+  affinityOrAntiAffinityGroup(List<AffinityOrAntiAffinityGroupIdSchema> affinityOrAntiAffinityGroup) {
     this.affinityOrAntiAffinityGroup = affinityOrAntiAffinityGroup;
     return this;
   }
 
-  public VirtualLinkProfileItem addAffinityOrAntiAffinityGroupItem(Object affinityOrAntiAffinityGroupItem) {
+  public VirtualLinkProfileItem
+  addAffinityOrAntiAffinityGroupItem(AffinityOrAntiAffinityGroupIdSchema affinityOrAntiAffinityGroupItem) {
     if (this.affinityOrAntiAffinityGroup == null) {
-      this.affinityOrAntiAffinityGroup = new ArrayList<Object>();
+      this.affinityOrAntiAffinityGroup = new ArrayList<AffinityOrAntiAffinityGroupIdSchema>();
     }
     this.affinityOrAntiAffinityGroup.add(affinityOrAntiAffinityGroupItem);
     return this;
@@ -93,11 +104,11 @@ public class VirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRule  {
    **/
   //@Schema(description = "Identifies an affinity or anti-affinity group the VLs instantiated according to the VlProfile belong to.")
   
-    public List<Object> getAffinityOrAntiAffinityGroup() {
+    public List<AffinityOrAntiAffinityGroupIdSchema> getAffinityOrAntiAffinityGroup() {
     return affinityOrAntiAffinityGroup;
   }
 
-  public void setAffinityOrAntiAffinityGroup(List<Object> affinityOrAntiAffinityGroup) {
+  public void setAffinityOrAntiAffinityGroup(List<AffinityOrAntiAffinityGroupIdSchema> affinityOrAntiAffinityGroup) {
     this.affinityOrAntiAffinityGroup = affinityOrAntiAffinityGroup;
   }
 

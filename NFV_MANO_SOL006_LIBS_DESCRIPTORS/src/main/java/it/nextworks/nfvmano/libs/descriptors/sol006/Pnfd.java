@@ -41,8 +41,9 @@ public class Pnfd extends SecurityGroupRule {
   private String provider = null;
 
   @JsonProperty("security")
-  @ElementCollection
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "pnfd_fk", referencedColumnName = "uuid")
   private List<SecurityParameters> security = null;
 
   @JsonProperty("id")

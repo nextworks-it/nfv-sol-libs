@@ -3,8 +3,8 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 
 /**
  * NsdConstituentcpdidVnf
@@ -12,9 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Embeddable
+public class NsdConstituentcpdidVnf {
 
-public class NsdConstituentcpdidVnf   {
   @JsonProperty("vnf")
+  @Embedded
   private NsdConstituentcpdidVnfVnf vnf = null;
 
   public NsdConstituentcpdidVnf vnf(NsdConstituentcpdidVnfVnf vnf) {

@@ -3,7 +3,7 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
+import javax.persistence.Embeddable;
 
 /**
  * NsdLifecyclemanagementscript
@@ -11,8 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Embeddable
+public class NsdLifecyclemanagementscript {
 
-public class NsdLifecyclemanagementscript   {
   @JsonProperty("event")
   private String event = null;
 
@@ -80,7 +81,7 @@ public class NsdLifecyclemanagementscript   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class NsdLifecyclemanagementscript {\n");
-    
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    event: ").append(toIndentedString(event)).append("\n");
     sb.append("    script: ").append(toIndentedString(script)).append("\n");
     sb.append("}");

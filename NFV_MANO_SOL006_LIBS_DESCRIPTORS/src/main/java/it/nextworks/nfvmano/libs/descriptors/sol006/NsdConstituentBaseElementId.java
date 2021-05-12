@@ -1,10 +1,16 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.springframework.validation.annotation.Validated;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Reference to the profile of an NS constituent.
@@ -13,15 +19,25 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
-
+@Entity
 public class NsdConstituentBaseElementId {
+
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("ns-profile")
+  @Embedded
   private NsdConstituentNsProfileSchema nsProfile = null;
 
   @JsonProperty("vnf-profile")
+  @Embedded
   private NsdConstituentVnfProfileSchema vnfProfile = null;
 
   @JsonProperty("pnf-profile")
+  @Embedded
   private NsdConstituentPnfProfileSchema pnfProfile = null;
 
   public NsdConstituentBaseElementId nsProfile(NsdConstituentNsProfileSchema nsProfile) {

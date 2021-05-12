@@ -1,10 +1,14 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-
-
+import javax.persistence.*;
 
 /**
  * NsdMonitoredinfo
@@ -12,15 +16,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class NsdMonitoredinfo {
 
-public class NsdMonitoredinfo   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("monitoring-parameter")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "monitoring_parameter_fk", referencedColumnName = "uuid")
   private NsdMonitoringparameter monitoringParameter = null;
 
   @JsonProperty("id")
   private String id = null;
 
   @JsonProperty("vnf-indicator-info")
+  @Embedded
   private NsdVnfindicatorinfo vnfIndicatorInfo = null;
 
   public NsdMonitoredinfo monitoringParameter(NsdMonitoringparameter monitoringParameter) {

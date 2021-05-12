@@ -1,11 +1,17 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
-import org.springframework.validation.annotation.Validated;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import it.nextworks.nfvmano.libs.common.enums.ScopeEnum;
+import it.nextworks.nfvmano.libs.common.enums.TypeEnum;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * NsdAffinityorantiaffinitygroup
@@ -13,75 +19,18 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
-
+@Entity
 public class NsdAffinityOrAntiaffinityGroup {
-  /**
-   * Specifies the scope of the affinity or anti-affinity relationship e.g. a NFVI node, an NFVI PoP, etc.
-   */
-  public enum ScopeEnum {
-    NFVI_NODE("nfvi-node"),
-    
-    ZONE_GROUP("zone-group"),
-    
-    ZONE("zone"),
-    
-    NFVI_POP("nfvi-pop");
 
-    private String value;
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
 
-    ScopeEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static ScopeEnum fromValue(String text) {
-      for (ScopeEnum b : ScopeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("scope")
   private ScopeEnum scope = null;
 
-  /**
-   * Specifies the type of relationship that the members of the group have: 'affinity' or 'anti-affinity.'
-   */
-  public enum TypeEnum {
-    AFFINITY("affinity"),
-    
-    ANTI_AFFINITY("anti-affinity");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static TypeEnum fromValue(String text) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
   @JsonProperty("type")
   private TypeEnum type = null;
 

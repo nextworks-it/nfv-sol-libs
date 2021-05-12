@@ -1,12 +1,17 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.*;
 
 /**
  * NsdVnffgd
@@ -14,29 +19,43 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class NsdVnffgd {
 
-public class NsdVnffgd   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("cpd-pool")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_vnf_fgd_fk", referencedColumnName = "uuid")
   private List<NsdCpdpool> cpdPool = null;
 
   @JsonProperty("virtual-link-profile-id")
   private String virtualLinkProfileId = null;
 
   @JsonProperty("vnf-profile-id")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> vnfProfileId = null;
 
   @JsonProperty("nfpd")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_vnf_fgd_fk", referencedColumnName = "uuid")
   private List<NsdNfpd> nfpd = null;
 
   @JsonProperty("nested-ns-profile-id")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> nestedNsProfileId = null;
 
   @JsonProperty("pnf-profile-id")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> pnfProfileId = null;
 
   @JsonProperty("id")

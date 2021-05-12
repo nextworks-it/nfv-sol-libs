@@ -2,11 +2,12 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * Nsd
@@ -14,10 +15,12 @@ import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class Nsd extends SecurityParameters {
 
-public class Nsd extends SecurityParameters  {
   @JsonProperty("nested-nsd-id")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> nestedNsdId = null;
 
   @JsonProperty("designer")
@@ -27,16 +30,21 @@ public class Nsd extends SecurityParameters  {
   private String name = null;
 
   @JsonProperty("sapd")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_fk", referencedColumnName = "uuid")
   private List<NsdSapd> sapd = null;
 
   @JsonProperty("lifecycle-management-script")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<NsdLifecyclemanagementscript> lifecycleManagementScript = null;
 
   @JsonProperty("virtual-link-desc")
-
-  private List<Object> virtualLinkDesc = null;
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_fk", referencedColumnName = "uuid")
+  private List<VirtualLinkDesc> virtualLinkDesc = null;
 
   @JsonProperty("invariant-id")
   private String invariantId = null;
@@ -45,23 +53,30 @@ public class Nsd extends SecurityParameters  {
   private String version = null;
 
   @JsonProperty("autoscale-rule")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> autoscaleRule = null;
 
   @JsonProperty("vnffgd")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_fk", referencedColumnName = "uuid")
   private List<NsdVnffgd> vnffgd = null;
 
   @JsonProperty("df")
-
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "nsd_fk", referencedColumnName = "uuid")
   private List<NsdDf> df = null;
 
   @JsonProperty("pnfd-id")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> pnfdId = null;
 
   @JsonProperty("vnfd-id")
-
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<String> vnfdId = null;
 
   @JsonProperty("id")
@@ -186,14 +201,14 @@ public class Nsd extends SecurityParameters  {
     this.lifecycleManagementScript = lifecycleManagementScript;
   }
 
-  public Nsd virtualLinkDesc(List<Object> virtualLinkDesc) {
+  public Nsd virtualLinkDesc(List<VirtualLinkDesc> virtualLinkDesc) {
     this.virtualLinkDesc = virtualLinkDesc;
     return this;
   }
 
-  public Nsd addVirtualLinkDescItem(Object virtualLinkDescItem) {
+  public Nsd addVirtualLinkDescItem(VirtualLinkDesc virtualLinkDescItem) {
     if (this.virtualLinkDesc == null) {
-      this.virtualLinkDesc = new ArrayList<Object>();
+      this.virtualLinkDesc = new ArrayList<VirtualLinkDesc>();
     }
     this.virtualLinkDesc.add(virtualLinkDescItem);
     return this;
@@ -205,11 +220,11 @@ public class Nsd extends SecurityParameters  {
    **/
   //@Schema(description = "Provides the constituent VLDs.")
   
-    public List<Object> getVirtualLinkDesc() {
+    public List<VirtualLinkDesc> getVirtualLinkDesc() {
     return virtualLinkDesc;
   }
 
-  public void setVirtualLinkDesc(List<Object> virtualLinkDesc) {
+  public void setVirtualLinkDesc(List<VirtualLinkDesc> virtualLinkDesc) {
     this.virtualLinkDesc = virtualLinkDesc;
   }
 

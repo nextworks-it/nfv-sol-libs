@@ -3,8 +3,8 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.springframework.validation.annotation.Validated;
-
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 
 /**
  * References a VnfProfile or NsProfile.
@@ -13,12 +13,15 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Embeddable
+public class NsdSecondaryid {
 
-public class NsdSecondaryid   {
   @JsonProperty("secondary-ns-profile")
+  @Embedded
   private NsdSecondaryidSecondarynsprofile secondaryNsProfile = null;
 
   @JsonProperty("secondary-vnf-profile")
+  @Embedded
   private NsdSecondaryidSecondaryvnfprofile secondaryVnfProfile = null;
 
   public NsdSecondaryid secondaryNsProfile(NsdSecondaryidSecondarynsprofile secondaryNsProfile) {

@@ -1,9 +1,14 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.springframework.validation.annotation.Validated;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * The QoS information element specifies quality of service parameters applicable to a VL.
@@ -12,8 +17,15 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Entity
+public class QosSchema {
 
-public class QosSchema   {
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String uuid = null;
+
   @JsonProperty("packet-delay-variation")
   private String packetDelayVariation = null;
 
@@ -127,7 +139,7 @@ public class QosSchema   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class QosSchema {\n");
-    
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    packetDelayVariation: ").append(toIndentedString(packetDelayVariation)).append("\n");
     sb.append("    latency: ").append(toIndentedString(latency)).append("\n");
     sb.append("    priority: ").append(toIndentedString(priority)).append("\n");

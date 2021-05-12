@@ -3,8 +3,8 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 
 /**
  * References a VnfProfile or NsProfile.
@@ -13,12 +13,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
+@Embeddable
+public class NsdPrimaryid {
 
-public class NsdPrimaryid   {
   @JsonProperty("primary-ns-profile")
+  @Embedded
   private NsdPrimaryidPrimarynsprofile primaryNsProfile = null;
 
   @JsonProperty("primary-vnf-profile")
+  @Embedded
   private NsdPrimaryidPrimaryvnfprofile primaryVnfProfile = null;
 
   public NsdPrimaryid primaryNsProfile(NsdPrimaryidPrimarynsprofile primaryNsProfile) {

@@ -3,7 +3,7 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.springframework.validation.annotation.Validated;
+import javax.persistence.Embeddable;
 
 /**
  * NsdCpdorvirtuallinkAssociatedcpdidAssociatedcpdidNsNs
@@ -11,8 +11,9 @@ import org.springframework.validation.annotation.Validated;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-03-09T19:09:38.446+01:00[Europe/Rome]")
 
-
+@Embeddable
 public class NsAssociatedCpdId {
+
   @JsonProperty("nsd-id")
   private String nsdId = null;
 
@@ -80,10 +81,11 @@ public class NsAssociatedCpdId {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class NsdCpdorvirtuallinkAssociatedcpdidAssociatedcpdidNsNs {\n");
-    
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    nsdId: ").append(toIndentedString(nsdId)).append("\n");
     sb.append("    extCpdId: ").append(toIndentedString(extCpdId)).append("\n");
     sb.append("}");
+
     return sb.toString();
   }
 
