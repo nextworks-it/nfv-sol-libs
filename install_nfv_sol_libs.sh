@@ -13,12 +13,12 @@ while getopts ':hd:' option; do
 	esac
 done
 
-
-
 DIR_LIBS=${PWD}
 
 DIR_LIBS_COMMON=NFV_MANO_SOL001_LIBS_COMMON/
 DIR_LIBS_DESC=NFV_MANO_SOL001_LIBS_DESCRIPTORS/
+DIR_LIBS_COMMON_006=NFV_MANO_SOL006_LIBS_COMMON/
+DIR_LIBS_DESC_006=NFV_MANO_SOL006_LIBS_DESCRIPTORS/
 
 mvn_install() {
 	cd "$1"
@@ -38,6 +38,10 @@ cd $DIR_LIBS
 mvn_install $DIR_LIBS_COMMON "NFV libs common"
 cd ..
 mvn_install $DIR_LIBS_DESC "NFV libs descriptors"
+cd ..
+mvn_install $DIR_LIBS_COMMON_006 "NVF libs 006 common"
+cd ..
+mvn_install $DIR_LIBS_DESC_006 "NFV libs 006 descriptors"
 cd ..
 
 echo "All NFV SOL libs installed!"
