@@ -28,6 +28,7 @@ public class Vnfd extends SecurityGroupRule {
   private List<ExtCpd> extCpd = null;
 
   @JsonProperty("id")
+  @Column(unique = true)
   private String id = null;
 
   @JsonProperty("sw-image-desc")

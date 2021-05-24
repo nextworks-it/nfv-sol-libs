@@ -47,6 +47,7 @@ public class Pnfd extends SecurityGroupRule {
   private List<SecurityParameters> security = null;
 
   @JsonProperty("id")
+  @Column(unique = true)
   private String id = null;
 
   @JsonProperty("geographical-location-info")

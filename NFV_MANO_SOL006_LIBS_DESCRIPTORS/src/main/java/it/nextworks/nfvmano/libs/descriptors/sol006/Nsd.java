@@ -80,6 +80,7 @@ public class Nsd extends SecurityParameters {
   private List<String> vnfdId = null;
 
   @JsonProperty("id")
+  @Column(unique = true)
   private String id = null;
 
   public Nsd nestedNsdId(List<String> nestedNsdId) {
