@@ -29,7 +29,7 @@ public class VirtualNetworkInterfaceRequirementSchema {
   @ElementCollection
   @CollectionTable(name = "virtual_network_interface_req_schema_network_interface_req")
   @LazyCollection(LazyCollectionOption.FALSE)
-  private List<VnfdVdustoragerequirements> networkInterfaceRequirements = null;
+  private List<NetworkInterfaceRequirementsSchema> networkInterfaceRequirements = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -40,12 +40,12 @@ public class VirtualNetworkInterfaceRequirementSchema {
   @JsonProperty("description")
   private String description = null;
 
-  public VirtualNetworkInterfaceRequirementSchema networkInterfaceRequirements(List<VnfdVdustoragerequirements> networkInterfaceRequirements) {
+  public VirtualNetworkInterfaceRequirementSchema networkInterfaceRequirements(List<NetworkInterfaceRequirementsSchema> networkInterfaceRequirements) {
     this.networkInterfaceRequirements = networkInterfaceRequirements;
     return this;
   }
 
-  public VirtualNetworkInterfaceRequirementSchema addNetworkInterfaceRequirementsItem(VnfdVdustoragerequirements networkInterfaceRequirementsItem) {
+  public VirtualNetworkInterfaceRequirementSchema addNetworkInterfaceRequirementsItem(NetworkInterfaceRequirementsSchema networkInterfaceRequirementsItem) {
     if (this.networkInterfaceRequirements == null) {
       this.networkInterfaceRequirements = new ArrayList<>();
     }
@@ -58,11 +58,11 @@ public class VirtualNetworkInterfaceRequirementSchema {
    * @return networkInterfaceRequirements
    **/
 
-    public List<VnfdVdustoragerequirements> getNetworkInterfaceRequirements() {
+    public List<NetworkInterfaceRequirementsSchema> getNetworkInterfaceRequirements() {
     return networkInterfaceRequirements;
   }
 
-  public void setNetworkInterfaceRequirements(List<VnfdVdustoragerequirements> networkInterfaceRequirements) {
+  public void setNetworkInterfaceRequirements(List<NetworkInterfaceRequirementsSchema> networkInterfaceRequirements) {
     this.networkInterfaceRequirements = networkInterfaceRequirements;
   }
 

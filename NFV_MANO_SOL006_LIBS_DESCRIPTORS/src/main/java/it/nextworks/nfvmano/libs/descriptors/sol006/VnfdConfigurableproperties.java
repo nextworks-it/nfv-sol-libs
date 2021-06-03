@@ -37,7 +37,7 @@ public class VnfdConfigurableproperties {
   @JsonProperty("additional-configurable-property")
   @ElementCollection
   @LazyCollection(LazyCollectionOption.FALSE)
-  private List<VnfdVdustoragerequirements> additionalConfigurableProperty = null;
+  private List<AdditionalConfigurablePropertySchema> additionalConfigurableProperty = null;
 
   public VnfdConfigurableproperties isAutoScalableEnabled(Boolean isAutoScalableEnabled) {
     this.isAutoScalableEnabled = isAutoScalableEnabled;
@@ -77,14 +77,14 @@ public class VnfdConfigurableproperties {
     this.isAutoHealEnabled = isAutoHealEnabled;
   }
 
-  public VnfdConfigurableproperties additionalConfigurableProperty(List<VnfdVdustoragerequirements> additionalConfigurableProperty) {
+  public VnfdConfigurableproperties additionalConfigurableProperty(List<AdditionalConfigurablePropertySchema> additionalConfigurableProperty) {
     this.additionalConfigurableProperty = additionalConfigurableProperty;
     return this;
   }
 
-  public VnfdConfigurableproperties addAdditionalConfigurablePropertyItem(VnfdVdustoragerequirements additionalConfigurablePropertyItem) {
+  public VnfdConfigurableproperties addAdditionalConfigurablePropertyItem(AdditionalConfigurablePropertySchema additionalConfigurablePropertyItem) {
     if (this.additionalConfigurableProperty == null) {
-      this.additionalConfigurableProperty = new ArrayList<VnfdVdustoragerequirements>();
+      this.additionalConfigurableProperty = new ArrayList<AdditionalConfigurablePropertySchema>();
     }
     this.additionalConfigurableProperty.add(additionalConfigurablePropertyItem);
     return this;
@@ -96,11 +96,11 @@ public class VnfdConfigurableproperties {
    **/
   //@Schema(description = "It provides VNF specific configurable properties that can be modified using the ModifyVnfConfiguration operation.")
 
-    public List<VnfdVdustoragerequirements> getAdditionalConfigurableProperty() {
+    public List<AdditionalConfigurablePropertySchema> getAdditionalConfigurableProperty() {
     return additionalConfigurableProperty;
   }
 
-  public void setAdditionalConfigurableProperty(List<VnfdVdustoragerequirements> additionalConfigurableProperty) {
+  public void setAdditionalConfigurableProperty(List<AdditionalConfigurablePropertySchema> additionalConfigurableProperty) {
     this.additionalConfigurableProperty = additionalConfigurableProperty;
   }
 
