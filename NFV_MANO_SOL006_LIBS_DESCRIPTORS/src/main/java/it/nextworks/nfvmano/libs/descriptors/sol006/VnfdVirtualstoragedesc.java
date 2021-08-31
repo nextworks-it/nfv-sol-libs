@@ -8,14 +8,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.nextworks.nfvmano.libs.common.enums.DeviceBusEnum;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * VnfdVirtualstoragedesc
@@ -51,6 +49,17 @@ public class VnfdVirtualstoragedesc {
 
   @JsonProperty("id")
   private String id = null;
+
+  @JsonProperty("description")
+  private String description = null;
+
+  @JsonProperty("disk-io-quota")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "disk_io_quota_fk", referencedColumnName = "uuid")
+  private DiskIOQuota diskIOQuota = null;
+
+  @JsonProperty("device-bus")
+  private DeviceBusEnum deviceBus = null;
 
   public VnfdVirtualstoragedesc typeOfStorage(String typeOfStorage) {
     this.typeOfStorage = typeOfStorage;
@@ -174,6 +183,32 @@ public class VnfdVirtualstoragedesc {
     this.id = id;
   }
 
+  public VnfdVirtualstoragedesc description(String description) {
+      this.description = description;
+      return this;
+  }
+
+  public String getDescription() { return description; }
+
+  public void setDescription(String description) { this.description = description; }
+
+  public VnfdVirtualstoragedesc diskIOQuota(DiskIOQuota diskIOQuota) {
+      this.diskIOQuota = diskIOQuota;
+      return this;
+  }
+
+  public DiskIOQuota getDiskIOQuota() { return diskIOQuota; }
+
+  public void setDiskIOQuota(DiskIOQuota diskIOQuota) { this.diskIOQuota = diskIOQuota; }
+
+  public VnfdVirtualstoragedesc deviceBus(DeviceBusEnum deviceBus) {
+      this.deviceBus = deviceBus;
+      return this;
+  }
+
+  public DeviceBusEnum getDeviceBus() { return deviceBus; }
+
+  public void setDeviceBus(DeviceBusEnum deviceBus) { this.deviceBus = deviceBus; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -185,16 +220,20 @@ public class VnfdVirtualstoragedesc {
     }
     VnfdVirtualstoragedesc vnfdVirtualstoragedesc = (VnfdVirtualstoragedesc) o;
     return Objects.equals(this.typeOfStorage, vnfdVirtualstoragedesc.typeOfStorage) &&
-        Objects.equals(this.rdmaEnabled, vnfdVirtualstoragedesc.rdmaEnabled) &&
-        Objects.equals(this.sizeOfStorage, vnfdVirtualstoragedesc.sizeOfStorage) &&
-        Objects.equals(this.vduStorageRequirements, vnfdVirtualstoragedesc.vduStorageRequirements) &&
-        Objects.equals(this.swImageDesc, vnfdVirtualstoragedesc.swImageDesc) &&
-        Objects.equals(this.id, vnfdVirtualstoragedesc.id);
+            Objects.equals(this.rdmaEnabled, vnfdVirtualstoragedesc.rdmaEnabled) &&
+            Objects.equals(this.sizeOfStorage, vnfdVirtualstoragedesc.sizeOfStorage) &&
+            Objects.equals(this.vduStorageRequirements, vnfdVirtualstoragedesc.vduStorageRequirements) &&
+            Objects.equals(this.swImageDesc, vnfdVirtualstoragedesc.swImageDesc) &&
+            Objects.equals(this.id, vnfdVirtualstoragedesc.id) &&
+            Objects.equals(this.description, vnfdVirtualstoragedesc.description) &&
+            Objects.equals(this.diskIOQuota, vnfdVirtualstoragedesc.diskIOQuota) &&
+            Objects.equals(this.deviceBus, vnfdVirtualstoragedesc.deviceBus);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(typeOfStorage, rdmaEnabled, sizeOfStorage, vduStorageRequirements, swImageDesc, id);
+    return Objects.hash(typeOfStorage, rdmaEnabled, sizeOfStorage, vduStorageRequirements, swImageDesc,
+            id, description, diskIOQuota, deviceBus);
   }
 
   @Override
@@ -208,6 +247,9 @@ public class VnfdVirtualstoragedesc {
     sb.append("    vduStorageRequirements: ").append(toIndentedString(vduStorageRequirements)).append("\n");
     sb.append("    swImageDesc: ").append(toIndentedString(swImageDesc)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    diskIOQuota: ").append(toIndentedString(diskIOQuota)).append("\n");
+    sb.append("    deviceBus: ").append(toIndentedString(deviceBus)).append("\n");
     sb.append("}");
     return sb.toString();
   }
