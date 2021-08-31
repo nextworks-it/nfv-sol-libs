@@ -47,6 +47,11 @@ public class IntVirtualLinkDesc {
     @JoinColumn(name = "int_virtual_link_desc_fk", referencedColumnName = "uuid")
     private List<MonitoringParameterSchema> monitoringParameters = null;
 
+    @JsonProperty("provider-network")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "provider_network_fk", referencedColumnName = "uuid")
+    private ProviderNetwork providerNetwork = null;
+
     public IntVirtualLinkDesc id(String id) {
         this.id = id;
         return this;
@@ -129,6 +134,15 @@ public class IntVirtualLinkDesc {
         this.monitoringParameters = monitoringParameters;
     }
 
+    public IntVirtualLinkDesc providerNetwork(ProviderNetwork providerNetwork) {
+        this.providerNetwork = providerNetwork;
+        return this;
+    }
+
+    public ProviderNetwork getProviderNetwork() { return providerNetwork; }
+
+    public void setProviderNetwork(ProviderNetwork providerNetwork) { this.providerNetwork = providerNetwork; }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if(this == o)
@@ -143,12 +157,14 @@ public class IntVirtualLinkDesc {
                 Objects.equals(this.connectivityTypeSchema, intVirtualLinkDesc.connectivityTypeSchema) &&
                 Objects.equals(this.testAccess, intVirtualLinkDesc.testAccess) &&
                 Objects.equals(this.description, intVirtualLinkDesc.description) &&
-                Objects.equals(this.monitoringParameters, intVirtualLinkDesc.monitoringParameters);
+                Objects.equals(this.monitoringParameters, intVirtualLinkDesc.monitoringParameters) &&
+                Objects.equals(this.providerNetwork, intVirtualLinkDesc.providerNetwork);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, flavourSchemas, connectivityTypeSchema, testAccess, description, monitoringParameters);
+        return Objects.hash(id, flavourSchemas, connectivityTypeSchema, testAccess, description,
+                monitoringParameters, providerNetwork);
     }
 
     @Override
@@ -163,6 +179,7 @@ public class IntVirtualLinkDesc {
         sb.append("    testAccess: ").append(toIndentedString(testAccess)).append("\n");
         sb.append("    description: ").append(toIndentedString(description)).append("\n");
         sb.append("    monitoringParameters: ").append(toIndentedString(monitoringParameters)).append("\n");
+        sb.append("    providerNetwork: ").append(toIndentedString(providerNetwork)).append("\n");
         sb.append("}");
 
         return sb.toString();
