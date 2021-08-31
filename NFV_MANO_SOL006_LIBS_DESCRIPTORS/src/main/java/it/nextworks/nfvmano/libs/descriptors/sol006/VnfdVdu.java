@@ -78,6 +78,30 @@ public class VnfdVdu {
   @JsonProperty("name")
   private String name = null;
 
+  @JsonProperty("alarm")
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_vdu_fk", referencedColumnName = "uuid")
+  private List<Alarm> alarm = null;
+
+  @JsonProperty("alternative-sw-image-desc")
+  @ElementCollection
+  @LazyCollection(LazyCollectionOption.FALSE)
+  private List<String> alternativeSwImageDesc = null;
+
+  @JsonProperty("cloud-init")
+  private String cloudInit = null;
+
+  @JsonProperty("cloud-init-file")
+  private String cloudInitFile = null;
+
+  @JsonProperty("pdu-type")
+  private String pduType = null;
+
+  @JsonProperty("supplemental-boot-data")
+  @Embedded
+  private SupplementalBootData supplementalBootData = null;
+
   public VnfdVdu virtualStorageDesc(List<String> virtualStorageDesc) {
     this.virtualStorageDesc = virtualStorageDesc;
     return this;
@@ -354,6 +378,79 @@ public class VnfdVdu {
     this.name = name;
   }
 
+  public VnfdVdu alarm(List<Alarm> alarm) {
+      this.alarm = alarm;
+      return this;
+  }
+
+  public VnfdVdu addAlarmItem(Alarm alarm) {
+      if(this.alarm == null)
+        this.alarm = new ArrayList<>();
+
+      this.alarm.add(alarm);
+      return this;
+  }
+
+  public List<Alarm> getAlarm() { return alarm; }
+
+  public void setAlarm(List<Alarm> alarm) { this.alarm = alarm; }
+
+  public VnfdVdu alternativeSwImageDesc(List<String> alternativeSwImageDesc) {
+      this.alternativeSwImageDesc = alternativeSwImageDesc;
+      return this;
+  }
+
+  public VnfdVdu addAlternativeSwImageDescItem(String alternativeSwImageDesc) {
+      if(this.alternativeSwImageDesc == null)
+        this.alternativeSwImageDesc = new ArrayList<>();
+
+      this.alternativeSwImageDesc.add(alternativeSwImageDesc);
+      return this;
+  }
+
+  public List<String> getAlternativeSwImageDesc() { return alternativeSwImageDesc; }
+
+  public void setAlternativeSwImageDesc(List<String> alternativeSwImageDesc) {
+    this.alternativeSwImageDesc = alternativeSwImageDesc;
+  }
+
+  public VnfdVdu cloudInit(String cloudInit) {
+      this.cloudInit = cloudInit;
+      return this;
+  }
+
+  public String getCloudInit() { return cloudInit; }
+
+  public void setCloudInit(String cloudInit) { this.cloudInit = cloudInit; }
+
+  public VnfdVdu cloudInitFile(String cloudInitFile) {
+      this.cloudInitFile = cloudInitFile;
+      return this;
+  }
+
+  public String getCloudInitFile() { return cloudInitFile; }
+
+  public void setCloudInitFile(String cloudInitFile) { this.cloudInitFile = cloudInitFile; }
+
+  public VnfdVdu pduType(String pduType) {
+      this.pduType = pduType;
+      return this;
+  }
+
+  public String getPduType() { return pduType; }
+
+  public void setPduType(String pduType) { this.pduType = pduType; }
+
+  public VnfdVdu supplementalBootData(SupplementalBootData supplementalBootData) {
+      this.supplementalBootData = supplementalBootData;
+      return this;
+  }
+
+  public SupplementalBootData getSupplementalBootData() { return supplementalBootData; }
+
+  public void setSupplementalBootData(SupplementalBootData supplementalBootData) {
+    this.supplementalBootData = supplementalBootData;
+  }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -365,22 +462,30 @@ public class VnfdVdu {
     }
     VnfdVdu vnfdVdu = (VnfdVdu) o;
     return Objects.equals(this.virtualStorageDesc, vnfdVdu.virtualStorageDesc) &&
-        Objects.equals(this.bootData, vnfdVdu.bootData) &&
-        Objects.equals(this.description, vnfdVdu.description) &&
-        Objects.equals(this.virtualComputeDesc, vnfdVdu.virtualComputeDesc) &&
-        Objects.equals(this.intCpd, vnfdVdu.intCpd) &&
-        Objects.equals(this.configurableProperties, vnfdVdu.configurableProperties) &&
-        Objects.equals(this.id, vnfdVdu.id) &&
-        Objects.equals(this.bootOrder, vnfdVdu.bootOrder) &&
-        Objects.equals(this.nfviConstraint, vnfdVdu.nfviConstraint) &&
-        Objects.equals(this.monitoringParameter, vnfdVdu.monitoringParameter) &&
-        Objects.equals(this.swImageDesc, vnfdVdu.swImageDesc) &&
-        Objects.equals(this.name, vnfdVdu.name);
-  }
+            Objects.equals(this.bootData, vnfdVdu.bootData) &&
+            Objects.equals(this.description, vnfdVdu.description) &&
+            Objects.equals(this.virtualComputeDesc, vnfdVdu.virtualComputeDesc) &&
+            Objects.equals(this.intCpd, vnfdVdu.intCpd) &&
+            Objects.equals(this.configurableProperties, vnfdVdu.configurableProperties) &&
+            Objects.equals(this.id, vnfdVdu.id) &&
+            Objects.equals(this.bootOrder, vnfdVdu.bootOrder) &&
+            Objects.equals(this.nfviConstraint, vnfdVdu.nfviConstraint) &&
+            Objects.equals(this.monitoringParameter, vnfdVdu.monitoringParameter) &&
+            Objects.equals(this.swImageDesc, vnfdVdu.swImageDesc) &&
+            Objects.equals(this.name, vnfdVdu.name) &&
+            Objects.equals(this.alarm, vnfdVdu.alarm) &&
+            Objects.equals(this.alternativeSwImageDesc, vnfdVdu.alternativeSwImageDesc) &&
+            Objects.equals(this.cloudInit, vnfdVdu.cloudInit) &&
+            Objects.equals(this.cloudInitFile, vnfdVdu.cloudInitFile) &&
+            Objects.equals(this.pduType, vnfdVdu.pduType) &&
+            Objects.equals(this.supplementalBootData, vnfdVdu.supplementalBootData);
+    }
 
   @Override
   public int hashCode() {
-    return Objects.hash(virtualStorageDesc, bootData, description, virtualComputeDesc, intCpd, configurableProperties, id, bootOrder, nfviConstraint, monitoringParameter, swImageDesc, name);
+    return Objects.hash(virtualStorageDesc, bootData, description, virtualComputeDesc, intCpd, configurableProperties,
+            id, bootOrder, nfviConstraint, monitoringParameter, swImageDesc, name, alarm, alternativeSwImageDesc,
+            cloudInit, cloudInitFile, pduType, supplementalBootData);
   }
 
   @Override
@@ -400,6 +505,12 @@ public class VnfdVdu {
     sb.append("    monitoringParameter: ").append(toIndentedString(monitoringParameter)).append("\n");
     sb.append("    swImageDesc: ").append(toIndentedString(swImageDesc)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    alarm: ").append(toIndentedString(alarm)).append("\n");
+    sb.append("    alternativeSwImageDesc: ").append(toIndentedString(alternativeSwImageDesc)).append("\n");
+    sb.append("    cloudInit: ").append(toIndentedString(cloudInit)).append("\n");
+    sb.append("    cloudInitFile: ").append(toIndentedString(cloudInitFile)).append("\n");
+    sb.append("    pduType: ").append(toIndentedString(pduType)).append("\n");
+    sb.append("    supplementalBootData: ").append(toIndentedString(supplementalBootData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

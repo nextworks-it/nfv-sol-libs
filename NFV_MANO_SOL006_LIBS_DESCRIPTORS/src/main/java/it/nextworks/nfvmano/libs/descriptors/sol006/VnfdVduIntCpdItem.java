@@ -2,6 +2,7 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import it.nextworks.nfvmano.libs.common.enums.PortSecurityDisableStrategyEnum;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -59,6 +60,12 @@ public class VnfdVduIntCpdItem extends VirtualNetworkInterfaceRequirements {
   @LazyCollection(LazyCollectionOption.FALSE)
   @Column(name = "sort")
   private List<String> order = null;
+
+  @JsonProperty("port-security-enabled")
+  private Boolean portSecurityEnabled = null;
+
+  @JsonProperty("port-security-disable-strategy")
+  private PortSecurityDisableStrategyEnum portSecurityDisableStrategy = null;
 
   public VnfdVduIntCpdItem protocol(List<CpdProtocol> protocol) {
     this.protocol = protocol;
@@ -291,6 +298,25 @@ public class VnfdVduIntCpdItem extends VirtualNetworkInterfaceRequirements {
     this.order = order;
   }
 
+  public VnfdVduIntCpdItem portSecurityEnabled(Boolean portSecurityEnabled) {
+      this.portSecurityEnabled = portSecurityEnabled;
+      return this;
+  }
+
+  public Boolean getPortSecurityEnabled() { return portSecurityEnabled; }
+
+  public void setPortSecurityEnabled(Boolean portSecurityEnabled) { this.portSecurityEnabled = portSecurityEnabled; }
+
+  public VnfdVduIntCpdItem portSecurityDisableStrategy(PortSecurityDisableStrategyEnum portSecurityDisableStrategy) {
+      this.portSecurityDisableStrategy = portSecurityDisableStrategy;
+      return this;
+  }
+
+  public PortSecurityDisableStrategyEnum getPortSecurityDisableStrategy() { return portSecurityDisableStrategy; }
+
+  public void setPortSecurityDisableStrategy(PortSecurityDisableStrategyEnum portSecurityDisableStrategy) {
+    this.portSecurityDisableStrategy = portSecurityDisableStrategy;
+  }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -302,22 +328,26 @@ public class VnfdVduIntCpdItem extends VirtualNetworkInterfaceRequirements {
     }
     VnfdVduIntCpdItem allOfvnfdVduIntCpdItems = (VnfdVduIntCpdItem) o;
     return Objects.equals(this.protocol, allOfvnfdVduIntCpdItems.protocol) &&
-        Objects.equals(this.description, allOfvnfdVduIntCpdItems.description) &&
-        Objects.equals(this.layerProtocol, allOfvnfdVduIntCpdItems.layerProtocol) &&
-        Objects.equals(this.trunkMode, allOfvnfdVduIntCpdItems.trunkMode) &&
-        Objects.equals(this.role, allOfvnfdVduIntCpdItems.role) &&
-        Objects.equals(this.id, allOfvnfdVduIntCpdItems.id) &&
-        Objects.equals(this.intVirtualLinkDesc, allOfvnfdVduIntCpdItems.intVirtualLinkDesc) &&
-        Objects.equals(this.securityGroupRuleId, allOfvnfdVduIntCpdItems.securityGroupRuleId) &&
-        Objects.equals(this.nicioRequirements, allOfvnfdVduIntCpdItems.nicioRequirements) &&
-        Objects.equals(this.bitrateRequirement, allOfvnfdVduIntCpdItems.bitrateRequirement) &&
-        Objects.equals(this.order, allOfvnfdVduIntCpdItems.order) &&
-        super.equals(o);
+            Objects.equals(this.description, allOfvnfdVduIntCpdItems.description) &&
+            Objects.equals(this.layerProtocol, allOfvnfdVduIntCpdItems.layerProtocol) &&
+            Objects.equals(this.trunkMode, allOfvnfdVduIntCpdItems.trunkMode) &&
+            Objects.equals(this.role, allOfvnfdVduIntCpdItems.role) &&
+            Objects.equals(this.id, allOfvnfdVduIntCpdItems.id) &&
+            Objects.equals(this.intVirtualLinkDesc, allOfvnfdVduIntCpdItems.intVirtualLinkDesc) &&
+            Objects.equals(this.securityGroupRuleId, allOfvnfdVduIntCpdItems.securityGroupRuleId) &&
+            Objects.equals(this.nicioRequirements, allOfvnfdVduIntCpdItems.nicioRequirements) &&
+            Objects.equals(this.bitrateRequirement, allOfvnfdVduIntCpdItems.bitrateRequirement) &&
+            Objects.equals(this.order, allOfvnfdVduIntCpdItems.order) &&
+            Objects.equals(this.portSecurityEnabled, allOfvnfdVduIntCpdItems.portSecurityEnabled) &&
+            Objects.equals(this.portSecurityDisableStrategy, allOfvnfdVduIntCpdItems.portSecurityDisableStrategy) &&
+            super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(protocol, description, layerProtocol, trunkMode, role, id, intVirtualLinkDesc, securityGroupRuleId, nicioRequirements, bitrateRequirement, order, super.hashCode());
+    return Objects.hash(protocol, description, layerProtocol, trunkMode, role, id, intVirtualLinkDesc,
+            securityGroupRuleId, nicioRequirements, bitrateRequirement, order, portSecurityEnabled,
+            portSecurityDisableStrategy, super.hashCode());
   }
 
   @Override
@@ -336,6 +366,8 @@ public class VnfdVduIntCpdItem extends VirtualNetworkInterfaceRequirements {
     sb.append("    nicioRequirements: ").append(toIndentedString(nicioRequirements)).append("\n");
     sb.append("    bitrateRequirement: ").append(toIndentedString(bitrateRequirement)).append("\n");
     sb.append("    order: ").append(toIndentedString(order)).append("\n");
+    sb.append("    portSecurityEnabled: ").append(toIndentedString(portSecurityEnabled)).append("\n");
+    sb.append("    portSecurityDisableStrategy: ").append(toIndentedString(portSecurityDisableStrategy)).append("\n");
     sb.append("}");
     return sb.toString();
   }
