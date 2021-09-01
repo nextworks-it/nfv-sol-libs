@@ -2,6 +2,7 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import it.nextworks.nfvmano.libs.common.enums.PortSecurityDisableStrategyEnum;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -26,6 +27,9 @@ public class ExtCpd {
     @JsonProperty("int-cpd")
     @Embedded
     private IntCpdSchema intCpdSchema = null;
+
+    @JsonProperty("k8s-cluster-net")
+    private String k8sClusterNet = null;
 
     @JsonProperty("virtual-network-interface-requirement")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -61,6 +65,12 @@ public class ExtCpd {
 
     @JsonProperty("security-group-rule-id")
     private String securityGroupRuleId = null;
+
+    @JsonProperty("port-security-enabled")
+    private Boolean portSecurityEnabled = null;
+
+    @JsonProperty("port-security-disable-strategy")
+    private PortSecurityDisableStrategyEnum portSecurityDisableStrategy = null;
 
     public ExtCpd intVirtualLinkDesc(String intVirtualLinkDesc) {
         this.intVirtualLinkDesc = intVirtualLinkDesc;
@@ -194,6 +204,35 @@ public class ExtCpd {
 
     public void setSecurityGroupRuleId(String securityGroupRuleId) { this.securityGroupRuleId = securityGroupRuleId; }
 
+    public ExtCpd k8sClusterNet(String k8sClusterNet) {
+        this.k8sClusterNet = k8sClusterNet;
+        return this;
+    }
+
+    public String getK8sClusterNet() { return k8sClusterNet; }
+
+    public void setK8sClusterNet(String k8sClusterNet) { this.k8sClusterNet = k8sClusterNet; }
+
+    public ExtCpd portSecurityEnabled(Boolean portSecurityEnabled) {
+        this.portSecurityEnabled = portSecurityEnabled;
+        return this;
+    }
+
+    public Boolean getPortSecurityEnabled() { return portSecurityEnabled; }
+
+    public void setPortSecurityEnabled(Boolean portSecurityEnabled) { this.portSecurityEnabled = portSecurityEnabled; }
+
+    public ExtCpd portSecurityDisableStrategy(PortSecurityDisableStrategyEnum portSecurityDisableStrategy) {
+        this.portSecurityDisableStrategy = portSecurityDisableStrategy;
+        return this;
+    }
+
+    public PortSecurityDisableStrategyEnum getPortSecurityDisableStrategy() { return portSecurityDisableStrategy; }
+
+    public void setPortSecurityDisableStrategy(PortSecurityDisableStrategyEnum portSecurityDisableStrategy) {
+        this.portSecurityDisableStrategy = portSecurityDisableStrategy;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if(this == o)
@@ -213,14 +252,17 @@ public class ExtCpd {
                 Objects.equals(this.description, extCpd.description) &&
                 Objects.equals(this.protocolSchemas, extCpd.protocolSchemas) &&
                 Objects.equals(this.trunkMode, extCpd.trunkMode) &&
-                Objects.equals(this.securityGroupRuleId, extCpd.securityGroupRuleId);
+                Objects.equals(this.securityGroupRuleId, extCpd.securityGroupRuleId) &&
+                Objects.equals(this.k8sClusterNet, extCpd.k8sClusterNet) &&
+                Objects.equals(this.portSecurityEnabled, extCpd.portSecurityEnabled) &&
+                Objects.equals(this.portSecurityDisableStrategy, extCpd.portSecurityDisableStrategy);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(intVirtualLinkDesc, intCpdSchema, virtualNetworkInterfaceRequirementSchemas,
                 nicIORequirements, id, layerProtocols, role, description, protocolSchemas, trunkMode,
-                securityGroupRuleId);
+                securityGroupRuleId, k8sClusterNet, portSecurityEnabled, portSecurityDisableStrategy);
     }
 
     @Override
@@ -240,7 +282,10 @@ public class ExtCpd {
         sb.append("    description: ").append(toIndentedString(description)).append("\n");
         sb.append("    protocolSchemas: ").append(toIndentedString(protocolSchemas)).append("\n");
         sb.append("    trunkMode: ").append(toIndentedString(trunkMode)).append("\n");
-        sb.append("    securityGroupRuleId: ").append(securityGroupRuleId).append("\n");
+        sb.append("    securityGroupRuleId: ").append(toIndentedString(securityGroupRuleId)).append("\n");
+        sb.append("    k8sClusterNet: ").append(toIndentedString(k8sClusterNet)).append("\n");
+        sb.append("    portSecurityEnabled: ").append(toIndentedString(portSecurityEnabled)).append("\n");
+        sb.append("    portSecurityDisableStrategy: ").append(toIndentedString(portSecurityDisableStrategy)).append("\n");
         sb.append("}");
 
         return sb.toString();
