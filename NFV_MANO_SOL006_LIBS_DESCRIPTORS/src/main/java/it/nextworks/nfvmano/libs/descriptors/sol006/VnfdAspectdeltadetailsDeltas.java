@@ -39,6 +39,12 @@ public class VnfdAspectdeltadetailsDeltas {
   @JoinColumn(name = "vnfd_aspect_delta_details_deltas_fk", referencedColumnName = "uuid")
   private List<VnfdAspectdeltadetailsVdudelta> vduDelta = null;
 
+  @JsonProperty("kdu-resource-delta")
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_aspect_delta_details_deltas_fk", referencedColumnName = "uuid")
+  private List<KduResourceDelta> kduResourceDelta = null;
+
   @JsonProperty("id")
   private String id = null;
 
@@ -115,6 +121,22 @@ public class VnfdAspectdeltadetailsDeltas {
     this.id = id;
   }
 
+  public VnfdAspectdeltadetailsDeltas kduResourceDelta(List<KduResourceDelta> kduResourceDelta) {
+      this.kduResourceDelta = kduResourceDelta;
+      return this;
+  }
+
+  public VnfdAspectdeltadetailsDeltas addKduResourceDeltaItem(KduResourceDelta kduResourceDelta) {
+      if(this.kduResourceDelta == null)
+        this.kduResourceDelta = new ArrayList<>();
+
+      this.kduResourceDelta.add(kduResourceDelta);
+      return this;
+  }
+
+  public List<KduResourceDelta> getKduResourceDelta() { return kduResourceDelta; }
+
+  public void setKduResourceDelta(List<KduResourceDelta> kduResourceDelta) { this.kduResourceDelta = kduResourceDelta; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -126,13 +148,14 @@ public class VnfdAspectdeltadetailsDeltas {
     }
     VnfdAspectdeltadetailsDeltas vnfdAspectdeltadetailsDeltas = (VnfdAspectdeltadetailsDeltas) o;
     return Objects.equals(this.virtualLinkBitRateDelta, vnfdAspectdeltadetailsDeltas.virtualLinkBitRateDelta) &&
-        Objects.equals(this.vduDelta, vnfdAspectdeltadetailsDeltas.vduDelta) &&
-        Objects.equals(this.id, vnfdAspectdeltadetailsDeltas.id);
+            Objects.equals(this.vduDelta, vnfdAspectdeltadetailsDeltas.vduDelta) &&
+            Objects.equals(this.id, vnfdAspectdeltadetailsDeltas.id) &&
+            Objects.equals(this.kduResourceDelta, vnfdAspectdeltadetailsDeltas.kduResourceDelta);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(virtualLinkBitRateDelta, vduDelta, id);
+    return Objects.hash(virtualLinkBitRateDelta, vduDelta, id, kduResourceDelta);
   }
 
   @Override
@@ -143,6 +166,7 @@ public class VnfdAspectdeltadetailsDeltas {
     sb.append("    virtualLinkBitRateDelta: ").append(toIndentedString(virtualLinkBitRateDelta)).append("\n");
     sb.append("    vduDelta: ").append(toIndentedString(vduDelta)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    kduResourceDelta: ").append(toIndentedString(kduResourceDelta)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -56,6 +56,12 @@ public class VirtuallinkprotocoldataSchemaL3protocoldata {
   @JsonProperty("ipv6-address-mode")
   private Ipv6AddressModeEnum ipv6AddressMode = null;
 
+  @JsonProperty("description")
+  private String description = null;
+
+  @JsonProperty("security-group")
+  private String securityGroup = null;
+
   public VirtuallinkprotocoldataSchemaL3protocoldata name(String name) {
     this.name = name;
     return this;
@@ -197,6 +203,23 @@ public class VirtuallinkprotocoldataSchemaL3protocoldata {
     this.ipv6AddressMode = ipv6AddressMode;
   }
 
+  public VirtuallinkprotocoldataSchemaL3protocoldata description(String description) {
+      this.description = description;
+      return this;
+  }
+
+  public String getDescription() { return description; }
+
+  public void setDescription(String description) { this.description = description; }
+
+  public VirtuallinkprotocoldataSchemaL3protocoldata securityGroup(String securityGroup) {
+      this.securityGroup = securityGroup;
+      return this;
+  }
+
+  public String getSecurityGroup() { return securityGroup; }
+
+  public void setSecurityGroup(String securityGroup) { this.securityGroup = securityGroup; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -208,17 +231,20 @@ public class VirtuallinkprotocoldataSchemaL3protocoldata {
     }
     VirtuallinkprotocoldataSchemaL3protocoldata virtuallinkprotocoldataSchemaL3protocoldata = (VirtuallinkprotocoldataSchemaL3protocoldata) o;
     return Objects.equals(this.name, virtuallinkprotocoldataSchemaL3protocoldata.name) &&
-        Objects.equals(this.ipAllocationPools, virtuallinkprotocoldataSchemaL3protocoldata.ipAllocationPools) &&
-        Objects.equals(this.ipVersion, virtuallinkprotocoldataSchemaL3protocoldata.ipVersion) &&
-        Objects.equals(this.dhcpEnabled, virtuallinkprotocoldataSchemaL3protocoldata.dhcpEnabled) &&
-        Objects.equals(this.cidr, virtuallinkprotocoldataSchemaL3protocoldata.cidr) &&
-        Objects.equals(this.gatewayIp, virtuallinkprotocoldataSchemaL3protocoldata.gatewayIp) &&
-        Objects.equals(this.ipv6AddressMode, virtuallinkprotocoldataSchemaL3protocoldata.ipv6AddressMode);
+            Objects.equals(this.ipAllocationPools, virtuallinkprotocoldataSchemaL3protocoldata.ipAllocationPools) &&
+            Objects.equals(this.ipVersion, virtuallinkprotocoldataSchemaL3protocoldata.ipVersion) &&
+            Objects.equals(this.dhcpEnabled, virtuallinkprotocoldataSchemaL3protocoldata.dhcpEnabled) &&
+            Objects.equals(this.cidr, virtuallinkprotocoldataSchemaL3protocoldata.cidr) &&
+            Objects.equals(this.gatewayIp, virtuallinkprotocoldataSchemaL3protocoldata.gatewayIp) &&
+            Objects.equals(this.ipv6AddressMode, virtuallinkprotocoldataSchemaL3protocoldata.ipv6AddressMode) &&
+            Objects.equals(this.description, virtuallinkprotocoldataSchemaL3protocoldata.description) &&
+            Objects.equals(this.securityGroup, virtuallinkprotocoldataSchemaL3protocoldata.securityGroup);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, ipAllocationPools, ipVersion, dhcpEnabled, cidr, gatewayIp, ipv6AddressMode);
+    return Objects.hash(name, ipAllocationPools, ipVersion, dhcpEnabled, cidr, gatewayIp,
+            ipv6AddressMode, description, securityGroup);
   }
 
   @Override
@@ -233,6 +259,8 @@ public class VirtuallinkprotocoldataSchemaL3protocoldata {
     sb.append("    cidr: ").append(toIndentedString(cidr)).append("\n");
     sb.append("    gatewayIp: ").append(toIndentedString(gatewayIp)).append("\n");
     sb.append("    ipv6AddressMode: ").append(toIndentedString(ipv6AddressMode)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    securityGroup: ").append(toIndentedString(securityGroup)).append("\n");
     sb.append("}");
     return sb.toString();
   }

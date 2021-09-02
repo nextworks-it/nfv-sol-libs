@@ -40,6 +40,12 @@ public class VnfdLcmoperationsconfigurationOperatevnfopconfig {
   @JsonProperty("min-graceful-stop-timeout")
   private String minGracefulStopTimeout = null;
 
+  @JsonProperty("day1-2")
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "operate-vnf-op-config_fk", referencedColumnName = "uuid")
+  private List<Day1_2> day1_2 = null;
+
   public VnfdLcmoperationsconfigurationOperatevnfopconfig parameter(List<VnfdVdustoragerequirements> parameter) {
     this.parameter = parameter;
     return this;
@@ -105,6 +111,22 @@ public class VnfdLcmoperationsconfigurationOperatevnfopconfig {
     this.minGracefulStopTimeout = minGracefulStopTimeout;
   }
 
+  public VnfdLcmoperationsconfigurationOperatevnfopconfig day1_2(List<Day1_2> day1_2) {
+      this.day1_2 = day1_2;
+      return this;
+  }
+
+  public VnfdLcmoperationsconfigurationOperatevnfopconfig addDay1_2Item(Day1_2 day1_2) {
+      if(this.day1_2 == null)
+        this.day1_2 = new ArrayList<>();
+
+      this.day1_2.add(day1_2);
+      return this;
+  }
+
+  public List<Day1_2> getDay1_2() { return day1_2; }
+
+  public void setDay1_2(List<Day1_2> day1_2) { this.day1_2 = day1_2; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -116,13 +138,14 @@ public class VnfdLcmoperationsconfigurationOperatevnfopconfig {
     }
     VnfdLcmoperationsconfigurationOperatevnfopconfig vnfdLcmoperationsconfigurationOperatevnfopconfig = (VnfdLcmoperationsconfigurationOperatevnfopconfig) o;
     return Objects.equals(this.parameter, vnfdLcmoperationsconfigurationOperatevnfopconfig.parameter) &&
-        Objects.equals(this.maxRecommendedGracefulStopTimeout, vnfdLcmoperationsconfigurationOperatevnfopconfig.maxRecommendedGracefulStopTimeout) &&
-        Objects.equals(this.minGracefulStopTimeout, vnfdLcmoperationsconfigurationOperatevnfopconfig.minGracefulStopTimeout);
+            Objects.equals(this.maxRecommendedGracefulStopTimeout, vnfdLcmoperationsconfigurationOperatevnfopconfig.maxRecommendedGracefulStopTimeout) &&
+            Objects.equals(this.minGracefulStopTimeout, vnfdLcmoperationsconfigurationOperatevnfopconfig.minGracefulStopTimeout) &&
+            Objects.equals(this.day1_2, vnfdLcmoperationsconfigurationOperatevnfopconfig.day1_2);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(parameter, maxRecommendedGracefulStopTimeout, minGracefulStopTimeout);
+    return Objects.hash(parameter, maxRecommendedGracefulStopTimeout, minGracefulStopTimeout, day1_2);
   }
 
   @Override
@@ -133,6 +156,7 @@ public class VnfdLcmoperationsconfigurationOperatevnfopconfig {
     sb.append("    parameter: ").append(toIndentedString(parameter)).append("\n");
     sb.append("    maxRecommendedGracefulStopTimeout: ").append(toIndentedString(maxRecommendedGracefulStopTimeout)).append("\n");
     sb.append("    minGracefulStopTimeout: ").append(toIndentedString(minGracefulStopTimeout)).append("\n");
+    sb.append("    day1_2: ").append(toIndentedString(day1_2)).append("\n");
     sb.append("}");
     return sb.toString();
   }
