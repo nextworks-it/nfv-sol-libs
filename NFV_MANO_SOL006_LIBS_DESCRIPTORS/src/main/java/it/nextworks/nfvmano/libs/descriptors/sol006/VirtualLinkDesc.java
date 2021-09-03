@@ -49,6 +49,17 @@ public class VirtualLinkDesc {
     @JsonProperty("certificate")
     private String certificate = null;
 
+    @JsonProperty("provider-network")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "provider_network_fk", referencedColumnName = "uuid")
+    private ProviderNetwork providerNetwork = null;
+
+    @JsonProperty("mgmt-network")
+    private Boolean mgmtNetwork = null;
+
+    @JsonProperty("vim-network-name")
+    private String vimNetworkName = null;
+
     public VirtualLinkDesc id(String id) {
         this.id = id;
         return this;
@@ -131,6 +142,33 @@ public class VirtualLinkDesc {
 
     public void setCertificate(String certificate) { this.certificate = certificate; }
 
+    public VirtualLinkDesc providerNetwork(ProviderNetwork providerNetwork) {
+        this.providerNetwork = providerNetwork;
+        return this;
+    }
+
+    public ProviderNetwork getProviderNetwork() { return providerNetwork; }
+
+    public void setProviderNetwork(ProviderNetwork providerNetwork) { this.providerNetwork = providerNetwork; }
+
+    public VirtualLinkDesc mgmtNetwork(Boolean mgmtNetwork) {
+        this.mgmtNetwork = mgmtNetwork;
+        return this;
+    }
+
+    public Boolean getMgmtNetwork() { return mgmtNetwork; }
+
+    public void setMgmtNetwork(Boolean mgmtNetwork) { this.mgmtNetwork = mgmtNetwork; }
+
+    public VirtualLinkDesc vimNetworkName(String vimNetworkName) {
+        this.vimNetworkName = vimNetworkName;
+        return this;
+    }
+
+    public String getVimNetworkName() { return vimNetworkName; }
+
+    public void setVimNetworkName(String vimNetworkName) { this.vimNetworkName = vimNetworkName; }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if(this == o)
@@ -147,12 +185,16 @@ public class VirtualLinkDesc {
                 Objects.equals(this.description, virtualLinkDesc.description) &&
                 Objects.equals(this.signature, virtualLinkDesc.signature) &&
                 Objects.equals(this.algorithm, virtualLinkDesc.algorithm) &&
-                Objects.equals(this.certificate, virtualLinkDesc.certificate);
+                Objects.equals(this.certificate, virtualLinkDesc.certificate) &&
+                Objects.equals(this.providerNetwork, virtualLinkDesc.providerNetwork) &&
+                Objects.equals(this.mgmtNetwork, virtualLinkDesc.mgmtNetwork) &&
+                Objects.equals(this.vimNetworkName, virtualLinkDesc.vimNetworkName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, connectivityTypeSchema, df, testAccess, description, signature, algorithm, certificate);
+        return Objects.hash(id, connectivityTypeSchema, df, testAccess, description, signature,
+                algorithm, certificate, providerNetwork, mgmtNetwork, vimNetworkName);
     }
 
     @Override
@@ -169,6 +211,9 @@ public class VirtualLinkDesc {
         sb.append("    signature: ").append(toIndentedString(signature)).append("\n");
         sb.append("    algorithm: ").append(toIndentedString(algorithm)).append("\n");
         sb.append("    certificate: ").append(toIndentedString(certificate)).append("\n");
+        sb.append("    providerNetwork: ").append(toIndentedString(providerNetwork)).append("\n");
+        sb.append("    mgmtNetwork: ").append(toIndentedString(mgmtNetwork)).append("\n");
+        sb.append("    vimNetworkName: ").append(toIndentedString(vimNetworkName)).append("\n");
         sb.append("}");
 
         return sb.toString();
