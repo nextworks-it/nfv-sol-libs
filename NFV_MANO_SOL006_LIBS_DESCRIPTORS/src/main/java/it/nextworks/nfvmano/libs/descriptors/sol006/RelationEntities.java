@@ -2,7 +2,6 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import it.nextworks.nfvmano.libs.common.enums.ScriptTypeEnum;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -11,7 +10,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Day1_2Script {
+public class RelationEntities {
 
     @JsonIgnore
     @Id
@@ -19,17 +18,29 @@ public class Day1_2Script {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String uuid = null;
 
-    @JsonProperty("script-type")
-    private ScriptTypeEnum scriptType = null;
+    @JsonProperty("id")
+    private String id = null;
 
-    public Day1_2Script scriptType(ScriptTypeEnum scriptType) {
-        this.scriptType = scriptType;
+    @JsonProperty("endpoint")
+    private String endpoint = null;
+
+    public RelationEntities id(String id) {
+        this.id = id;
         return this;
     }
 
-    public ScriptTypeEnum getScriptType() { return scriptType; }
+    public String getId() { return id; }
 
-    public void setScriptType(ScriptTypeEnum scriptType) { this.scriptType = scriptType; }
+    public void setId(String id) { this.id = id; }
+
+    public RelationEntities endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    public String getEndpoint() { return endpoint; }
+
+    public void setEndpoint(String endpoint) { this.endpoint = endpoint; }
 
     @Override
     public boolean equals(Object o) {
@@ -41,22 +52,24 @@ public class Day1_2Script {
             return false;
         }
 
-        Day1_2Script day1_2Script = (Day1_2Script) o;
+        RelationEntities relationEntities = (RelationEntities) o;
 
-        return Objects.equals(this.scriptType, day1_2Script.scriptType);
+        return Objects.equals(this.id, relationEntities.id) &&
+                Objects.equals(this.endpoint, relationEntities.endpoint);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(scriptType);
+        return Objects.hash(id, endpoint);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("class Day1_2Script {\n");
-        sb.append("    scriptType: ").append(toIndentedString(scriptType)).append("\n");
+        sb.append("class RelationEntities {\n");
+        sb.append("    id: ").append(toIndentedString(id)).append("\n");
+        sb.append("    endpoint: ").append(toIndentedString(endpoint)).append("\n");
         sb.append("}");
 
         return sb.toString();

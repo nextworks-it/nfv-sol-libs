@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Day1_2ExecutionEnvironmentList {
+public class ExecutionEnvironmentList {
 
     @JsonIgnore
     @Id
@@ -23,7 +23,7 @@ public class Day1_2ExecutionEnvironmentList {
     @JsonProperty("juju")
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "juju_fk", referencedColumnName = "uuid")
-    private Day1_2Juju juju = null;
+    private Juju juju = null;
 
     @JsonProperty("helm-chart")
     private String helmChart = null;
@@ -37,7 +37,7 @@ public class Day1_2ExecutionEnvironmentList {
     @JsonProperty("external-connection-point-ref")
     private String externalConnectionPointRef = null;
 
-    public Day1_2ExecutionEnvironmentList id(String id) {
+    public ExecutionEnvironmentList id(String id) {
         this.id = id;
         return this;
     }
@@ -46,16 +46,16 @@ public class Day1_2ExecutionEnvironmentList {
 
     public void setId(String id) { this.id = id; }
 
-    public Day1_2ExecutionEnvironmentList juju(Day1_2Juju juju) {
+    public ExecutionEnvironmentList juju(Juju juju) {
         this.juju = juju;
         return this;
     }
 
-    public Day1_2Juju getJuju() { return juju; }
+    public Juju getJuju() { return juju; }
 
-    public void setJuju(Day1_2Juju juju) { this.juju = juju; }
+    public void setJuju(Juju juju) { this.juju = juju; }
 
-    public Day1_2ExecutionEnvironmentList helmChart(String helmChart) {
+    public ExecutionEnvironmentList helmChart(String helmChart) {
         this.helmChart = helmChart;
         return this;
     }
@@ -64,7 +64,7 @@ public class Day1_2ExecutionEnvironmentList {
 
     public void setHelmChart(String helmChart) { this.helmChart = helmChart; }
 
-    public Day1_2ExecutionEnvironmentList helmVersion(HelmVersionEnum helmVersion) {
+    public ExecutionEnvironmentList helmVersion(HelmVersionEnum helmVersion) {
         this.helmVersion = helmVersion;
         return this;
     }
@@ -73,7 +73,7 @@ public class Day1_2ExecutionEnvironmentList {
 
     public void setHelmVersion(HelmVersionEnum helmVersion) { this.helmVersion = helmVersion; }
 
-    public Day1_2ExecutionEnvironmentList metricService(String metricService) {
+    public ExecutionEnvironmentList metricService(String metricService) {
         this.metricService = metricService;
         return this;
     }
@@ -82,7 +82,7 @@ public class Day1_2ExecutionEnvironmentList {
 
     public void setMetricService(String metricService) { this.metricService = metricService; }
 
-    public Day1_2ExecutionEnvironmentList externalConnectionPointRef(String externalConnectionPointRef) {
+    public ExecutionEnvironmentList externalConnectionPointRef(String externalConnectionPointRef) {
         this.externalConnectionPointRef = externalConnectionPointRef;
         return this;
     }
@@ -103,14 +103,14 @@ public class Day1_2ExecutionEnvironmentList {
             return false;
         }
 
-        Day1_2ExecutionEnvironmentList day1_2ExecutionEnvironmentList = (Day1_2ExecutionEnvironmentList) o;
+        ExecutionEnvironmentList executionEnvironmentList = (ExecutionEnvironmentList) o;
 
-        return Objects.equals(this.id, day1_2ExecutionEnvironmentList.id) &&
-                Objects.equals(this.juju, day1_2ExecutionEnvironmentList.juju) &&
-                Objects.equals(this.helmChart, day1_2ExecutionEnvironmentList.helmChart) &&
-                Objects.equals(this.helmVersion, day1_2ExecutionEnvironmentList.helmVersion) &&
-                Objects.equals(this.metricService, day1_2ExecutionEnvironmentList.metricService) &&
-                Objects.equals(this.externalConnectionPointRef, day1_2ExecutionEnvironmentList.externalConnectionPointRef);
+        return Objects.equals(this.id, executionEnvironmentList.id) &&
+                Objects.equals(this.juju, executionEnvironmentList.juju) &&
+                Objects.equals(this.helmChart, executionEnvironmentList.helmChart) &&
+                Objects.equals(this.helmVersion, executionEnvironmentList.helmVersion) &&
+                Objects.equals(this.metricService, executionEnvironmentList.metricService) &&
+                Objects.equals(this.externalConnectionPointRef, executionEnvironmentList.externalConnectionPointRef);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class Day1_2ExecutionEnvironmentList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("class Day1_2ExecutionEnvironmentList {\n");
+        sb.append("class ExecutionEnvironmentList {\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    juju: ").append(toIndentedString(juju)).append("\n");
         sb.append("    helmChart: ").append(toIndentedString(helmChart)).append("\n");

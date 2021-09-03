@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Day1_2RelationEntities {
+public class Metrics {
 
     @JsonIgnore
     @Id
@@ -18,29 +18,17 @@ public class Day1_2RelationEntities {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String uuid = null;
 
-    @JsonProperty("id")
-    private String id = null;
+    @JsonProperty("name")
+    private String name = null;
 
-    @JsonProperty("endpoint")
-    private String endpoint = null;
-
-    public Day1_2RelationEntities id(String id) {
-        this.id = id;
+    public Metrics name(String name) {
+        this.name = name;
         return this;
     }
 
-    public String getId() { return id; }
+    public String getName() { return name; }
 
-    public void setId(String id) { this.id = id; }
-
-    public Day1_2RelationEntities endpoint(String endpoint) {
-        this.endpoint = endpoint;
-        return this;
-    }
-
-    public String getEndpoint() { return endpoint; }
-
-    public void setEndpoint(String endpoint) { this.endpoint = endpoint; }
+    public void setName(String name) { this.name = name; }
 
     @Override
     public boolean equals(Object o) {
@@ -52,24 +40,22 @@ public class Day1_2RelationEntities {
             return false;
         }
 
-        Day1_2RelationEntities day1_2RelationEntities = (Day1_2RelationEntities) o;
+        Metrics metrics = (Metrics) o;
 
-        return Objects.equals(this.id, day1_2RelationEntities.id) &&
-                Objects.equals(this.endpoint, day1_2RelationEntities.endpoint);
+        return Objects.equals(this.name, metrics.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, endpoint);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("class Day1_2RelationEntities {\n");
-        sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    endpoint: ").append(toIndentedString(endpoint)).append("\n");
+        sb.append("class Metrics {\n");
+        sb.append("    name: ").append(toIndentedString(name)).append("\n");
         sb.append("}");
 
         return sb.toString();

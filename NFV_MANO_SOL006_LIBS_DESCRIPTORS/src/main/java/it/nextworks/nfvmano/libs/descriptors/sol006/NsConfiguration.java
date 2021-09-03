@@ -2,7 +2,6 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import it.nextworks.nfvmano.libs.common.enums.BlacklistConfigPrimitiveEnum;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -13,16 +12,13 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Day1_2 {
+public class NsConfiguration {
 
     @JsonIgnore
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String uuid = null;
-
-    @JsonProperty("id")
-    private String id = null;
 
     @JsonProperty("script")
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -37,59 +33,40 @@ public class Day1_2 {
     @JsonProperty("execution-environment-list")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinColumn(name = "day1_2_fk", referencedColumnName = "uuid")
+    @JoinColumn(name = "ns_configuration_fk", referencedColumnName = "uuid")
     private List<ExecutionEnvironmentList> executionEnvironmentList = null;
 
     @JsonProperty("config-primitive")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinColumn(name = "day1_2_fk", referencedColumnName = "uuid")
+    @JoinColumn(name = "ns_configuration_fk", referencedColumnName = "uuid")
     private List<ConfigPrimitive> configPrimitive = null;
 
     @JsonProperty("initial-config-primitive")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinColumn(name = "day1_2_fk", referencedColumnName = "uuid")
+    @JoinColumn(name = "ns_configuration_fk", referencedColumnName = "uuid")
     private List<InitialConfigPrimitive> initialConfigPrimitive = null;
 
     @JsonProperty("terminate-config-primitive")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinColumn(name = "day1_2_fk", referencedColumnName = "uuid")
+    @JoinColumn(name = "ns_configuration_fk", referencedColumnName = "uuid")
     private List<TerminateConfigPrimitive> terminateConfigPrimitive = null;
 
     @JsonProperty("metrics")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinColumn(name = "day1_2_fk", referencedColumnName = "uuid")
+    @JoinColumn(name = "ns_configuration_fk", referencedColumnName = "uuid")
     private List<Metrics> metrics = null;
 
     @JsonProperty("relation")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinColumn(name = "day1_2_fk", referencedColumnName = "uuid")
+    @JoinColumn(name = "ns_configuration_fk", referencedColumnName = "uuid")
     private List<Relation> relation = null;
 
-    @JsonProperty("config-access")
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "config_access_fk", referencedColumnName = "uuid")
-    private Day1_2ConfigAccess configAccess = null;
-
-    @JsonProperty("blacklist-config-primitive")
-    @ElementCollection
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<BlacklistConfigPrimitiveEnum> blacklistConfigPrimitive = null;
-
-    public Day1_2 id(String id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getId() { return id; }
-
-    public void setId(String id) { this.id = id; }
-
-    public Day1_2 script(Script script) {
+    public NsConfiguration script(Script script) {
         this.script = script;
         return this;
     }
@@ -98,7 +75,7 @@ public class Day1_2 {
 
     public void setScript(Script script) { this.script = script; }
 
-    public Day1_2 juju(Juju juju) {
+    public NsConfiguration juju(Juju juju) {
         this.juju = juju;
         return this;
     }
@@ -107,12 +84,12 @@ public class Day1_2 {
 
     public void setJuju(Juju juju) { this.juju = juju; }
 
-    public Day1_2 executionEnvironmentList(List<ExecutionEnvironmentList> executionEnvironmentList) {
+    public NsConfiguration executionEnvironmentList(List<ExecutionEnvironmentList> executionEnvironmentList) {
         this.executionEnvironmentList = executionEnvironmentList;
         return this;
     }
 
-    public Day1_2 addExecutionEnvironmentListItem(ExecutionEnvironmentList executionEnvironmentList) {
+    public NsConfiguration addExecutionEnvironmentListItem(ExecutionEnvironmentList executionEnvironmentList) {
         if(this.executionEnvironmentList == null)
             this.executionEnvironmentList = new ArrayList<>();
 
@@ -126,12 +103,12 @@ public class Day1_2 {
         this.executionEnvironmentList = executionEnvironmentList;
     }
 
-    public Day1_2 configPrimitive(List<ConfigPrimitive> configPrimitive) {
+    public NsConfiguration configPrimitive(List<ConfigPrimitive> configPrimitive) {
         this.configPrimitive = configPrimitive;
         return this;
     }
 
-    public Day1_2 addConfigPrimitiveItem(ConfigPrimitive configPrimitive) {
+    public NsConfiguration addConfigPrimitiveItem(ConfigPrimitive configPrimitive) {
         if(this.configPrimitive == null)
             this.configPrimitive = new ArrayList<>();
 
@@ -143,12 +120,12 @@ public class Day1_2 {
 
     public void setConfigPrimitive(List<ConfigPrimitive> configPrimitive) { this.configPrimitive = configPrimitive; }
 
-    public Day1_2 initialConfigPrimitive(List<InitialConfigPrimitive> initialConfigPrimitive) {
+    public NsConfiguration initialConfigPrimitive(List<InitialConfigPrimitive> initialConfigPrimitive) {
         this.initialConfigPrimitive = initialConfigPrimitive;
         return this;
     }
 
-    public Day1_2 addInitialConfigPrimitiveItem(InitialConfigPrimitive initialConfigPrimitive) {
+    public NsConfiguration addInitialConfigPrimitiveItem(InitialConfigPrimitive initialConfigPrimitive) {
         if(this.initialConfigPrimitive == null)
             this.initialConfigPrimitive = new ArrayList<>();
 
@@ -162,12 +139,12 @@ public class Day1_2 {
         this.initialConfigPrimitive = initialConfigPrimitive;
     }
 
-    public Day1_2 terminateConfigPrimitive(List<TerminateConfigPrimitive> terminateConfigPrimitive) {
+    public NsConfiguration terminateConfigPrimitive(List<TerminateConfigPrimitive> terminateConfigPrimitive) {
         this.terminateConfigPrimitive = terminateConfigPrimitive;
         return this;
     }
 
-    public Day1_2 addTerminateConfigPrimitiveItem(TerminateConfigPrimitive terminateConfigPrimitive) {
+    public NsConfiguration addTerminateConfigPrimitiveItem(TerminateConfigPrimitive terminateConfigPrimitive) {
         if(this.terminateConfigPrimitive == null)
             this.terminateConfigPrimitive = new ArrayList<>();
 
@@ -181,16 +158,16 @@ public class Day1_2 {
         this.terminateConfigPrimitive = terminateConfigPrimitive;
     }
 
-    public Day1_2 metrics(List<Metrics> metrics) {
+    public NsConfiguration metrics(List<Metrics> metrics) {
         this.metrics = metrics;
         return this;
     }
 
-    public Day1_2 addMetricsItem(Metrics metrics) {
+    public NsConfiguration addMetricsItem(Metrics metric) {
         if(this.metrics == null)
             this.metrics = new ArrayList<>();
 
-        this.metrics.add(metrics);
+        this.metrics.add(metric);
         return this;
     }
 
@@ -198,12 +175,12 @@ public class Day1_2 {
 
     public void setMetrics(List<Metrics> metrics) { this.metrics = metrics; }
 
-    public Day1_2 relation(List<Relation> relation) {
+    public NsConfiguration relation(List<Relation> relation) {
         this.relation = relation;
         return this;
     }
 
-    public Day1_2 addRelationItem(Relation relation) {
+    public NsConfiguration addRelationItem(Relation relation) {
         if(this.relation == null)
             this.relation = new ArrayList<>();
 
@@ -215,34 +192,6 @@ public class Day1_2 {
 
     public void setRelation(List<Relation> relation) { this.relation = relation; }
 
-    public Day1_2 configAccess(Day1_2ConfigAccess configAccess) {
-        this.configAccess = configAccess;
-        return this;
-    }
-
-    public Day1_2ConfigAccess getConfigAccess() { return configAccess; }
-
-    public void setConfigAccess(Day1_2ConfigAccess configAccess) { this.configAccess = configAccess; }
-
-    public Day1_2 blacklistConfigPrimitive(List<BlacklistConfigPrimitiveEnum> blacklistConfigPrimitive) {
-        this.blacklistConfigPrimitive = blacklistConfigPrimitive;
-        return this;
-    }
-
-    public Day1_2 addBlacklistConfigPrimitiveItem(BlacklistConfigPrimitiveEnum blacklistConfigPrimitiveEnum) {
-        if(this.blacklistConfigPrimitive == null)
-            this.blacklistConfigPrimitive = new ArrayList<>();
-
-        this.blacklistConfigPrimitive.add(blacklistConfigPrimitiveEnum);
-        return this;
-    }
-
-    public List<BlacklistConfigPrimitiveEnum> getBlacklistConfigPrimitive() { return blacklistConfigPrimitive; }
-
-    public void setBlacklistConfigPrimitive(List<BlacklistConfigPrimitiveEnum> blacklistConfigPrimitive) {
-        this.blacklistConfigPrimitive = blacklistConfigPrimitive;
-    }
-
     @Override
     public boolean equals(Object o) {
 
@@ -253,33 +202,29 @@ public class Day1_2 {
             return false;
         }
 
-        Day1_2 day1_2 = (Day1_2) o;
+        NsConfiguration nsConfiguration = (NsConfiguration) o;
 
-        return Objects.equals(this.id, day1_2.id) &&
-                Objects.equals(this.script, day1_2.script) &&
-                Objects.equals(this.juju, day1_2.juju) &&
-                Objects.equals(this.executionEnvironmentList, day1_2.executionEnvironmentList) &&
-                Objects.equals(this.configPrimitive, day1_2.configPrimitive) &&
-                Objects.equals(this.initialConfigPrimitive, day1_2.initialConfigPrimitive) &&
-                Objects.equals(this.terminateConfigPrimitive, day1_2.terminateConfigPrimitive) &&
-                Objects.equals(this.metrics, day1_2.metrics) &&
-                Objects.equals(this.relation, day1_2.relation) &&
-                Objects.equals(this.configAccess, day1_2.configAccess) &&
-                Objects.equals(this.blacklistConfigPrimitive, day1_2.blacklistConfigPrimitive);
+        return Objects.equals(this.script, nsConfiguration.script) &&
+                Objects.equals(this.juju, nsConfiguration.juju) &&
+                Objects.equals(this.executionEnvironmentList, nsConfiguration.executionEnvironmentList) &&
+                Objects.equals(this.configPrimitive, nsConfiguration.configPrimitive) &&
+                Objects.equals(this.initialConfigPrimitive, nsConfiguration.initialConfigPrimitive) &&
+                Objects.equals(this.terminateConfigPrimitive, nsConfiguration.terminateConfigPrimitive) &&
+                Objects.equals(this.metrics, nsConfiguration.metrics) &&
+                Objects.equals(this.relation, nsConfiguration.relation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, script, juju, executionEnvironmentList, configPrimitive, initialConfigPrimitive,
-                terminateConfigPrimitive, metrics, relation, configAccess, blacklistConfigPrimitive);
+        return Objects.hash(script, juju, executionEnvironmentList, configPrimitive, initialConfigPrimitive,
+                terminateConfigPrimitive, metrics, relation);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("class Day1_2 {\n");
-        sb.append("    id: ").append(toIndentedString(id)).append("\n");
+        sb.append("class NsConfiguration {\n");
         sb.append("    script: ").append(toIndentedString(script)).append("\n");
         sb.append("    juju: ").append(toIndentedString(juju)).append("\n");
         sb.append("    executionEnvironmentList: ").append(toIndentedString(executionEnvironmentList)).append("\n");
@@ -288,8 +233,6 @@ public class Day1_2 {
         sb.append("    terminateConfigPrimitive: ").append(toIndentedString(terminateConfigPrimitive)).append("\n");
         sb.append("    metrics: ").append(toIndentedString(metrics)).append("\n");
         sb.append("    relation: ").append(toIndentedString(relation)).append("\n");
-        sb.append("    configAccess: ").append(toIndentedString(configAccess)).append("\n");
-        sb.append("    blacklistConfigPrimitive: ").append(toIndentedString(blacklistConfigPrimitive)).append("\n");
         sb.append("}");
 
         return sb.toString();

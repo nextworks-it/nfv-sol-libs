@@ -83,6 +83,14 @@ public class Nsd extends SecurityParameters {
   @Column(unique = true)
   private String id = null;
 
+  @JsonProperty("ns-configuration")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "ns_configuration_fk", referencedColumnName = "uuid")
+  private NsConfiguration nsConfiguration = null;
+
+  @JsonProperty("description")
+  private String description = null;
+
   public Nsd nestedNsdId(List<String> nestedNsdId) {
     this.nestedNsdId = nestedNsdId;
     return this;
@@ -421,6 +429,23 @@ public class Nsd extends SecurityParameters {
     this.id = id;
   }
 
+  public Nsd nsConfiguration(NsConfiguration nsConfiguration) {
+      this.nsConfiguration = nsConfiguration;
+      return this;
+  }
+
+  public NsConfiguration getNsConfiguration() { return nsConfiguration; }
+
+  public void setNsConfiguration(NsConfiguration nsConfiguration) { this.nsConfiguration = nsConfiguration; }
+
+  public Nsd description(String description) {
+      this.description = description;
+      return this;
+  }
+
+  public String getDescription() { return description; }
+
+  public void setDescription(String description) { this.description = description; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -432,25 +457,28 @@ public class Nsd extends SecurityParameters {
     }
     Nsd nsd = (Nsd) o;
     return Objects.equals(this.nestedNsdId, nsd.nestedNsdId) &&
-        Objects.equals(this.designer, nsd.designer) &&
-        Objects.equals(this.name, nsd.name) &&
-        Objects.equals(this.sapd, nsd.sapd) &&
-        Objects.equals(this.lifecycleManagementScript, nsd.lifecycleManagementScript) &&
-        Objects.equals(this.virtualLinkDesc, nsd.virtualLinkDesc) &&
-        Objects.equals(this.invariantId, nsd.invariantId) &&
-        Objects.equals(this.version, nsd.version) &&
-        Objects.equals(this.autoscaleRule, nsd.autoscaleRule) &&
-        Objects.equals(this.vnffgd, nsd.vnffgd) &&
-        Objects.equals(this.df, nsd.df) &&
-        Objects.equals(this.pnfdId, nsd.pnfdId) &&
-        Objects.equals(this.vnfdId, nsd.vnfdId) &&
-        Objects.equals(this.id, nsd.id) &&
-        super.equals(o);
+            Objects.equals(this.designer, nsd.designer) &&
+            Objects.equals(this.name, nsd.name) &&
+            Objects.equals(this.sapd, nsd.sapd) &&
+            Objects.equals(this.lifecycleManagementScript, nsd.lifecycleManagementScript) &&
+            Objects.equals(this.virtualLinkDesc, nsd.virtualLinkDesc) &&
+            Objects.equals(this.invariantId, nsd.invariantId) &&
+            Objects.equals(this.version, nsd.version) &&
+            Objects.equals(this.autoscaleRule, nsd.autoscaleRule) &&
+            Objects.equals(this.vnffgd, nsd.vnffgd) &&
+            Objects.equals(this.df, nsd.df) &&
+            Objects.equals(this.pnfdId, nsd.pnfdId) &&
+            Objects.equals(this.vnfdId, nsd.vnfdId) &&
+            Objects.equals(this.id, nsd.id) &&
+            Objects.equals(this.nsConfiguration, nsd.nsConfiguration) &&
+            Objects.equals(this.description, nsd.description) &&
+            super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(nestedNsdId, designer, name, sapd, lifecycleManagementScript, virtualLinkDesc, invariantId, version, autoscaleRule, vnffgd, df, pnfdId, vnfdId, id, super.hashCode());
+    return Objects.hash(nestedNsdId, designer, name, sapd, lifecycleManagementScript, virtualLinkDesc, invariantId,
+            version, autoscaleRule, vnffgd, df, pnfdId, vnfdId, id, nsConfiguration, description, super.hashCode());
   }
 
   @Override
@@ -472,6 +500,8 @@ public class Nsd extends SecurityParameters {
     sb.append("    pnfdId: ").append(toIndentedString(pnfdId)).append("\n");
     sb.append("    vnfdId: ").append(toIndentedString(vnfdId)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    nsConfiguration: ").append(toIndentedString(nsConfiguration)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");
     return sb.toString();
   }

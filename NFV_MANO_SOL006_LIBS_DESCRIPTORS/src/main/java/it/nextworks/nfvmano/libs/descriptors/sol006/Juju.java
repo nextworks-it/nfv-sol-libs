@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Day1_2Juju {
+public class Juju {
 
     @JsonIgnore
     @Id
@@ -28,7 +28,7 @@ public class Day1_2Juju {
     @JsonProperty("cloud")
     private CloudEnum cloud = null;
 
-    public Day1_2Juju charm(String charm) {
+    public Juju charm(String charm) {
         this.charm = charm;
         return this;
     }
@@ -37,7 +37,7 @@ public class Day1_2Juju {
 
     public void setCharm(String charm) { this.charm = charm; }
 
-    public Day1_2Juju proxy(Boolean proxy) {
+    public Juju proxy(Boolean proxy) {
         this.proxy = proxy;
         return this;
     }
@@ -46,7 +46,7 @@ public class Day1_2Juju {
 
     public void setProxy(Boolean proxy) { this.proxy = proxy; }
 
-    public Day1_2Juju cloud(CloudEnum cloud) {
+    public Juju cloud(CloudEnum cloud) {
         this.cloud = cloud;
         return this;
     }
@@ -65,11 +65,11 @@ public class Day1_2Juju {
             return false;
         }
 
-        Day1_2Juju day1_2Juju = (Day1_2Juju) o;
+        Juju juju = (Juju) o;
 
-        return Objects.equals(this.charm, day1_2Juju.charm) &&
-                Objects.equals(this.proxy, day1_2Juju.proxy) &&
-                Objects.equals(this.cloud, day1_2Juju.cloud);
+        return Objects.equals(this.charm, juju.charm) &&
+                Objects.equals(this.proxy, juju.proxy) &&
+                Objects.equals(this.cloud, juju.cloud);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class Day1_2Juju {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("class Day1_2Juju {\n");
+        sb.append("class Juju {\n");
         sb.append("    charm: ").append(toIndentedString(charm)).append("\n");
         sb.append("    proxy: ").append(toIndentedString(proxy)).append("\n");
         sb.append("    cloud: ").append(toIndentedString(cloud)).append("\n");

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Day1_2ConfigPrimitive {
+public class ConfigPrimitive {
 
     @JsonIgnore
     @Id
@@ -33,12 +33,12 @@ public class Day1_2ConfigPrimitive {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "day1_2_config_primitive_fk", referencedColumnName = "uuid")
-    private List<Day1_2ConfigPrimitiveParameter> parameter = null;
+    private List<ConfigPrimitiveParameter> parameter = null;
 
     @JsonProperty("user-defined-script")
     private String userDefinedScript = null;
 
-    public Day1_2ConfigPrimitive name(String name) {
+    public ConfigPrimitive name(String name) {
         this.name = name;
         return this;
     }
@@ -47,7 +47,7 @@ public class Day1_2ConfigPrimitive {
 
     public void setName(String name) { this.name = name; }
 
-    public Day1_2ConfigPrimitive executionEnvironmentRef(String executionEnvironmentRef) {
+    public ConfigPrimitive executionEnvironmentRef(String executionEnvironmentRef) {
         this.executionEnvironmentRef = executionEnvironmentRef;
         return this;
     }
@@ -58,7 +58,7 @@ public class Day1_2ConfigPrimitive {
         this.executionEnvironmentRef = executionEnvironmentRef;
     }
 
-    public Day1_2ConfigPrimitive executionEnvironmentPrimitive(String executionEnvironmentPrimitive) {
+    public ConfigPrimitive executionEnvironmentPrimitive(String executionEnvironmentPrimitive) {
         this.executionEnvironmentPrimitive = executionEnvironmentPrimitive;
         return this;
     }
@@ -69,24 +69,24 @@ public class Day1_2ConfigPrimitive {
         this.executionEnvironmentPrimitive = executionEnvironmentPrimitive;
     }
 
-    public Day1_2ConfigPrimitive parameter(List<Day1_2ConfigPrimitiveParameter> parameter) {
+    public ConfigPrimitive parameter(List<ConfigPrimitiveParameter> parameter) {
         this.parameter = parameter;
         return this;
     }
 
-    public Day1_2ConfigPrimitive addParameterItem(Day1_2ConfigPrimitiveParameter day1_2ConfigPrimitiveParameter) {
+    public ConfigPrimitive addParameterItem(ConfigPrimitiveParameter configPrimitiveParameter) {
         if(this.parameter == null)
             this.parameter = new ArrayList<>();
 
-        this.parameter.add(day1_2ConfigPrimitiveParameter);
+        this.parameter.add(configPrimitiveParameter);
         return this;
     }
 
-    public List<Day1_2ConfigPrimitiveParameter> getParameter() { return parameter; }
+    public List<ConfigPrimitiveParameter> getParameter() { return parameter; }
 
-    public void setParameter(List<Day1_2ConfigPrimitiveParameter> parameter) { this.parameter = parameter; }
+    public void setParameter(List<ConfigPrimitiveParameter> parameter) { this.parameter = parameter; }
 
-    public Day1_2ConfigPrimitive userDefinedScript(String userDefinedScript) {
+    public ConfigPrimitive userDefinedScript(String userDefinedScript) {
         this.userDefinedScript = userDefinedScript;
         return this;
     }
@@ -105,13 +105,13 @@ public class Day1_2ConfigPrimitive {
             return false;
         }
 
-        Day1_2ConfigPrimitive day1_2ConfigPrimitive = (Day1_2ConfigPrimitive) o;
+        ConfigPrimitive configPrimitive = (ConfigPrimitive) o;
 
-        return Objects.equals(this.name, day1_2ConfigPrimitive.name) &&
-                Objects.equals(this.executionEnvironmentRef, day1_2ConfigPrimitive.executionEnvironmentRef) &&
-                Objects.equals(this.executionEnvironmentPrimitive, day1_2ConfigPrimitive.executionEnvironmentPrimitive) &&
-                Objects.equals(this.parameter, day1_2ConfigPrimitive.parameter) &&
-                Objects.equals(this.userDefinedScript, day1_2ConfigPrimitive.userDefinedScript);
+        return Objects.equals(this.name, configPrimitive.name) &&
+                Objects.equals(this.executionEnvironmentRef, configPrimitive.executionEnvironmentRef) &&
+                Objects.equals(this.executionEnvironmentPrimitive, configPrimitive.executionEnvironmentPrimitive) &&
+                Objects.equals(this.parameter, configPrimitive.parameter) &&
+                Objects.equals(this.userDefinedScript, configPrimitive.userDefinedScript);
     }
 
     @Override
@@ -123,7 +123,7 @@ public class Day1_2ConfigPrimitive {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("class Day1_2ConfigPrimitive {\n");
+        sb.append("class ConfigPrimitive {\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
         sb.append("    executionEnvironmentRef: ").append(toIndentedString(executionEnvironmentRef)).append("\n");
         sb.append("    executionEnvironmentPrimitive: ").append(toIndentedString(executionEnvironmentPrimitive)).append("\n");

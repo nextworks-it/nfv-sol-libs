@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Day1_2Relation {
+public class Relation {
 
     @JsonIgnore
     @Id
@@ -27,9 +27,9 @@ public class Day1_2Relation {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "day1_2_relation_fk", referencedColumnName = "uuid")
-    private List<Day1_2RelationEntities> entities = null;
+    private List<RelationEntities> entities = null;
 
-    public Day1_2Relation name(String name) {
+    public Relation name(String name) {
         this.name = name;
         return this;
     }
@@ -38,22 +38,22 @@ public class Day1_2Relation {
 
     public void setName(String name) { this.name = name; }
 
-    public Day1_2Relation entities(List<Day1_2RelationEntities> entities) {
+    public Relation entities(List<RelationEntities> entities) {
         this.entities = entities;
         return this;
     }
 
-    public Day1_2Relation addEntitiesItem(Day1_2RelationEntities day1_2RelationEntities) {
+    public Relation addEntitiesItem(RelationEntities relationEntities) {
         if(this.entities == null)
             this.entities = new ArrayList<>();
 
-        this.entities.add(day1_2RelationEntities);
+        this.entities.add(relationEntities);
         return this;
     }
 
-    public List<Day1_2RelationEntities> getEntities() { return entities; }
+    public List<RelationEntities> getEntities() { return entities; }
 
-    public void setEntities(List<Day1_2RelationEntities> entities) { this.entities = entities; }
+    public void setEntities(List<RelationEntities> entities) { this.entities = entities; }
 
     @Override
     public boolean equals(Object o) {
@@ -65,10 +65,10 @@ public class Day1_2Relation {
             return false;
         }
 
-        Day1_2Relation day1_2Relation = (Day1_2Relation) o;
+        Relation relation = (Relation) o;
 
-        return Objects.equals(this.name, day1_2Relation.name) &&
-                Objects.equals(this.entities, day1_2Relation.entities);
+        return Objects.equals(this.name, relation.name) &&
+                Objects.equals(this.entities, relation.entities);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Day1_2Relation {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("class Day1_2Relation {\n");
+        sb.append("class Relation {\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
         sb.append("    entities: ").append(toIndentedString(entities)).append("\n");
         sb.append("}");

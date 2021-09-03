@@ -2,6 +2,7 @@ package it.nextworks.nfvmano.libs.descriptors.sol006;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import it.nextworks.nfvmano.libs.common.enums.ScriptTypeEnum;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Day1_2Metrics {
+public class Script {
 
     @JsonIgnore
     @Id
@@ -18,17 +19,17 @@ public class Day1_2Metrics {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String uuid = null;
 
-    @JsonProperty("name")
-    private String name = null;
+    @JsonProperty("script-type")
+    private ScriptTypeEnum scriptType = null;
 
-    public Day1_2Metrics name(String name) {
-        this.name = name;
+    public Script scriptType(ScriptTypeEnum scriptType) {
+        this.scriptType = scriptType;
         return this;
     }
 
-    public String getName() { return name; }
+    public ScriptTypeEnum getScriptType() { return scriptType; }
 
-    public void setName(String name) { this.name = name; }
+    public void setScriptType(ScriptTypeEnum scriptType) { this.scriptType = scriptType; }
 
     @Override
     public boolean equals(Object o) {
@@ -40,22 +41,22 @@ public class Day1_2Metrics {
             return false;
         }
 
-        Day1_2Metrics day1_2Metrics = (Day1_2Metrics) o;
+        Script script = (Script) o;
 
-        return Objects.equals(this.name, day1_2Metrics.name);
+        return Objects.equals(this.scriptType, script.scriptType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(scriptType);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("class Day1_2Metrics {\n");
-        sb.append("    name: ").append(toIndentedString(name)).append("\n");
+        sb.append("class Script {\n");
+        sb.append("    scriptType: ").append(toIndentedString(scriptType)).append("\n");
         sb.append("}");
 
         return sb.toString();
