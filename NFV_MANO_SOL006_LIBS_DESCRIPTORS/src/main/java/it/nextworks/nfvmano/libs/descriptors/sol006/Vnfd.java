@@ -125,6 +125,35 @@ public class Vnfd extends SecurityGroupRule {
   @JsonProperty("product-info-description")
   private String productInfoDescription = null;
 
+  @JsonProperty("description")
+  private String description = null;
+
+  @JsonProperty("kdu")
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
+  private List<Kdu> kdu = null;
+
+  @JsonProperty("k8s-cluster")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "k8s_cluster_fk", referencedColumnName = "uuid")
+  private K8sCluster k8sCluster = null;
+
+  @JsonProperty("service")
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
+  private List<VnfdKduService> service = null;
+
+  @JsonProperty("mgmt-cp")
+  private String mgmtCp = null;
+
+  @JsonProperty("vip")
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_fk", referencedColumnName = "uuid")
+  private List<VnfdVip> vip = null;
+
   public Vnfd defaultLocalizationLanguage(String defaultLocalizationLanguage) {
     this.defaultLocalizationLanguage = defaultLocalizationLanguage;
     return this;
@@ -660,6 +689,83 @@ public class Vnfd extends SecurityGroupRule {
     this.productInfoDescription = productInfoDescription;
   }
 
+  public Vnfd description(String description) {
+      this.description = description;
+      return this;
+  }
+
+  public String getDescription() { return description; }
+
+  public void setDescription(String description) { this.description = description; }
+
+  public Vnfd kdu(List<Kdu> kdu) {
+      this.kdu = kdu;
+      return this;
+  }
+
+  public Vnfd addKduItem(Kdu kdu) {
+      if(this.kdu == null)
+        this.kdu = new ArrayList<>();
+
+      this.kdu.add(kdu);
+      return this;
+  }
+
+  public List<Kdu> getKdu() { return kdu; }
+
+  public void setKdu(List<Kdu> kdu) { this.kdu = kdu; }
+
+  public Vnfd k8sCluster(K8sCluster k8sCluster) {
+      this.k8sCluster = k8sCluster;
+      return this;
+  }
+
+  public K8sCluster getK8sCluster() { return k8sCluster; }
+
+  public void setK8sCluster(K8sCluster k8sCluster) { this.k8sCluster = k8sCluster; }
+
+  public Vnfd service(List<VnfdKduService> service) {
+      this.service = service;
+      return this;
+  }
+
+  public Vnfd addServiceItem(VnfdKduService service) {
+      if(this.service == null)
+        this.service = new ArrayList<>();
+
+      this.service.add(service);
+      return this;
+  }
+
+  public List<VnfdKduService> getService() { return service; }
+
+  public void setService(List<VnfdKduService> service) { this.service = service; }
+
+  public Vnfd mgmtCp(String mgmtCp) {
+      this.mgmtCp = mgmtCp;
+      return this;
+  }
+
+  public String getMgmtCp() { return mgmtCp; }
+
+  public void setMgmtCp(String mgmtCp) { this.mgmtCp = mgmtCp; }
+
+  public Vnfd vip(List<VnfdVip> vip) {
+      this.vip = vip;
+      return this;
+  }
+
+  public Vnfd addVipItem(VnfdVip vip) {
+      if(this.vip == null)
+        this.vip = new ArrayList<>();
+
+      this.vip.add(vip);
+      return this;
+  }
+
+  public List<VnfdVip> getVip() { return vip; }
+
+  public void setVip(List<VnfdVip> vip) { this.vip = vip; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -671,34 +777,44 @@ public class Vnfd extends SecurityGroupRule {
     }
     Vnfd vnfd = (Vnfd) o;
     return Objects.equals(this.defaultLocalizationLanguage, vnfd.defaultLocalizationLanguage) &&
-        Objects.equals(this.extCpd, vnfd.extCpd) &&
-        Objects.equals(this.id, vnfd.id) &&
-        Objects.equals(this.swImageDesc, vnfd.swImageDesc) &&
-        Objects.equals(this.elementGroup, vnfd.elementGroup) &&
-        Objects.equals(this.virtualStorageDesc, vnfd.virtualStorageDesc) &&
-        Objects.equals(this.indicator, vnfd.indicator) &&
-        Objects.equals(this.virtualComputeDesc, vnfd.virtualComputeDesc) &&
-        Objects.equals(this.vnfmInfo, vnfd.vnfmInfo) &&
-        Objects.equals(this.productInfoName, vnfd.productInfoName) &&
-        Objects.equals(this.modifiableAttributes, vnfd.modifiableAttributes) &&
-        Objects.equals(this.version, vnfd.version) &&
-        Objects.equals(this.provider, vnfd.provider) &&
-        Objects.equals(this.productName, vnfd.productName) &&
-        Objects.equals(this.df, vnfd.df) &&
-        Objects.equals(this.softwareVersion, vnfd.softwareVersion) &&
-        Objects.equals(this.configurableProperties, vnfd.configurableProperties) &&
-        Objects.equals(this.autoScale, vnfd.autoScale) &&
-        Objects.equals(this.lifecycleManagementScript, vnfd.lifecycleManagementScript) &&
-        Objects.equals(this.vdu, vnfd.vdu) &&
-        Objects.equals(this.localizationLanguage, vnfd.localizationLanguage) &&
-        Objects.equals(this.intVirtualLinkDesc, vnfd.intVirtualLinkDesc) &&
-        Objects.equals(this.productInfoDescription, vnfd.productInfoDescription) &&
-        super.equals(o);
+            Objects.equals(this.extCpd, vnfd.extCpd) &&
+            Objects.equals(this.id, vnfd.id) &&
+            Objects.equals(this.swImageDesc, vnfd.swImageDesc) &&
+            Objects.equals(this.elementGroup, vnfd.elementGroup) &&
+            Objects.equals(this.virtualStorageDesc, vnfd.virtualStorageDesc) &&
+            Objects.equals(this.indicator, vnfd.indicator) &&
+            Objects.equals(this.virtualComputeDesc, vnfd.virtualComputeDesc) &&
+            Objects.equals(this.vnfmInfo, vnfd.vnfmInfo) &&
+            Objects.equals(this.productInfoName, vnfd.productInfoName) &&
+            Objects.equals(this.modifiableAttributes, vnfd.modifiableAttributes) &&
+            Objects.equals(this.version, vnfd.version) &&
+            Objects.equals(this.provider, vnfd.provider) &&
+            Objects.equals(this.productName, vnfd.productName) &&
+            Objects.equals(this.df, vnfd.df) &&
+            Objects.equals(this.softwareVersion, vnfd.softwareVersion) &&
+            Objects.equals(this.configurableProperties, vnfd.configurableProperties) &&
+            Objects.equals(this.autoScale, vnfd.autoScale) &&
+            Objects.equals(this.lifecycleManagementScript, vnfd.lifecycleManagementScript) &&
+            Objects.equals(this.vdu, vnfd.vdu) &&
+            Objects.equals(this.localizationLanguage, vnfd.localizationLanguage) &&
+            Objects.equals(this.intVirtualLinkDesc, vnfd.intVirtualLinkDesc) &&
+            Objects.equals(this.productInfoDescription, vnfd.productInfoDescription) &&
+            Objects.equals(this.description, vnfd.description) &&
+            Objects.equals(this.kdu, vnfd.kdu) &&
+            Objects.equals(this.k8sCluster, vnfd.k8sCluster) &&
+            Objects.equals(this.service, vnfd.service) &&
+            Objects.equals(this.mgmtCp, vnfd.mgmtCp) &&
+            Objects.equals(this.vip, vnfd.vip) &&
+            super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(defaultLocalizationLanguage, extCpd, id, swImageDesc, elementGroup, virtualStorageDesc, indicator, virtualComputeDesc, vnfmInfo, productInfoName, modifiableAttributes, version, provider, productName, df, softwareVersion, configurableProperties, autoScale, lifecycleManagementScript, vdu, localizationLanguage, intVirtualLinkDesc, productInfoDescription, super.hashCode());
+    return Objects.hash(defaultLocalizationLanguage, extCpd, id, swImageDesc, elementGroup, virtualStorageDesc,
+            indicator, virtualComputeDesc, vnfmInfo, productInfoName, modifiableAttributes, version, provider,
+            productName, df, softwareVersion, configurableProperties, autoScale, lifecycleManagementScript, vdu,
+            localizationLanguage, intVirtualLinkDesc, productInfoDescription, description, kdu, k8sCluster,
+            service, mgmtCp, vip, super.hashCode());
   }
 
   @Override
@@ -729,6 +845,12 @@ public class Vnfd extends SecurityGroupRule {
     sb.append("    localizationLanguage: ").append(toIndentedString(localizationLanguage)).append("\n");
     sb.append("    intVirtualLinkDesc: ").append(toIndentedString(intVirtualLinkDesc)).append("\n");
     sb.append("    productInfoDescription: ").append(toIndentedString(productInfoDescription)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    kdu: ").append(toIndentedString(kdu)).append("\n");
+    sb.append("    k8sCluster: ").append(toIndentedString(k8sCluster)).append("\n");
+    sb.append("    service: ").append(toIndentedString(service)).append("\n");
+    sb.append("    mgmtCp: ").append(toIndentedString(mgmtCp)).append("\n");
+    sb.append("    vip: ").append(toIndentedString(vip)).append("\n");
     sb.append("}");
     return sb.toString();
   }
