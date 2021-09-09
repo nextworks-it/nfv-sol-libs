@@ -57,7 +57,7 @@ public class VirtualNetworkInterfaceRequirementSchema {
   @JsonProperty("virtual-interface")
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "virtual_interface_fk", referencedColumnName = "uuid")
-  private VirtualInterface virtualInterface = null;
+  private VnirsVirtualInterface vnirsVirtualInterface = null;
 
   public VirtualNetworkInterfaceRequirementSchema networkInterfaceRequirements(List<NetworkInterfaceRequirementsSchema> networkInterfaceRequirements) {
     this.networkInterfaceRequirements = networkInterfaceRequirements;
@@ -178,14 +178,14 @@ public class VirtualNetworkInterfaceRequirementSchema {
 
   public void setMacAddress(String macAddress) { this.macAddress = macAddress; }
 
-  public VirtualNetworkInterfaceRequirementSchema virtualInterface(VirtualInterface virtualInterface) {
-    this.virtualInterface = virtualInterface;
+  public VirtualNetworkInterfaceRequirementSchema virtualInterface(VnirsVirtualInterface vnirsVirtualInterface) {
+    this.vnirsVirtualInterface = vnirsVirtualInterface;
     return this;
   }
 
-  public VirtualInterface getVirtualInterface() { return virtualInterface; }
+  public VnirsVirtualInterface getVirtualInterface() { return vnirsVirtualInterface; }
 
-  public void setVirtualInterface(VirtualInterface virtualInterface) { this.virtualInterface = virtualInterface; }
+  public void setVirtualInterface(VnirsVirtualInterface vnirsVirtualInterface) { this.vnirsVirtualInterface = vnirsVirtualInterface; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -204,13 +204,13 @@ public class VirtualNetworkInterfaceRequirementSchema {
             Objects.equals(this.position, virtualNetworkInterfaceRequirementSchema.position) &&
             Objects.equals(this.ipAddress, virtualNetworkInterfaceRequirementSchema.ipAddress) &&
             Objects.equals(this.macAddress, virtualNetworkInterfaceRequirementSchema.macAddress) &&
-            Objects.equals(this.virtualInterface, virtualNetworkInterfaceRequirementSchema.virtualInterface);
+            Objects.equals(this.vnirsVirtualInterface, virtualNetworkInterfaceRequirementSchema.vnirsVirtualInterface);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(networkInterfaceRequirements, name, supportMandatory, description, vifQuota, position,
-            ipAddress, macAddress, virtualInterface);
+            ipAddress, macAddress, vnirsVirtualInterface);
   }
 
   @Override
@@ -226,7 +226,7 @@ public class VirtualNetworkInterfaceRequirementSchema {
     sb.append("    position: ").append(toIndentedString(position)).append("\n");
     sb.append("    ipAddress: ").append(toIndentedString(ipAddress)).append("\n");
     sb.append("    macAddress: ").append(toIndentedString(macAddress)).append("\n");
-    sb.append("    virtualInterface: ").append(toIndentedString(virtualInterface)).append("\n");
+    sb.append("    virtualInterface: ").append(toIndentedString(vnirsVirtualInterface)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class VirtualInterface {
+public class VnirsVirtualInterface {
 
     @JsonIgnore
     @Id
@@ -28,7 +28,7 @@ public class VirtualInterface {
     @JsonProperty("bandwidth")
     private String bandwidth;
 
-    public VirtualInterface type(InterfaceTypeEnum type) {
+    public VnirsVirtualInterface type(InterfaceTypeEnum type) {
         this.type = type;
         return this;
     }
@@ -37,7 +37,7 @@ public class VirtualInterface {
 
     public void setType(InterfaceTypeEnum type) { this.type = type; }
 
-    public VirtualInterface vpci(String vpci) {
+    public VnirsVirtualInterface vpci(String vpci) {
         this.vpci = vpci;
         return this;
     }
@@ -46,7 +46,7 @@ public class VirtualInterface {
 
     public void setVpci(String vpci) { this.vpci = vpci; }
 
-    public VirtualInterface bandwidth(String bandwidth) {
+    public VnirsVirtualInterface bandwidth(String bandwidth) {
         this.bandwidth = bandwidth;
         return this;
     }
@@ -64,11 +64,11 @@ public class VirtualInterface {
         if(o == null || getClass() != o.getClass())
             return false;
 
-        VirtualInterface virtualInterface = (VirtualInterface) o;
+        VnirsVirtualInterface vnirsVirtualInterface = (VnirsVirtualInterface) o;
 
-        return Objects.equals(this.type, virtualInterface.type) &&
-                Objects.equals(this.vpci, virtualInterface.vpci) &&
-                Objects.equals(this.bandwidth, virtualInterface.bandwidth);
+        return Objects.equals(this.type, vnirsVirtualInterface.type) &&
+                Objects.equals(this.vpci, vnirsVirtualInterface.vpci) &&
+                Objects.equals(this.bandwidth, vnirsVirtualInterface.bandwidth);
     }
 
     @Override
