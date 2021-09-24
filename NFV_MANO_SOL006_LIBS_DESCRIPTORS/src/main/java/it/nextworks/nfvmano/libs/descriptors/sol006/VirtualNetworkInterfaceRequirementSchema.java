@@ -183,6 +183,7 @@ public class VirtualNetworkInterfaceRequirementSchema {
     return this;
   }
 
+  @JsonProperty("virtual-interface")
   public VnirsVirtualInterface getVirtualInterface() { return vnirsVirtualInterface; }
 
   public void setVirtualInterface(VnirsVirtualInterface vnirsVirtualInterface) { this.vnirsVirtualInterface = vnirsVirtualInterface; }
