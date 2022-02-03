@@ -50,6 +50,11 @@ public class VnfdVirtualcpu {
   @JsonProperty("oversubscription-policy")
   private String oversubscriptionPolicy = null;
 
+  @JsonProperty("cpu-quota")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "cpu_quota_fk", referencedColumnName = "uuid")
+  private CpuQuota cpuQuota = null;
+
   public VnfdVirtualcpu numVirtualCpu(String numVirtualCpu) {
     this.numVirtualCpu = numVirtualCpu;
     return this;
@@ -173,6 +178,14 @@ public class VnfdVirtualcpu {
     this.oversubscriptionPolicy = oversubscriptionPolicy;
   }
 
+  public VnfdVirtualcpu cpuQuota(CpuQuota cpuQuota) {
+      this.cpuQuota = cpuQuota;
+      return this;
+  }
+
+  public CpuQuota getCpuQuota() { return cpuQuota; }
+
+  public void setCpuQuota(CpuQuota cpuQuota) { this.cpuQuota = cpuQuota; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -184,16 +197,17 @@ public class VnfdVirtualcpu {
     }
     VnfdVirtualcpu vnfdVirtualcpu = (VnfdVirtualcpu) o;
     return Objects.equals(this.numVirtualCpu, vnfdVirtualcpu.numVirtualCpu) &&
-        Objects.equals(this.clock, vnfdVirtualcpu.clock) &&
-        Objects.equals(this.pinning, vnfdVirtualcpu.pinning) &&
-        Objects.equals(this.cpuArchitecture, vnfdVirtualcpu.cpuArchitecture) &&
-        Objects.equals(this.vduCpuRequirements, vnfdVirtualcpu.vduCpuRequirements) &&
-        Objects.equals(this.oversubscriptionPolicy, vnfdVirtualcpu.oversubscriptionPolicy);
+            Objects.equals(this.clock, vnfdVirtualcpu.clock) &&
+            Objects.equals(this.pinning, vnfdVirtualcpu.pinning) &&
+            Objects.equals(this.cpuArchitecture, vnfdVirtualcpu.cpuArchitecture) &&
+            Objects.equals(this.vduCpuRequirements, vnfdVirtualcpu.vduCpuRequirements) &&
+            Objects.equals(this.oversubscriptionPolicy, vnfdVirtualcpu.oversubscriptionPolicy) &&
+            Objects.equals(this.cpuQuota, vnfdVirtualcpu.cpuQuota);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(numVirtualCpu, clock, pinning, cpuArchitecture, vduCpuRequirements, oversubscriptionPolicy);
+    return Objects.hash(numVirtualCpu, clock, pinning, cpuArchitecture, vduCpuRequirements, oversubscriptionPolicy, cpuQuota);
   }
 
   @Override
@@ -207,6 +221,7 @@ public class VnfdVirtualcpu {
     sb.append("    cpuArchitecture: ").append(toIndentedString(cpuArchitecture)).append("\n");
     sb.append("    vduCpuRequirements: ").append(toIndentedString(vduCpuRequirements)).append("\n");
     sb.append("    oversubscriptionPolicy: ").append(toIndentedString(oversubscriptionPolicy)).append("\n");
+    sb.append("    cpuQuota: ").append(toIndentedString(cpuQuota)).append("\n");
     sb.append("}");
     return sb.toString();
   }

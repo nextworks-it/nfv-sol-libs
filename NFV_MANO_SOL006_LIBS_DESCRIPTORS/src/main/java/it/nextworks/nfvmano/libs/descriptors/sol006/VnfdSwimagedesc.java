@@ -67,6 +67,9 @@ public class VnfdSwimagedesc {
   @JsonProperty("size")
   private String size = null;
 
+  @JsonProperty("vim-type")
+  private String vimType = null;
+
   public VnfdSwimagedesc name(String name) {
     this.name = name;
     return this;
@@ -304,6 +307,14 @@ public class VnfdSwimagedesc {
     this.size = size;
   }
 
+  public VnfdSwimagedesc vimType(String vimType) {
+      this.vimType = vimType;
+      return this;
+  }
+
+  public String getVimType() { return vimType; }
+
+  public void setVimType(String vimType) { this.vimType = vimType; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -315,22 +326,24 @@ public class VnfdSwimagedesc {
     }
     VnfdSwimagedesc vnfdSwimagedesc = (VnfdSwimagedesc) o;
     return Objects.equals(this.name, vnfdSwimagedesc.name) &&
-        Objects.equals(this.checksum, vnfdSwimagedesc.checksum) &&
-        Objects.equals(this.image, vnfdSwimagedesc.image) &&
-        Objects.equals(this.version, vnfdSwimagedesc.version) &&
-        Objects.equals(this.operatingSystem, vnfdSwimagedesc.operatingSystem) &&
-        Objects.equals(this.minDisk, vnfdSwimagedesc.minDisk) &&
-        Objects.equals(this.diskFormat, vnfdSwimagedesc.diskFormat) &&
-        Objects.equals(this.containerFormat, vnfdSwimagedesc.containerFormat) &&
-        Objects.equals(this.minRam, vnfdSwimagedesc.minRam) &&
-        Objects.equals(this.id, vnfdSwimagedesc.id) &&
-        Objects.equals(this.supportedVirtualizationEnvironment, vnfdSwimagedesc.supportedVirtualizationEnvironment) &&
-        Objects.equals(this.size, vnfdSwimagedesc.size);
+            Objects.equals(this.checksum, vnfdSwimagedesc.checksum) &&
+            Objects.equals(this.image, vnfdSwimagedesc.image) &&
+            Objects.equals(this.version, vnfdSwimagedesc.version) &&
+            Objects.equals(this.operatingSystem, vnfdSwimagedesc.operatingSystem) &&
+            Objects.equals(this.minDisk, vnfdSwimagedesc.minDisk) &&
+            Objects.equals(this.diskFormat, vnfdSwimagedesc.diskFormat) &&
+            Objects.equals(this.containerFormat, vnfdSwimagedesc.containerFormat) &&
+            Objects.equals(this.minRam, vnfdSwimagedesc.minRam) &&
+            Objects.equals(this.id, vnfdSwimagedesc.id) &&
+            Objects.equals(this.supportedVirtualizationEnvironment, vnfdSwimagedesc.supportedVirtualizationEnvironment) &&
+            Objects.equals(this.size, vnfdSwimagedesc.size) &&
+            Objects.equals(this.vimType, vnfdSwimagedesc.vimType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, checksum, image, version, operatingSystem, minDisk, diskFormat, containerFormat, minRam, id, supportedVirtualizationEnvironment, size);
+    return Objects.hash(name, checksum, image, version, operatingSystem, minDisk, diskFormat, containerFormat, minRam,
+            id, supportedVirtualizationEnvironment, size, vimType);
   }
 
   @Override
@@ -350,6 +363,7 @@ public class VnfdSwimagedesc {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    supportedVirtualizationEnvironment: ").append(toIndentedString(supportedVirtualizationEnvironment)).append("\n");
     sb.append("    size: ").append(toIndentedString(size)).append("\n");
+    sb.append("    vimType: ").append(toIndentedString(vimType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

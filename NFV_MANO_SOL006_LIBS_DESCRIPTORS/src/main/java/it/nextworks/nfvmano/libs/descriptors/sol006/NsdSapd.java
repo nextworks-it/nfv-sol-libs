@@ -47,6 +47,9 @@ public class NsdSapd {
   @AttributeOverrides({ @AttributeOverride(name = "extCpdId", column = @Column(name = "ns_associated_ext_cpd_id")) })
   private NsAssociatedCpdId ns = null;
 
+  @JsonProperty("floating-ip-required")
+  private Boolean floatingIpRequired = null;
+
   public NsdSapd addressAssignment(Boolean addressAssignment) {
     this.addressAssignment = addressAssignment;
     return this;
@@ -137,6 +140,15 @@ public class NsdSapd {
     this.ns = ns;
   }
 
+  public NsdSapd floatingIpRequired(Boolean floatingIpRequired) {
+      this.floatingIpRequired = floatingIpRequired;
+      return this;
+  }
+
+  public Boolean getFloatingIpRequired() { return floatingIpRequired; }
+
+  public void setFloatingIpRequired(Boolean floatingIpRequired) { this.floatingIpRequired = floatingIpRequired; }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -151,12 +163,13 @@ public class NsdSapd {
             Objects.equals(this.virtualLinkDesc, nsdSapd.virtualLinkDesc) &&
             Objects.equals(this.vnf, nsdSapd.vnf) &&
             Objects.equals(this.pnf, nsdSapd.pnf) &&
-            Objects.equals(this.ns, nsdSapd.ns);
+            Objects.equals(this.ns, nsdSapd.ns) &&
+            Objects.equals(this.floatingIpRequired, nsdSapd.floatingIpRequired);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addressAssignment, id, virtualLinkDesc, vnf, pnf, ns);
+    return Objects.hash(addressAssignment, id, virtualLinkDesc, vnf, pnf, ns, floatingIpRequired);
   }
 
   @Override
@@ -171,6 +184,7 @@ public class NsdSapd {
     sb.append("    vnf: ").append(toIndentedString(vnf)).append("\n");
     sb.append("    pnf: ").append(toIndentedString(pnf)).append("\n");
     sb.append("    ns: ").append(toIndentedString(ns)).append("\n");
+    sb.append("    floatingIpRequired: ").append(toIndentedString(floatingIpRequired)).append("\n");
     sb.append("}");
 
     return sb.toString();

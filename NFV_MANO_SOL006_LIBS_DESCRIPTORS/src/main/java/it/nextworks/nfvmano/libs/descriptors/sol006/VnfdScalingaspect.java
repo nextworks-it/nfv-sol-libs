@@ -1,10 +1,14 @@
 package it.nextworks.nfvmano.libs.descriptors.sol006;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 
@@ -39,6 +43,18 @@ public class VnfdScalingaspect {
 
   @JsonProperty("description")
   private String description = null;
+
+  @JsonProperty("scaling-policy")
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_scaling_aspect_fk", referencedColumnName = "uuid")
+  private List<ScalingPolicy> scalingPolicy = null;
+
+  @JsonProperty("scaling-config-action")
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_scaling_aspect_fk", referencedColumnName = "uuid")
+  private List<ScalingConfigAction> scalingConfigAction = null;
 
   public VnfdScalingaspect aspectDeltaDetails(VnfdAspectdeltadetails aspectDeltaDetails) {
     this.aspectDeltaDetails = aspectDeltaDetails;
@@ -136,6 +152,41 @@ public class VnfdScalingaspect {
     this.description = description;
   }
 
+  public VnfdScalingaspect scalingPolicy(List<ScalingPolicy> scalingPolicy) {
+      this.scalingPolicy = scalingPolicy;
+      return this;
+  }
+
+  public VnfdScalingaspect addScalingPolicyItem(ScalingPolicy scalingPolicy) {
+      if(this.scalingPolicy == null)
+        this.scalingPolicy = new ArrayList<>();
+
+      this.scalingPolicy.add(scalingPolicy);
+      return this;
+  }
+
+  public List<ScalingPolicy> getScalingPolicy() { return scalingPolicy; }
+
+  public void setScalingPolicy(List<ScalingPolicy> scalingPolicy) { this.scalingPolicy = scalingPolicy; }
+
+  public VnfdScalingaspect scalingConfigAction(List<ScalingConfigAction> scalingConfigAction) {
+      this.scalingConfigAction = scalingConfigAction;
+      return this;
+  }
+
+  public VnfdScalingaspect addScalingConfigActionItem(ScalingConfigAction scalingConfigAction) {
+      if(this.scalingConfigAction == null)
+        this.scalingConfigAction = new ArrayList<>();
+
+      this.scalingConfigAction.add(scalingConfigAction);
+      return this;
+  }
+
+  public List<ScalingConfigAction> getScalingConfigAction() { return scalingConfigAction; }
+
+  public void setScalingConfigAction(List<ScalingConfigAction> scalingConfigAction) {
+    this.scalingConfigAction = scalingConfigAction;
+  }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -147,15 +198,17 @@ public class VnfdScalingaspect {
     }
     VnfdScalingaspect vnfdScalingaspect = (VnfdScalingaspect) o;
     return Objects.equals(this.aspectDeltaDetails, vnfdScalingaspect.aspectDeltaDetails) &&
-        Objects.equals(this.id, vnfdScalingaspect.id) &&
-        Objects.equals(this.maxScaleLevel, vnfdScalingaspect.maxScaleLevel) &&
-        Objects.equals(this.name, vnfdScalingaspect.name) &&
-        Objects.equals(this.description, vnfdScalingaspect.description);
+            Objects.equals(this.id, vnfdScalingaspect.id) &&
+            Objects.equals(this.maxScaleLevel, vnfdScalingaspect.maxScaleLevel) &&
+            Objects.equals(this.name, vnfdScalingaspect.name) &&
+            Objects.equals(this.description, vnfdScalingaspect.description) &&
+            Objects.equals(this.scalingPolicy, vnfdScalingaspect.scalingPolicy) &&
+            Objects.equals(this.scalingConfigAction, vnfdScalingaspect.scalingConfigAction);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(aspectDeltaDetails, id, maxScaleLevel, name, description);
+    return Objects.hash(aspectDeltaDetails, id, maxScaleLevel, name, description, scalingPolicy, scalingConfigAction);
   }
 
   @Override
@@ -168,6 +221,8 @@ public class VnfdScalingaspect {
     sb.append("    maxScaleLevel: ").append(toIndentedString(maxScaleLevel)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    scalingPolicy: ").append(toIndentedString(scalingPolicy)).append("\n");
+    sb.append("    scalingConfigAction: ").append(toIndentedString(scalingConfigAction)).append("\n");
     sb.append("}");
     return sb.toString();
   }

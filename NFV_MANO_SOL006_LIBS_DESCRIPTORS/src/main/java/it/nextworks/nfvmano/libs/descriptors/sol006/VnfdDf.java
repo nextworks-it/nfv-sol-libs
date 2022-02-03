@@ -95,6 +95,12 @@ public class VnfdDf {
   @JsonProperty("id")
   private String id = null;
 
+  @JsonProperty("kdu-resource-profile")
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @JoinColumn(name = "vnfd_df_fk", referencedColumnName = "uuid")
+  private List<KduResourceProfile> kduResourceProfile = null;
+
   public VnfdDf supportedVnfInterfaces(List<VnfdSupportedvnfinterfaces> supportedVnfInterfaces) {
     this.supportedVnfInterfaces = supportedVnfInterfaces;
     return this;
@@ -415,6 +421,22 @@ public class VnfdDf {
     this.id = id;
   }
 
+  public VnfdDf kduResourceProfile(List<KduResourceProfile> kduResourceProfile) {
+      this.kduResourceProfile = kduResourceProfile;
+      return this;
+  }
+
+  public VnfdDf addKduResourceProfileItem(KduResourceProfile kduResourceProfile) {
+      if(this.kduResourceProfile == null)
+        this.kduResourceProfile = new ArrayList<>();
+
+      this.kduResourceProfile.add(kduResourceProfile);
+      return this;
+  }
+
+  public List<KduResourceProfile> getKduResourceProfile() { return kduResourceProfile; }
+
+  public void setKduResourceProfile(List<KduResourceProfile> kduResourceProfile) { this.kduResourceProfile = kduResourceProfile; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -426,23 +448,26 @@ public class VnfdDf {
     }
     VnfdDf vnfdDf = (VnfdDf) o;
     return Objects.equals(this.supportedVnfInterfaces, vnfdDf.supportedVnfInterfaces) &&
-        Objects.equals(this.indicator, vnfdDf.indicator) &&
-        Objects.equals(this.description, vnfdDf.description) &&
-        Objects.equals(this.affinityOrAntiAffinityGroup, vnfdDf.affinityOrAntiAffinityGroup) &&
-        Objects.equals(this.lcmOperationsConfiguration, vnfdDf.lcmOperationsConfiguration) &&
-        Objects.equals(this.virtualLinkProfile, vnfdDf.virtualLinkProfile) &&
-        Objects.equals(this.instantiationLevel, vnfdDf.instantiationLevel) &&
-        Objects.equals(this.vduProfile, vnfdDf.vduProfile) &&
-        Objects.equals(this.supportedOperation, vnfdDf.supportedOperation) &&
-        Objects.equals(this.scalingAspect, vnfdDf.scalingAspect) &&
-        Objects.equals(this.defaultInstantiationLevel, vnfdDf.defaultInstantiationLevel) &&
-        Objects.equals(this.monitoringParameter, vnfdDf.monitoringParameter) &&
-        Objects.equals(this.id, vnfdDf.id);
+            Objects.equals(this.indicator, vnfdDf.indicator) &&
+            Objects.equals(this.description, vnfdDf.description) &&
+            Objects.equals(this.affinityOrAntiAffinityGroup, vnfdDf.affinityOrAntiAffinityGroup) &&
+            Objects.equals(this.lcmOperationsConfiguration, vnfdDf.lcmOperationsConfiguration) &&
+            Objects.equals(this.virtualLinkProfile, vnfdDf.virtualLinkProfile) &&
+            Objects.equals(this.instantiationLevel, vnfdDf.instantiationLevel) &&
+            Objects.equals(this.vduProfile, vnfdDf.vduProfile) &&
+            Objects.equals(this.supportedOperation, vnfdDf.supportedOperation) &&
+            Objects.equals(this.scalingAspect, vnfdDf.scalingAspect) &&
+            Objects.equals(this.defaultInstantiationLevel, vnfdDf.defaultInstantiationLevel) &&
+            Objects.equals(this.monitoringParameter, vnfdDf.monitoringParameter) &&
+            Objects.equals(this.id, vnfdDf.id) &&
+            Objects.equals(this.kduResourceProfile, vnfdDf.kduResourceProfile);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(supportedVnfInterfaces, indicator, description, affinityOrAntiAffinityGroup, lcmOperationsConfiguration, virtualLinkProfile, instantiationLevel, vduProfile, supportedOperation, scalingAspect, defaultInstantiationLevel, monitoringParameter, id);
+    return Objects.hash(supportedVnfInterfaces, indicator, description, affinityOrAntiAffinityGroup,
+            lcmOperationsConfiguration, virtualLinkProfile, instantiationLevel, vduProfile, supportedOperation,
+            scalingAspect, defaultInstantiationLevel, monitoringParameter, id, kduResourceProfile);
   }
 
   @Override
@@ -463,6 +488,7 @@ public class VnfdDf {
     sb.append("    defaultInstantiationLevel: ").append(toIndentedString(defaultInstantiationLevel)).append("\n");
     sb.append("    monitoringParameter: ").append(toIndentedString(monitoringParameter)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    kduResourceProfile: ").append(toIndentedString(kduResourceProfile)).append("\n");
     sb.append("}");
     return sb.toString();
   }

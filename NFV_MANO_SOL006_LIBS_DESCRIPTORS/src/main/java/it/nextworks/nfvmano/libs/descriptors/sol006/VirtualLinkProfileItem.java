@@ -44,6 +44,11 @@ public class VirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRule  {
   @JoinColumn(name = "max_bitrate_requirements_fk", referencedColumnName = "uuid")
   private LinkBitrateRequirements maxBitrateRequirements = null;
 
+  @JsonProperty("virtual-link-protocol-data")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "virtual_link_protocol_data_fk", referencedColumnName = "uuid")
+  private VirtualLinkProtocolDataSchema virtualLinkProtocolData = null;
+
   public VirtualLinkProfileItem flavourId(String flavourId) {
     this.flavourId = flavourId;
     return this;
@@ -170,6 +175,16 @@ public class VirtualLinkProfileItem extends LocalAffinityOrAntiAffinityRule  {
     this.maxBitrateRequirements = maxBitrateRequirements;
   }
 
+  public VirtualLinkProfileItem virtualLinkProtocolData(VirtualLinkProtocolDataSchema virtualLinkProtocolData) {
+      this.virtualLinkProtocolData = virtualLinkProtocolData;
+      return this;
+  }
+
+  public VirtualLinkProtocolDataSchema getVirtualLinkProtocolData() { return virtualLinkProtocolData; }
+
+  public void setVirtualLinkProtocolData(VirtualLinkProtocolDataSchema virtualLinkProtocolData) {
+    this.virtualLinkProtocolData = virtualLinkProtocolData;
+  }
 
   @Override
   public boolean equals(java.lang.Object o) {

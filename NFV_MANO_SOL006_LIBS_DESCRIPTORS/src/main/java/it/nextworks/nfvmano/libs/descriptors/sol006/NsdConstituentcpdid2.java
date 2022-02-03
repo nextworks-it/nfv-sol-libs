@@ -20,6 +20,9 @@ public class NsdConstituentcpdid2 {
   @JsonProperty("constituent-base-element-id")
   private String constituentBaseElementId = null;
 
+  @JsonProperty("ip-address")
+  private String ipAddress = null;
+
   public NsdConstituentcpdid2 constituentCpdId(String constituentCpdId) {
     this.constituentCpdId = constituentCpdId;
     return this;
@@ -58,6 +61,14 @@ public class NsdConstituentcpdid2 {
     this.constituentBaseElementId = constituentBaseElementId;
   }
 
+  public NsdConstituentcpdid2 ipAddress(String ipAddress) {
+      this.ipAddress = ipAddress;
+      return this;
+  }
+
+  public String getIpAddress() { return ipAddress; }
+
+  public void setIpAddress(String ipAddress) { this.ipAddress = ipAddress; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -69,12 +80,13 @@ public class NsdConstituentcpdid2 {
     }
     NsdConstituentcpdid2 nsdConstituentcpdid2 = (NsdConstituentcpdid2) o;
     return Objects.equals(this.constituentCpdId, nsdConstituentcpdid2.constituentCpdId) &&
-        Objects.equals(this.constituentBaseElementId, nsdConstituentcpdid2.constituentBaseElementId);
+            Objects.equals(this.constituentBaseElementId, nsdConstituentcpdid2.constituentBaseElementId) &&
+            Objects.equals(this.ipAddress, nsdConstituentcpdid2.ipAddress);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(constituentCpdId, constituentBaseElementId);
+    return Objects.hash(constituentCpdId, constituentBaseElementId, ipAddress);
   }
 
   @Override
@@ -84,6 +96,7 @@ public class NsdConstituentcpdid2 {
     
     sb.append("    constituentCpdId: ").append(toIndentedString(constituentCpdId)).append("\n");
     sb.append("    constituentBaseElementId: ").append(toIndentedString(constituentBaseElementId)).append("\n");
+    sb.append("    ipAddress: ").append(toIndentedString(ipAddress)).append("\n");
     sb.append("}");
     return sb.toString();
   }

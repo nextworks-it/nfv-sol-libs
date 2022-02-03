@@ -8,14 +8,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.nextworks.nfvmano.libs.common.enums.MemPageSizeEnum;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * The virtual memory of the virtualised compute.
@@ -46,6 +44,19 @@ public class VnfdVirtualmemory {
 
   @JsonProperty("size")
   private Double size = null;
+
+  @JsonProperty("numa-node-policy")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "numa_node_policy_fk", referencedColumnName = "uuid")
+  private NumaNodePolicy numaNodePolicy = null;
+
+  @JsonProperty("mempage-size")
+  private MemPageSizeEnum memPageSizeEnum = null;
+
+  @JsonProperty("mem-quota")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "mem_quota_fk", referencedColumnName = "uuid")
+  private MemQuota memQuota = null;
 
   public VnfdVirtualmemory vduMemRequirements(List<VnfdVdustoragerequirements> vduMemRequirements) {
     this.vduMemRequirements = vduMemRequirements;
@@ -131,6 +142,32 @@ public class VnfdVirtualmemory {
     this.size = size;
   }
 
+  public VnfdVirtualmemory numaNodePolicy(NumaNodePolicy numaNodePolicy) {
+      this.numaNodePolicy = numaNodePolicy;
+      return this;
+  }
+
+  public NumaNodePolicy getNumaNodePolicy() { return numaNodePolicy; }
+
+  public void setNumaNodePolicy(NumaNodePolicy numaNodePolicy) { this.numaNodePolicy = numaNodePolicy; }
+
+  public VnfdVirtualmemory memPageSizeEnum(MemPageSizeEnum memPageSizeEnum) {
+      this.memPageSizeEnum = memPageSizeEnum;
+      return this;
+  }
+
+  public MemPageSizeEnum getMemPageSizeEnum() { return memPageSizeEnum; }
+
+  public void setMemPageSizeEnum(MemPageSizeEnum memPageSizeEnum) { this.memPageSizeEnum = memPageSizeEnum; }
+
+  public VnfdVirtualmemory memQuota(MemQuota memQuota) {
+      this.memQuota = memQuota;
+      return this;
+  }
+
+  public MemQuota getMemQuota() { return memQuota; }
+
+  public void setMemQuota(MemQuota memQuota) { this.memQuota = memQuota; }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -142,14 +179,18 @@ public class VnfdVirtualmemory {
     }
     VnfdVirtualmemory vnfdVirtualmemory = (VnfdVirtualmemory) o;
     return Objects.equals(this.vduMemRequirements, vnfdVirtualmemory.vduMemRequirements) &&
-        Objects.equals(this.numaEnabled, vnfdVirtualmemory.numaEnabled) &&
-        Objects.equals(this.overSubscriptionPolicy, vnfdVirtualmemory.overSubscriptionPolicy) &&
-        Objects.equals(this.size, vnfdVirtualmemory.size);
-  }
+            Objects.equals(this.numaEnabled, vnfdVirtualmemory.numaEnabled) &&
+            Objects.equals(this.overSubscriptionPolicy, vnfdVirtualmemory.overSubscriptionPolicy) &&
+            Objects.equals(this.size, vnfdVirtualmemory.size) &&
+            Objects.equals(this.numaNodePolicy, vnfdVirtualmemory.numaNodePolicy) &&
+            Objects.equals(this.memPageSizeEnum, vnfdVirtualmemory.memPageSizeEnum) &&
+            Objects.equals(this.memQuota, vnfdVirtualmemory.memQuota);
+    }
 
   @Override
   public int hashCode() {
-    return Objects.hash(vduMemRequirements, numaEnabled, overSubscriptionPolicy, size);
+    return Objects.hash(vduMemRequirements, numaEnabled, overSubscriptionPolicy,
+            size, numaNodePolicy, memPageSizeEnum, memQuota);
   }
 
   @Override
@@ -161,6 +202,9 @@ public class VnfdVirtualmemory {
     sb.append("    numaEnabled: ").append(toIndentedString(numaEnabled)).append("\n");
     sb.append("    overSubscriptionPolicy: ").append(toIndentedString(overSubscriptionPolicy)).append("\n");
     sb.append("    size: ").append(toIndentedString(size)).append("\n");
+    sb.append("    numaNodePolicy: ").append(toIndentedString(numaNodePolicy)).append("\n");
+    sb.append("    memPageSizeEnum: ").append(toIndentedString(memPageSizeEnum)).append("\n");
+    sb.append("    memQuota: ").append(toIndentedString(memQuota)).append("\n");
     sb.append("}");
     return sb.toString();
   }
